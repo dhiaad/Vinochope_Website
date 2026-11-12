@@ -1,0 +1,134 @@
+[
+ {
+  "id": "mas-amiel-40",
+  "domaine": "Mas Amiel",
+  "cuvee": "Maury 40 ans d'âge",
+  "type": "Maury",
+  "appellation": "Maury, vin doux naturel",
+  "prix": 84,
+  "description": "Quarante ans en foudres de chêne. Cacao, figue sèche, noix et une longueur interminable. Pour les grandes occasions.",
+  "photo": "media/photos/b8.webp",
+  "distinction": ""
+ },
+ {
+  "id": "boucabeille-hors-dage",
+  "domaine": "Domaine Boucabeille",
+  "cuvee": "Rivesaltes hors d'âge",
+  "type": "Rivesaltes",
+  "appellation": "Rivesaltes, élevé en fûts de chêne",
+  "prix": 60,
+  "description": "Un ambré d'une grande finesse, présenté en carafe. Orange confite, noix, épices douces.",
+  "photo": "media/photos/b12.webp",
+  "distinction": ""
+ },
+ {
+  "id": "mas-amiel-30",
+  "domaine": "Mas Amiel",
+  "cuvee": "Maury 30 ans d'âge",
+  "type": "Maury",
+  "appellation": "Maury, vin doux naturel",
+  "prix": 56,
+  "description": "Le rancio dans toute sa profondeur : café, pruneau, cuir et tabac blond.",
+  "photo": "media/photos/b3.webp",
+  "distinction": ""
+ },
+ {
+  "id": "mas-amiel-20",
+  "domaine": "Mas Amiel",
+  "cuvee": "Maury 20 ans d'âge",
+  "type": "Maury",
+  "appellation": "Maury, vin doux naturel",
+  "prix": 38,
+  "description": "Fruits noirs confits, moka et épices. Superbe avec un dessert au chocolat.",
+  "photo": "media/photos/b10.webp",
+  "distinction": ""
+ },
+ {
+  "id": "coume-del-mas-quintessence",
+  "domaine": "Domaine Coume del Mas",
+  "cuvee": "Quintessence",
+  "type": "Banyuls",
+  "appellation": "Banyuls Rimage",
+  "prix": 29,
+  "description": "Un Banyuls jeune et intense, mis en bouteille tôt pour garder tout le fruit : cerise noire, mûre, violette.",
+  "photo": "media/photos/b1.webp",
+  "distinction": ""
+ },
+ {
+  "id": "noval-black",
+  "domaine": "Quinta do Noval",
+  "cuvee": "Noval Black",
+  "type": "Xérès et Porto",
+  "appellation": "Porto",
+  "prix": 28,
+  "description": "Un porto riche et velouté, plein de fruits rouges mûrs. À servir légèrement frais.",
+  "photo": "media/photos/b9.webp",
+  "distinction": ""
+ },
+ {
+  "id": "pemartin-amontillado",
+  "domaine": "Díez Mérito",
+  "cuvee": "Pemartín Amontillado",
+  "type": "Xérès et Porto",
+  "appellation": "Jerez, xérès sec",
+  "prix": 28,
+  "description": "Sec et salin, notes d'amande grillée et de noisette. Parfait à l'apéritif avec des olives.",
+  "photo": "media/photos/b11.webp",
+  "distinction": ""
+ },
+ {
+  "id": "mas-amiel-10",
+  "domaine": "Mas Amiel",
+  "cuvee": "Maury 10 ans d'âge",
+  "type": "Maury",
+  "appellation": "Maury, cuvée spéciale",
+  "prix": 26,
+  "description": "La porte d'entrée des Maury élevés : fruits secs, cacao, un vin chaleureux et accessible.",
+  "photo": "media/photos/b5.webp",
+  "distinction": ""
+ },
+ {
+  "id": "clos-st-sebastien-ardente",
+  "domaine": "Clos Saint Sébastien",
+  "cuvee": "Inspiration Ardente",
+  "type": "Banyuls",
+  "appellation": "Banyuls hors d'âge",
+  "prix": 22,
+  "description": "Un Banyuls patiné par les années, aux arômes de pruneau, de café et d'écorce d'orange.",
+  "photo": "media/photos/b4.webp",
+  "distinction": ""
+ },
+ {
+  "id": "pietri-geraud-traditionnel",
+  "domaine": "Domaine Pietri-Géraud",
+  "cuvee": "Banyuls Traditionnel",
+  "type": "Banyuls",
+  "appellation": "Banyuls Traditionnel",
+  "prix": 19,
+  "description": "Élevé à l'air libre, il mêle fruits cuits et notes torréfiées. Un classique de la côte Vermeille.",
+  "photo": "media/photos/b7.webp",
+  "distinction": "Guide Hachette 2020"
+ },
+ {
+  "id": "boucabeille-ambre",
+  "domaine": "Domaine Boucabeille",
+  "cuvee": "Rivesaltes ambré 2017",
+  "type": "Rivesaltes",
+  "appellation": "Rivesaltes ambré",
+  "prix": 19,
+  "description": "Abricot sec, miel et amande. Superbe avec un fromage à pâte persillée.",
+  "photo": "media/photos/b6.webp",
+  "distinction": ""
+ },
+ {
+  "id": "chateau-de-rey-mute",
+  "domaine": "Château de Rey",
+  "cuvee": "Le Muté sur Grain",
+  "type": "Rivesaltes",
+  "appellation": "Vin doux naturel",
+  "prix": 15,
+  "description": "Muté sur le grain pour garder un fruit éclatant : cassis, framboise, fraîcheur.",
+  "photo": "media/photos/c2.webp",
+  "distinction": ""
+ }
+]

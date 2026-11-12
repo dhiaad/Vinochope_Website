@@ -1,0 +1,38 @@
+[
+ {
+  "id": "tireuse",
+  "nom": "Tireuse à bière",
+  "description": "Une ou deux têtes, réfrigérée, prête à brancher. Prêtée avec chaque fût.",
+  "prix": "Offerte"
+ },
+ {
+  "id": "verres",
+  "nom": "Location de verres",
+  "description": "Verres à bière lavés et prêts, à rendre sales.",
+  "prix": "Sur devis"
+ },
+ {
+  "id": "ecocup",
+  "nom": "Gobelets écocup consignés",
+  "description": "Réutilisables, on ne paie que ceux qui ne reviennent pas.",
+  "prix": "Consigne par gobelet"
+ },
+ {
+  "id": "livraison",
+  "nom": "Livraison",
+  "description": "On apporte les fûts et le matériel sur le lieu de votre fête.",
+  "prix": "Selon la distance"
+ },
+ {
+  "id": "installation",
+  "nom": "Installation de la tireuse",
+  "description": "On branche, on règle la pression et on sert le premier demi avec vous.",
+  "prix": "Sur devis"
+ },
+ {
+  "id": "reprise",
+  "nom": "Reprise des fûts et bouteilles",
+  "description": "Les fûts et bouteilles non ouverts sont repris.",
+  "prix": "Inclus"
+ }
+]

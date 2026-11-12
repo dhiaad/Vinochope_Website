@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="fr" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Événements · Concerts, expositions et dégustations à Vinochope, Perpignan</title>
+<meta name="description" content="La programmation de Vinochope à Perpignan : concerts, apéros-concerts, expositions, cours de danse, dégustations et conférences. Dates, horaires, tarifs et réservations.">
+<meta name="theme-color" content="#3B1020">
+<meta property="og:title" content="Événements · Concerts, expositions et dégustations à Vinochope, Perpignan">
+<meta property="og:description" content="La programmation de Vinochope à Perpignan : concerts, apéros-concerts, expositions, cours de danse, dégustations et conférences. Dates, horaires, tarifs et réservations.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/cave.css?v=3">
+<link rel="stylesheet" href="assets/pages.css?v=3">
+</head>
+<body class="">
+<a class="evite" href="#contenu">Aller au contenu</a>
+
+<!--TETE-->
+<header class="tete" data-ton="clair">
+  <a class="marque" href="index.html" aria-label="Vinochope, accueil">Vinochope<span class="sceau" aria-hidden="true"></span></a>
+  <nav class="nav" aria-label="Navigation principale"><a href="la-cave.html">La cave</a><a href="evenements.html" aria-current="page">Événements</a><a href="tireuses.html">Tireuses</a><a href="histoire.html">Histoire</a><a href="contact.html">Contact</a></nav>
+  <div class="tete-droite">
+    <a class="etiquette petite" href="la-cave.html#carte">La carte</a>
+    <button type="button" class="menu-btn" aria-expanded="false" aria-controls="menu">Menu</button>
+  </div>
+</header>
+<div class="menu" id="menu" hidden>
+  <nav aria-label="Menu"><ol class="menu-liens"><li><a href="index.html"><span class="code">00</span>Accueil</a></li><li><a href="la-cave.html"><span class="code">01</span>La cave et la carte</a></li><li><a href="evenements.html" aria-current="page"><span class="code">02</span>Événements</a></li><li><a href="tireuses.html"><span class="code">03</span>Tireuses et fûts</a></li><li><a href="histoire.html"><span class="code">04</span>Notre histoire</a></li><li><a href="contact.html"><span class="code">05</span>Contact</a></li></ol></nav>
+  <div class="menu-infos">
+    <p class="repere">Vinochope</p>
+    <p>26 rue Mathieu de Dombasle<br>66000 Perpignan</p>
+    <p><a href="tel:+33468899143">04 68 89 91 43</a></p>
+    <p data-statut>Lun. 15 h – 21 h · mar.–sam. 10 h – 12 h 30 et 14 h 30 – 21 h</p>
+  </div>
+</div>
+<!--/TETE-->
+
+<main id="contenu">
+<!-- À la une : l'événement mis en avant par le gérant, sinon le prochain -->
+<section class="une sombre" id="une" data-ton="sombre" aria-labelledby="une-titre">
+  <div class="enveloppe une-grille">
+    <div class="une-texte">
+      <p class="repere" data-une-repere>À la une · La programmation</p>
+      <h1 id="une-titre" data-une-titre>La scène de Vinochope</h1>
+      <div class="une-date" data-une-date></div>
+      <p class="chapo" data-une-accroche>Concerts, apéros-concerts, expositions, danse et dégustations : la programmation change chaque trimestre.</p>
+      <p data-une-compte></p>
+      <div class="actions" data-une-actions>
+        <a class="etiquette" href="#agenda">Tout le programme</a>
+      </div>
+    </div>
+    <figure class="voute-img" data-une-figure>
+      <img src="media/photos/e2.webp" alt="" width="1000" height="1250" data-une-img>
+      <span class="cle" aria-hidden="true"></span>
+      <span class="une-prix" data-une-prix></span>
+    </figure>
+  </div>
+</section>
+
+<!-- L'agenda complet -->
+<section class="bloc clair" id="agenda" data-ton="clair" aria-labelledby="agenda-t">
+  <div class="enveloppe">
+    <div class="bloc-tete">
+      <div>
+        <p class="repere">L'agenda</p>
+        <h2 id="agenda-t" class="montee">Tout le <span class="accent">programme</span>.</h2>
+      </div>
+      <div class="filtres" role="group" aria-label="Filtrer par type d'événement" data-filtres>
+        <button type="button" class="filtre" aria-pressed="true" data-cat="">Tout</button>
+      </div>
+    </div>
+    <div data-agenda aria-live="polite">
+      <p class="agenda-vide">Chargement de la programmation…</p>
+    </div>
+    <noscript><p>La programmation s'affiche avec JavaScript. Retrouvez-la aussi sur <a href="https://www.facebook.com/vinochope/">notre page Facebook</a>.</p></noscript>
+  </div>
+</section>
+
+<!-- Les rendez-vous qui reviennent -->
+<section class="bloc vert" id="rendez-vous" data-ton="sombre" aria-labelledby="rdv-t">
+  <div class="enveloppe">
+    <p class="repere">Chaque mois</p>
+    <h2 id="rdv-t" class="montee">Les rendez-vous<br>qui <span class="accent">reviennent</span>.</h2>
+    <p class="chapo montee">Une salle de 200 personnes avec une vraie scène et un vrai son, un bar ouvert toute la soirée, et des soirées où l'on ferme plus tard que d'habitude.</p>
+    <ul class="rdv montee" style="margin-top:60px">
+      <li><span class="code">Le jeudi</span><h3>Apéros-concerts</h3><p>Deux jeudis par mois, en acoustique, à l'heure de l'apéro.</p></li>
+      <li><span class="code">Le samedi</span><h3>Les grands concerts</h3><p>Rock, blues, swing, chanson : deux grosses soirées par mois.</p></li>
+      <li><span class="code">Aux murs</span><h3>Expositions</h3><p>Des artistes de la région exposent, avec un vernissage à chaque nouvelle saison.</p></li>
+      <li><span class="code">Au comptoir</span><h3>Dégustations</h3><p>Soirées découverte de spiritueux, de vins et de bières, en petit comité.</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- Ils sont passés par la cave -->
+<section class="bloc nuit" id="passes" data-ton="sombre" aria-labelledby="passes-t">
+  <div class="enveloppe">
+    <p class="repere">Depuis 2013</p>
+    <h2 id="passes-t" class="montee" style="margin-bottom:56px">Ils sont passés<br>par la <span class="accent">cave</span>.</h2>
+    <ul class="noms montee">
+      <li>The Pretty Things</li><li>Les Limiñanas</li><li>The Fleshtones</li><li>Jango Edwards</li><li>Pascal Comelade</li>
+      <li>Tony Truant</li><li>Harlan T. Bobo</li><li>Steeve Laffont</li><li>Denis Maréchal</li><li>Samarabalouf</li>
+      <li>Freddy Whiteball</li><li>Lisa &amp; the Lips</li><li>Fat Cat Land Factory</li><li>The Seven Sins</li>
+    </ul>
+    <div class="archives montee">
+      <figure><img src="media/archives/jango.webp" alt="Le clown américain Jango Edwards sur la scène de Vinochope" loading="lazy" width="800" height="451"></figure>
+      <figure><img src="media/archives/groupe.webp" alt="Un groupe en concert à Vinochope" loading="lazy" width="800" height="450"></figure>
+      <figure><img src="media/archives/soiree.webp" alt="Le public d'une soirée à Vinochope" loading="lazy" width="800" height="450"></figure>
+      <figure><img src="media/archives/soiree-des-brasseurs.webp" alt="La soirée des brasseurs" loading="lazy" width="800" height="450"></figure>
+      <figure><img src="media/archives/vinochope-ambiance.webp" alt="L'ambiance du bar un soir de concert" loading="lazy" width="960" height="640"></figure>
+    </div>
+    <p class="suite montee"><a class="lien" href="histoire.html">Lire notre histoire et la revue de presse</a></p>
+  </div>
+</section>
+
+<!-- Jouer ou exposer -->
+<section class="bloc clair" id="proposer" data-ton="clair" aria-labelledby="prop-t">
+  <div class="enveloppe proposer">
+    <div>
+      <p class="repere">Artistes, groupes, associations</p>
+      <h2 id="prop-t" class="montee">Vous voulez jouer<br>ou <span class="accent">exposer</span> ?</h2>
+    </div>
+    <div class="montee">
+      <p class="chapo" style="margin-top:0">La programmation se construit chaque trimestre. Envoyez-nous une présentation de votre projet, on vous recontacte s'il peut rejoindre la saison.</p>
+      <ul>
+        <li>Quelques lignes sur vous et votre projet</li>
+        <li>Des photos, une vidéo ou un lien d'écoute</li>
+        <li>Vos disponibilités</li>
+      </ul>
+      <div class="actions" style="margin-top:30px">
+        <a class="etiquette" href="contact.html?sujet=programmation#ecrire">Proposer mon projet</a>
+        <a class="lien" href="tel:+33468899143">04 68 89 91 43</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Fiche d'un événement -->
+<dialog class="fiche" id="fiche" aria-labelledby="fiche-t">
+  <button type="button" class="fiche-fermer" data-fermer aria-label="Fermer la fiche">×</button>
+  <div class="fiche-grille">
+    <div class="fiche-img"><img src="" alt="" data-f="img"></div>
+    <div class="fiche-corps">
+      <p class="repere" data-f="cat"></p>
+      <h2 id="fiche-t" data-f="titre"></h2>
+      <p class="chapo" data-f="accroche" style="margin-top:0"></p>
+      <dl class="fiche-infos" data-f="infos"></dl>
+      <div class="fiche-texte" data-f="texte"></div>
+      <div class="actions" data-f="actions"></div>
+    </div>
+  </div>
+</dialog>
+</main>
+
+<!--PIED-->
+<footer class="pied" data-ton="sombre">
+  <div class="pied-haut">
+    <div>
+      <h2 class="pied-t">Venir</h2>
+      <p>26 rue Mathieu de Dombasle<br>66000 Perpignan</p>
+      <a class="lien" href="contact.html#venir">Itinéraire</a>
+    </div>
+    <div>
+      <h2 class="pied-t">Horaires</h2>
+      <p data-statut>Lundi 15 h – 21 h</p>
+      <p class="pied-petit">Lundi 15 h – 21 h<br>Mardi au samedi 10 h – 12 h 30, 14 h 30 – 21 h<br>Plus tard les soirs d'événement</p>
+    </div>
+    <div>
+      <h2 class="pied-t">Nous joindre</h2>
+      <p><a href="tel:+33468899143">04 68 89 91 43</a><br><a href="mailto:contact@vinochope.com">contact@vinochope.com</a></p>
+      <a class="lien" href="https://www.facebook.com/vinochope/" rel="noopener">Facebook</a>
+    </div>
+    <nav aria-label="Plan du site">
+      <h2 class="pied-t">Le site</h2>
+      <ul class="pied-liens">
+        <li><a href="la-cave.html">La cave et la carte</a></li>
+        <li><a href="evenements.html">Événements</a></li>
+        <li><a href="tireuses.html">Tireuses et fûts</a></li>
+        <li><a href="histoire.html">Notre histoire</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+  <p class="pied-marque" aria-hidden="true">Vinochope</p>
+  <div class="pied-bas">
+    <p>L'abus d'alcool est dangereux pour la santé, à consommer avec modération.</p>
+    <p>© <span data-annee>2026</span> Vinochope · <a href="gerant.html">Espace gérant</a></p>
+  </div>
+</footer>
+<!--/PIED-->
+
+<div class="seuil" id="seuil" role="dialog" aria-modal="true" aria-labelledby="seuil-t" hidden>
+  <div class="seuil-voute">
+    <p class="repere">Avant de descendre</p>
+    <h2 id="seuil-t">Avez-vous<br>18 ans ou plus ?</h2>
+    <p class="seuil-txt">Ce site parle de vin, de bière et de spiritueux.</p>
+    <div class="seuil-btns">
+      <button type="button" class="etiquette" data-oui>Oui, j'entre</button>
+      <button type="button" class="etiquette ligne" data-non>Non</button>
+    </div>
+    <p class="seuil-non" hidden>Revenez nous voir à vos 18 ans.</p>
+  </div>
+  <p class="seuil-pied">L'abus d'alcool est dangereux pour la santé.</p>
+</div>
+<div class="grain" aria-hidden="true"></div>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="assets/commun.js?v=3"></script>
+<script src="assets/evenements.js?v=3"></script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="fr" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Espace gérant · Vinochope</title>
+<meta name="description" content="Gestion des événements, des fûts, des options de location et de la cave.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#3B1020">
+<meta property="og:title" content="Espace gérant · Vinochope">
+<meta property="og:description" content="Gestion des événements, des fûts, des options de location et de la cave.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/cave.css?v=3">
+<link rel="stylesheet" href="assets/pages.css?v=3">
+</head>
+<body class="page-gerant">
+<a class="evite" href="#contenu">Aller au contenu</a>
+
+<!--TETE-->
+<header class="tete" data-ton="clair">
+  <a class="marque" href="index.html" aria-label="Vinochope, accueil">Vinochope<span class="sceau" aria-hidden="true"></span></a>
+  <nav class="nav" aria-label="Navigation principale"><a href="la-cave.html">La cave</a><a href="evenements.html">Événements</a><a href="tireuses.html">Tireuses</a><a href="histoire.html">Histoire</a><a href="contact.html">Contact</a></nav>
+  <div class="tete-droite">
+    <a class="etiquette petite" href="la-cave.html#carte">La carte</a>
+    <button type="button" class="menu-btn" aria-expanded="false" aria-controls="menu">Menu</button>
+  </div>
+</header>
+<div class="menu" id="menu" hidden>
+  <nav aria-label="Menu"><ol class="menu-liens"><li><a href="index.html"><span class="code">00</span>Accueil</a></li><li><a href="la-cave.html"><span class="code">01</span>La cave et la carte</a></li><li><a href="evenements.html"><span class="code">02</span>Événements</a></li><li><a href="tireuses.html"><span class="code">03</span>Tireuses et fûts</a></li><li><a href="histoire.html"><span class="code">04</span>Notre histoire</a></li><li><a href="contact.html"><span class="code">05</span>Contact</a></li></ol></nav>
+  <div class="menu-infos">
+    <p class="repere">Vinochope</p>
+    <p>26 rue Mathieu de Dombasle<br>66000 Perpignan</p>
+    <p><a href="tel:+33468899143">04 68 89 91 43</a></p>
+    <p data-statut>Lun. 15 h – 21 h · mar.–sam. 10 h – 12 h 30 et 14 h 30 – 21 h</p>
+  </div>
+</div>
+<!--/TETE-->
+
+<main id="contenu">
+<section class="gerant clair" data-ton="clair" aria-labelledby="t-page">
+  <div class="enveloppe">
+    <p class="repere">Espace gérant</p>
+    <h1 id="t-page" style="font-size:clamp(44px,6vw,84px);line-height:.95">Gérer le <span class="accent">site</span>.</h1>
+    <p class="avertissement"><b>Version de démonstration.</b> Vos modifications s'enregistrent dans ce navigateur et s'affichent tout de suite sur le site, sur cet appareil. Pour les publier pour tout le monde, utilisez « Exporter » et transmettez le fichier, ou branchez cet espace sur un hébergement avec comptes (prévu à la mise en ligne).</p>
+
+    <div class="onglets" role="tablist" aria-label="Ce que vous gérez" data-onglets>
+      <button type="button" class="filtre" role="tab" aria-selected="true" aria-pressed="true" data-onglet="evenements">Événements</button>
+      <button type="button" class="filtre" role="tab" aria-selected="false" aria-pressed="false" data-onglet="futs">Fûts</button>
+      <button type="button" class="filtre" role="tab" aria-selected="false" aria-pressed="false" data-onglet="options">Options de location</button>
+      <button type="button" class="filtre" role="tab" aria-selected="false" aria-pressed="false" data-onglet="vins">Grandes bouteilles</button>
+    </div>
+
+    <div class="g-grille">
+      <div>
+        <div class="g-outils">
+          <button type="button" class="etiquette" data-nouveau>Ajouter</button>
+          <button type="button" class="etiquette ligne" data-exporter>Exporter</button>
+          <label class="etiquette ligne" style="cursor:pointer">Importer<input type="file" accept="application/json,.json" data-importer hidden></label>
+        </div>
+        <ul class="g-liste" data-liste aria-label="Éléments enregistrés"></ul>
+        <p style="margin-top:14px"><button type="button" class="lien" data-reinit>Revenir à la version du site</button></p>
+      </div>
+      <form class="g-form formulaire" data-form novalidate aria-labelledby="g-form-t"></form>
+    </div>
+  </div>
+</section>
+</main>
+
+<!--PIED-->
+<footer class="pied" data-ton="sombre">
+  <div class="pied-haut">
+    <div>
+      <h2 class="pied-t">Venir</h2>
+      <p>26 rue Mathieu de Dombasle<br>66000 Perpignan</p>
+      <a class="lien" href="contact.html#venir">Itinéraire</a>
+    </div>
+    <div>
+      <h2 class="pied-t">Horaires</h2>
+      <p data-statut>Lundi 15 h – 21 h</p>
+      <p class="pied-petit">Lundi 15 h – 21 h<br>Mardi au samedi 10 h – 12 h 30, 14 h 30 – 21 h<br>Plus tard les soirs d'événement</p>
+    </div>
+    <div>
+      <h2 class="pied-t">Nous joindre</h2>
+      <p><a href="tel:+33468899143">04 68 89 91 43</a><br><a href="mailto:contact@vinochope.com">contact@vinochope.com</a></p>
+      <a class="lien" href="https://www.facebook.com/vinochope/" rel="noopener">Facebook</a>
+    </div>
+    <nav aria-label="Plan du site">
+      <h2 class="pied-t">Le site</h2>
+      <ul class="pied-liens">
+        <li><a href="la-cave.html">La cave et la carte</a></li>
+        <li><a href="evenements.html">Événements</a></li>
+        <li><a href="tireuses.html">Tireuses et fûts</a></li>
+        <li><a href="histoire.html">Notre histoire</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+  <p class="pied-marque" aria-hidden="true">Vinochope</p>
+  <div class="pied-bas">
+    <p>L'abus d'alcool est dangereux pour la santé, à consommer avec modération.</p>
+    <p>© <span data-annee>2026</span> Vinochope · <a href="gerant.html">Espace gérant</a></p>
+  </div>
+</footer>
+<!--/PIED-->
+
+
+<div class="grain" aria-hidden="true"></div>
+<script src="assets/commun.js?v=3"></script>
+<script src="assets/gerant.js?v=3"></script>
+</body>
+</html>

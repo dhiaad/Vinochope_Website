@@ -1,0 +1,74 @@
+[
+ {
+  "id": "blonde-canigou",
+  "nom": "Blonde du Canigou",
+  "brasserie": "Brasserie artisanale des P.-O.",
+  "style": "Blonde",
+  "degre": 5,
+  "volume": 30,
+  "prix": 80,
+  "description": "Légère et désaltérante, celle qui plaît à tout le monde. Le bon choix pour un mariage.",
+  "photo": "media/photos/t4.webp",
+  "dispo": true
+ },
+ {
+  "id": "blanche-aspres",
+  "nom": "Blanche des Aspres",
+  "brasserie": "Brasserie artisanale des P.-O.",
+  "style": "Blanche",
+  "degre": 4.8,
+  "volume": 30,
+  "prix": 85,
+  "description": "Blé, écorce d'orange et coriandre. Fraîche, parfaite les soirs d'été.",
+  "photo": "media/photos/t2.webp",
+  "dispo": true
+ },
+ {
+  "id": "ambree-tet",
+  "nom": "Ambrée de la Têt",
+  "brasserie": "Brasserie artisanale des P.-O.",
+  "style": "Ambrée",
+  "degre": 6,
+  "volume": 30,
+  "prix": 90,
+  "description": "Notes de caramel et de pain grillé, une bière ronde qui accompagne bien les grillades.",
+  "photo": "media/photos/t1.webp",
+  "dispo": true
+ },
+ {
+  "id": "ipa-tramontane",
+  "nom": "IPA Tramontane",
+  "brasserie": "Microbrasserie de Perpignan",
+  "style": "IPA",
+  "degre": 6.5,
+  "volume": 20,
+  "prix": 95,
+  "description": "Houblonnée, aux arômes d'agrumes et de fruits exotiques. Pour les amateurs de bières craft.",
+  "photo": "media/photos/t3.webp",
+  "dispo": true
+ },
+ {
+  "id": "pils",
+  "nom": "Pils allemande",
+  "brasserie": "Importation",
+  "style": "Blonde",
+  "degre": 4.9,
+  "volume": 30,
+  "prix": 80,
+  "description": "Une pils classique, nette et amère juste ce qu'il faut. Valeur sûre pour les grands groupes.",
+  "photo": "media/photos/t5.webp",
+  "dispo": true
+ },
+ {
+  "id": "sans-alcool",
+  "nom": "Blonde sans alcool",
+  "brasserie": "Brasserie artisanale",
+  "style": "Sans alcool",
+  "degre": 0.4,
+  "volume": 20,
+  "prix": 75,
+  "description": "Pour que les conducteurs aient aussi leur pression.",
+  "photo": "media/photos/t6.webp",
+  "dispo": false
+ }
+]
