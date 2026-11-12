@@ -17,7 +17,7 @@
   --t-mono: "IBM Plex Mono", ui-monospace, monospace;
   --ease: cubic-bezier(.2, .7, .1, 1);
 }
-@media (min-width: 900px) { :root { --jauge: 88px; } }
+@media (min-width: 900px) { .accueil { --jauge: 88px; } }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
@@ -304,11 +304,6 @@ h2 .accent, h1 .accent { color: var(--cire); }
 .horaires td { text-align: right; }
 .horaires tr.aujourdhui th, .horaires tr.aujourdhui td { color: var(--cire); font-weight: 600; }
 @media (max-width: 799px) { .venir-grille { grid-template-columns: 1fr; gap: 44px; margin-top: 56px; } }
-
-/* ---------- Pied ---------- */
-.pied { background: var(--lie); color: var(--tuffeau); padding: 80px var(--gouttiere) 34px calc(var(--gouttiere) + var(--jauge)); overflow: hidden; }
-.pied-marque { font: 400 clamp(64px, 15.5vw, 260px)/.8 var(--t-titre); letter-spacing: -.03em; color: var(--blanc); margin-left: -.04em; }
-.pied-bas { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 30px; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(232, 221, 200, .3); font: 500 12px/1.5 var(--t-mono); }
 
 /* ---------- Le seuil (18 ans) ---------- */
 .seuil {

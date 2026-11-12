@@ -1,0 +1,136 @@
+<!-- {"titre": "Location de tireuse à bière et fûts à Perpignan · Vinochope", "description": "Tireuse à bière offerte, fûts de 30 litres dès 80 €, soit 0,67 € le demi. Mariage, anniversaire, association, camping : livraison, installation, verres et écocups. Devis à Perpignan.", "scripts": ["tireuses.js"]} -->
+
+<section class="entete vert" data-ton="sombre" aria-labelledby="t-page">
+  <div class="enveloppe entete-grille">
+    <div>
+      <p class="repere">Niveau −5 · Location de tireuses</p>
+      <h1 id="t-page">La tireuse<br>est <span class="accent">offerte</span>.</h1>
+      <p class="chapo">Vous choisissez vos fûts, on prête la tireuse. Mariage, anniversaire, fête d'association, saison de camping : à partir de 80 € le fût de 30 litres, soit 0,67 € le demi de 25 cl.</p>
+      <div class="saut">
+        <a class="etiquette" href="#devis">Demander un devis</a>
+        <a class="lien" href="#calcul">Combien de fûts ?</a>
+        <a class="lien" href="tel:+33468899143">04 68 89 91 43</a>
+      </div>
+    </div>
+    <figure class="voute-img">
+      <img src="media/photos/t1.webp" alt="Une tireuse à bière à plusieurs têtes, un demi en train d'être servi" width="1050" height="1400">
+      <span class="cle" aria-hidden="true" style="--fond-cle:var(--vert)"></span>
+    </figure>
+  </div>
+</section>
+
+<section class="bloc clair" id="comment" data-ton="clair" aria-labelledby="comment-t">
+  <div class="enveloppe">
+    <p class="repere">Comment ça marche</p>
+    <h2 id="comment-t" class="montee" style="margin-bottom:60px">Quatre étapes,<br>zéro <span class="accent">prise de tête</span>.</h2>
+    <ol class="etapes-loc montee">
+      <li><h3>Choisissez vos fûts</h3><p>Blonde, blanche, ambrée, IPA : on vous conseille selon le nombre d'invités et leurs goûts.</p></li>
+      <li><h3>Réservez la date</h3><p>Par téléphone ou avec le formulaire. On confirme la disponibilité du matériel.</p></li>
+      <li><h3>On livre, ou vous passez</h3><p>Retrait à la cave, ou livraison et installation sur place si vous le souhaitez.</p></li>
+      <li><h3>On reprend tout</h3><p>Tireuse, fûts vides et fûts non entamés : on récupère le matériel après la fête.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="bloc sombre" id="futs" data-ton="sombre" aria-labelledby="futs-t">
+  <div class="enveloppe">
+    <div class="bloc-tete">
+      <div>
+        <p class="repere">Les fûts du moment</p>
+        <h2 id="futs-t" class="montee">Choisissez<br>vos <span class="accent">bières</span>.</h2>
+        <p class="chapo montee">La sélection change selon les brasseries et la saison. Une envie particulière ? Demandez, on cherche.</p>
+      </div>
+      <div class="filtres" role="group" aria-label="Filtrer par style de bière" data-filtres>
+        <button type="button" class="filtre" aria-pressed="true" data-style="">Tout</button>
+      </div>
+    </div>
+    <div class="futs" data-futs aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="bloc clair" id="calcul" data-ton="clair" aria-labelledby="calcul-t">
+  <div class="enveloppe calcul">
+    <div>
+      <p class="repere">Le calculateur</p>
+      <h2 id="calcul-t" class="montee">Combien<br>de <span class="accent">fûts</span> ?</h2>
+      <p class="chapo montee">Une estimation rapide pour préparer votre budget. On affine ensemble au téléphone.</p>
+      <form class="montee" style="margin-top:44px" data-calcul onsubmit="return false">
+        <div class="champ">
+          <label for="invites">Nombre d'invités qui boivent de la bière</label>
+          <output for="invites" data-invites-sortie>60</output>
+          <input type="range" id="invites" min="10" max="400" step="5" value="60">
+        </div>
+        <fieldset class="choix">
+          <legend>Durée de la fête</legend>
+          <input type="radio" name="duree" id="d1" value="2"><label for="d1">Apéro, 2 h</label>
+          <input type="radio" name="duree" id="d2" value="3" checked><label for="d2">Soirée, 4 h</label>
+          <input type="radio" name="duree" id="d3" value="4.5"><label for="d3">Jusqu'au bout de la nuit</label>
+        </fieldset>
+        <div class="champ">
+          <label for="fut-choix">Fût choisi</label>
+          <select id="fut-choix" data-fut-choix></select>
+        </div>
+      </form>
+    </div>
+    <div class="resultat montee" aria-live="polite" data-resultat>
+      <p class="repere">Votre estimation</p>
+      <div class="resultat-ligne"><span>Demis de 25 cl</span><strong data-r="demis">–</strong></div>
+      <div class="resultat-ligne"><span>Fûts</span><strong data-r="futs">–</strong></div>
+      <div class="resultat-ligne"><span>Tireuse</span><strong>Offerte</strong></div>
+      <div class="resultat-ligne total"><span>Budget bière</span><strong data-r="total">–</strong></div>
+      <p class="petit-mono" data-r="demi">Soit – le demi</p>
+      <p class="petit-mono">Estimation indicative, hors options. Les fûts non entamés sont repris.</p>
+      <a class="etiquette" href="#devis" data-vers-devis>Demander ce devis</a>
+    </div>
+  </div>
+</section>
+
+<section class="bloc vert" id="options" data-ton="sombre" aria-labelledby="options-t">
+  <div class="enveloppe">
+    <p class="repere">À la carte</p>
+    <h2 id="options-t" class="montee" style="margin-bottom:56px">Les <span class="accent">options</span>.</h2>
+    <ul class="options-loc montee" data-options></ul>
+  </div>
+</section>
+
+<section class="bloc clair" id="formules" data-ton="clair" aria-labelledby="formules-t">
+  <div class="enveloppe">
+    <p class="repere">Pour qui</p>
+    <h2 id="formules-t" class="montee" style="margin-bottom:56px">Une soirée<br>ou toute une <span class="accent">saison</span>.</h2>
+    <div class="formules montee">
+      <div class="formule"><span class="code">Particuliers</span><h3>Mariage, anniversaire, fête de famille</h3><p>Le fût, la tireuse et les verres pour un soir. On vous aide à prévoir la bonne quantité.</p><a class="lien" href="#devis">Demander un devis</a></div>
+      <div class="formule"><span class="code">Associations</span><h3>Fêtes de village, festivals, clubs</h3><p>Plusieurs fûts, plusieurs têtes, écocups consignés : on s'adapte au nombre et au lieu.</p><a class="lien" href="#devis">Demander un devis</a></div>
+      <div class="formule"><span class="code">Professionnels</span><h3>Campings, bars, créateurs d'événements</h3><p>Une tireuse à disposition pour la saison ou à l'année. Prenez contact, il y aura toujours une solution.</p><a class="lien" href="tel:+33468899143">04 68 89 91 43</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="bloc sombre" id="devis" data-ton="sombre" aria-labelledby="devis-t">
+  <div class="enveloppe">
+    <div class="bloc-tete">
+      <div>
+        <p class="repere">Votre demande</p>
+        <h2 id="devis-t">Demander<br>un <span class="accent">devis</span>.</h2>
+      </div>
+      <p>Ou directement au <a href="tel:+33468899143" style="color:var(--cire)">04 68 89 91 43</a></p>
+    </div>
+    <form class="formulaire" data-devis novalidate>
+      <div><label for="d-nom">Nom</label><input id="d-nom" name="nom" autocomplete="name" required><p class="erreur" id="err-d-nom"></p></div>
+      <div><label for="d-tel">Téléphone</label><input id="d-tel" name="tel" type="tel" autocomplete="tel" required><p class="erreur" id="err-d-tel"></p></div>
+      <div><label for="d-mail">E-mail</label><input id="d-mail" name="email" type="email" autocomplete="email"><p class="erreur" id="err-d-mail"></p></div>
+      <div><label for="d-date">Date de l'événement</label><input id="d-date" name="date" type="date" required><p class="erreur" id="err-d-date"></p></div>
+      <div><label for="d-lieu">Lieu</label><input id="d-lieu" name="lieu" placeholder="Commune, salle…"></div>
+      <div><label for="d-pers">Nombre de personnes</label><input id="d-pers" name="personnes" type="number" min="1" inputmode="numeric"></div>
+      <div class="plein"><label>Livraison souhaitée</label>
+        <div class="cases"><label><input type="radio" name="livraison" value="Oui"> Oui, livraison et installation</label><label><input type="radio" name="livraison" value="Non" checked> Non, je passe à la cave</label></div>
+      </div>
+      <div class="plein"><label>Fûts qui vous intéressent</label><div class="cases" data-cases-futs></div></div>
+      <div class="plein"><label>Options</label><div class="cases" data-cases-options></div></div>
+      <div class="plein"><label for="d-msg">Une demande particulière ?</label><textarea id="d-msg" name="message"></textarea></div>
+      <div class="plein actions"><button type="submit" class="etiquette">Préparer ma demande</button><span class="petit-mono">Votre logiciel de messagerie s'ouvre avec la demande remplie.</span></div>
+    </form>
+    <div class="envoye" data-envoye hidden tabindex="-1">
+      <p><b>Votre demande est prête.</b> Si votre messagerie ne s'est pas ouverte, appelez-nous au 04 68 89 91 43 ou écrivez à contact@vinochope.com.</p>
+    </div>
+  </div>
+</section>

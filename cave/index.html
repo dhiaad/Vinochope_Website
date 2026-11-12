@@ -10,7 +10,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gloock&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="media/raisin-lg.webp">
-<link rel="stylesheet" href="assets/cave.css?v=1">
+<link rel="stylesheet" href="assets/cave.css?v=3">
+<link rel="stylesheet" href="assets/pages.css?v=3">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":["LiquorStore","BarOrPub"],"name":"Vinochope","telephone":"+33468899143",
 "address":{"@type":"PostalAddress","streetAddress":"26 rue Mathieu de Dombasle","postalCode":"66000","addressLocality":"Perpignan","addressCountry":"FR"},
@@ -19,17 +20,28 @@
 {"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"14:30","closes":"21:00"}]}
 </script>
 </head>
-<body>
-<a class="evite" href="#cave">Aller au contenu</a>
+<body class="accueil">
+<a class="evite" href="#contenu">Aller au contenu</a>
 
-<!-- ============ En-tête ============ -->
-<header class="tete">
-  <a class="marque" href="#rue" aria-label="Vinochope, retour en haut">Vinochope<span class="sceau" aria-hidden="true"></span></a>
-  <nav class="nav" aria-label="Niveaux de la cave">
-    <a href="#cave">La cave</a><a href="#bar">Le bar</a><a href="#scene">La scène</a><a href="#tireuses">Tireuses</a><a href="#venir">Venir</a>
-  </nav>
-  <a class="etiquette petite" href="#tireuses">Louer une tireuse</a>
+<!--TETE-->
+<header class="tete" data-ton="clair">
+  <a class="marque" href="index.html" aria-label="Vinochope, accueil">Vinochope<span class="sceau" aria-hidden="true"></span></a>
+  <nav class="nav" aria-label="Navigation principale"><a href="la-cave.html">La cave</a><a href="evenements.html">Événements</a><a href="tireuses.html">Tireuses</a><a href="histoire.html">Histoire</a><a href="contact.html">Contact</a></nav>
+  <div class="tete-droite">
+    <a class="etiquette petite" href="la-cave.html#carte">La carte</a>
+    <button type="button" class="menu-btn" aria-expanded="false" aria-controls="menu">Menu</button>
+  </div>
 </header>
+<div class="menu" id="menu" hidden>
+  <nav aria-label="Menu"><ol class="menu-liens"><li><a href="index.html" aria-current="page"><span class="code">00</span>Accueil</a></li><li><a href="la-cave.html"><span class="code">01</span>La cave et la carte</a></li><li><a href="evenements.html"><span class="code">02</span>Événements</a></li><li><a href="tireuses.html"><span class="code">03</span>Tireuses et fûts</a></li><li><a href="histoire.html"><span class="code">04</span>Notre histoire</a></li><li><a href="contact.html"><span class="code">05</span>Contact</a></li></ol></nav>
+  <div class="menu-infos">
+    <p class="repere">Vinochope</p>
+    <p>26 rue Mathieu de Dombasle<br>66000 Perpignan</p>
+    <p><a href="tel:+33468899143">04 68 89 91 43</a></p>
+    <p data-statut>Lun. 15 h – 21 h · mar.–sam. 10 h – 12 h 30 et 14 h 30 – 21 h</p>
+  </div>
+</div>
+<!--/TETE-->
 
 <!-- ============ Jauge de profondeur ============ -->
 <aside class="jauge" aria-hidden="true">
@@ -37,15 +49,15 @@
   <div class="jauge-rail"><i class="jauge-bille"></i></div>
 </aside>
 
-<main>
+<main id="contenu">
 
   <!-- Niveau 0 · La rue : la porte voûtée s'ouvre et on entre -->
-  <section class="rue" id="rue" data-prof="0" aria-labelledby="t-rue">
+  <section class="rue" id="rue" data-prof="0" data-ton="clair" aria-labelledby="t-rue">
     <div class="rue-colle">
       <div class="rue-texte">
         <p class="repere">Niveau 0 · Rue Mathieu de Dombasle</p>
         <h1 id="t-rue">Descendez<br>à la <span class="accent">cave.</span></h1>
-        <p class="chapo">Deux cents vins, un comptoir, une scène. Depuis 2013, au cœur de Perpignan.</p>
+        <p class="chapo">Deux cents vins, un comptoir, une scène. Depuis 2013, à Perpignan.</p>
         <p class="repere discret">Faites défiler pour descendre</p>
       </div>
       <div class="porte">
@@ -58,7 +70,7 @@
   </section>
 
   <!-- Niveau −1 · La cave -->
-  <section class="niveau cave" id="cave" data-prof="3" aria-labelledby="t-cave">
+  <section class="niveau cave" id="cave" data-prof="3" data-ton="sombre" aria-labelledby="t-cave">
     <div class="enveloppe">
       <header class="niveau-tete">
         <p class="repere">Niveau −1 · La cave</p>
@@ -70,11 +82,12 @@
         <li class="casier montee"><span class="code">Casier B</span><strong>450</strong><span class="quoi">bières</span><span class="note">artisanales et brassées avec soin</span></li>
         <li class="casier montee"><span class="code">Casier C</span><strong>150</strong><span class="quoi">spiritueux</span><span class="note">whiskys, rhums, gins, liqueurs</span></li>
       </ul>
+      <p class="montee suite"><a class="lien" href="la-cave.html">La carte du bar et les grandes bouteilles</a></p>
     </div>
   </section>
 
   <!-- Niveau −2 · Du raisin au verre : la vidéo dans la voûte -->
-  <section class="niveau film" id="raisin" data-prof="5" aria-labelledby="t-film">
+  <section class="niveau film" id="raisin" data-prof="5" data-ton="sombre" aria-labelledby="t-film">
     <div class="film-colle">
       <div class="film-texte">
         <p class="repere">Niveau −2 · Du raisin au verre</p>
@@ -94,7 +107,7 @@
   </section>
 
   <!-- Niveau −3 · Le bar, à la bougie -->
-  <section class="niveau bar" id="bar" data-prof="7" aria-labelledby="t-bar">
+  <section class="niveau bar" id="bar" data-prof="7" data-ton="sombre" aria-labelledby="t-bar">
     <div class="enveloppe">
       <p class="repere">Niveau −3 · Le bar</p>
       <h2 id="t-bar" class="montee">Au verre, au <span class="accent">comptoir</span>,<br>avec des tapas.</h2>
@@ -111,7 +124,7 @@
   </section>
 
   <!-- Niveau −4 · La scène : le registre -->
-  <section class="niveau scene" id="scene" data-prof="9" aria-labelledby="t-scene">
+  <section class="niveau scene" id="scene" data-prof="9" data-ton="clair" aria-labelledby="t-scene">
     <div class="enveloppe">
       <p class="repere">Niveau −4 · La scène</p>
       <h2 id="t-scene" class="montee">On sert aussi<br>de la <span class="accent">culture.</span></h2>
@@ -126,12 +139,12 @@
           <tr><td class="code">04</td><th scope="row">Conférences</th><td>Le vin, le territoire, ceux qui le font</td><td>Au fil de la saison</td></tr>
         </tbody>
       </table>
-      <a class="lien montee" href="https://www.facebook.com/vinochope/" rel="noopener">Voir le programme sur Facebook</a>
+      <a class="lien montee" href="evenements.html">Voir toute la programmation</a>
     </div>
   </section>
 
   <!-- Niveau −5 · Les tireuses -->
-  <section class="niveau tireuses" id="tireuses" data-prof="11" aria-labelledby="t-tir">
+  <section class="niveau tireuses" id="tireuses" data-prof="11" data-ton="sombre" aria-labelledby="t-tir">
     <div class="enveloppe tir-grille">
       <div>
         <p class="repere">Niveau −5 · Location de tireuses</p>
@@ -144,7 +157,7 @@
           <li>À la soirée, à la saison ou à l'année</li>
         </ul>
         <div class="actions montee">
-          <a class="etiquette" href="tel:+33468899143">Demander un devis</a>
+          <a class="etiquette" href="tireuses.html">Voir les fûts et les options</a>
           <a class="lien" href="tel:+33468899143">04 68 89 91 43</a>
         </div>
       </div>
@@ -158,7 +171,7 @@
   </section>
 
   <!-- Remonter · Venir -->
-  <section class="venir" id="venir" data-prof="0" aria-labelledby="t-venir">
+  <section class="venir" id="venir" data-prof="0" data-ton="clair" aria-labelledby="t-venir">
     <div class="enveloppe">
       <p class="repere">Retour à la surface</p>
       <h2 id="t-venir" class="montee">Il ne manque<br>plus que <span class="accent">vous.</span></h2>
@@ -166,7 +179,7 @@
         <div>
           <h3>Adresse</h3>
           <p>26 rue Mathieu de Dombasle<br>66000 Perpignan</p>
-          <a class="lien" href="https://www.google.com/maps/search/?api=1&amp;query=26+rue+Mathieu+de+Dombasle+66000+Perpignan" rel="noopener">Itinéraire</a>
+          <a class="lien" href="contact.html#venir">Plan et itinéraire</a>
         </div>
         <div>
           <h3>Horaires</h3>
@@ -188,13 +201,42 @@
   </section>
 </main>
 
-<footer class="pied">
-  <p class="pied-marque">Vinochope</p>
+<!--PIED-->
+<footer class="pied" data-ton="sombre">
+  <div class="pied-haut">
+    <div>
+      <h2 class="pied-t">Venir</h2>
+      <p>26 rue Mathieu de Dombasle<br>66000 Perpignan</p>
+      <a class="lien" href="contact.html#venir">Itinéraire</a>
+    </div>
+    <div>
+      <h2 class="pied-t">Horaires</h2>
+      <p data-statut>Lundi 15 h – 21 h</p>
+      <p class="pied-petit">Lundi 15 h – 21 h<br>Mardi au samedi 10 h – 12 h 30, 14 h 30 – 21 h<br>Plus tard les soirs d'événement</p>
+    </div>
+    <div>
+      <h2 class="pied-t">Nous joindre</h2>
+      <p><a href="tel:+33468899143">04 68 89 91 43</a><br><a href="mailto:contact@vinochope.com">contact@vinochope.com</a></p>
+      <a class="lien" href="https://www.facebook.com/vinochope/" rel="noopener">Facebook</a>
+    </div>
+    <nav aria-label="Plan du site">
+      <h2 class="pied-t">Le site</h2>
+      <ul class="pied-liens">
+        <li><a href="la-cave.html">La cave et la carte</a></li>
+        <li><a href="evenements.html">Événements</a></li>
+        <li><a href="tireuses.html">Tireuses et fûts</a></li>
+        <li><a href="histoire.html">Notre histoire</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+  <p class="pied-marque" aria-hidden="true">Vinochope</p>
   <div class="pied-bas">
     <p>L'abus d'alcool est dangereux pour la santé, à consommer avec modération.</p>
-    <p>© <span data-annee>2026</span> Vinochope · Cave, bar et scène à Perpignan</p>
+    <p>© <span data-annee>2026</span> Vinochope · <a href="gerant.html">Espace gérant</a></p>
   </div>
 </footer>
+<!--/PIED-->
 
 <!-- ============ La porte : 18 ans et plus (Loi Évin) ============ -->
 <div class="seuil" id="seuil" role="dialog" aria-modal="true" aria-labelledby="seuil-t" hidden>
@@ -213,6 +255,7 @@
 
 <div class="grain" aria-hidden="true"></div>
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="assets/cave.js?v=1"></script>
+<script src="assets/commun.js?v=3"></script>
+<script src="assets/cave.js?v=3"></script>
 </body>
 </html>

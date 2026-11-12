@@ -1,0 +1,29 @@
+<!-- {"titre": "Espace gérant · Vinochope", "description": "Gestion des événements, des fûts, des options de location et de la cave.", "scripts": ["gerant.js"], "sans_seuil": true, "sans_lenis": true, "noindex": true, "classe": "page-gerant"} -->
+
+<section class="gerant clair" data-ton="clair" aria-labelledby="t-page">
+  <div class="enveloppe">
+    <p class="repere">Espace gérant</p>
+    <h1 id="t-page" style="font-size:clamp(44px,6vw,84px);line-height:.95">Gérer le <span class="accent">site</span>.</h1>
+    <p class="avertissement"><b>Version de démonstration.</b> Vos modifications s'enregistrent dans ce navigateur et s'affichent tout de suite sur le site, sur cet appareil. Pour les publier pour tout le monde, utilisez « Exporter » et transmettez le fichier, ou branchez cet espace sur un hébergement avec comptes (prévu à la mise en ligne).</p>
+
+    <div class="onglets" role="tablist" aria-label="Ce que vous gérez" data-onglets>
+      <button type="button" class="filtre" role="tab" aria-selected="true" aria-pressed="true" data-onglet="evenements">Événements</button>
+      <button type="button" class="filtre" role="tab" aria-selected="false" aria-pressed="false" data-onglet="futs">Fûts</button>
+      <button type="button" class="filtre" role="tab" aria-selected="false" aria-pressed="false" data-onglet="options">Options de location</button>
+      <button type="button" class="filtre" role="tab" aria-selected="false" aria-pressed="false" data-onglet="vins">Grandes bouteilles</button>
+    </div>
+
+    <div class="g-grille">
+      <div>
+        <div class="g-outils">
+          <button type="button" class="etiquette" data-nouveau>Ajouter</button>
+          <button type="button" class="etiquette ligne" data-exporter>Exporter</button>
+          <label class="etiquette ligne" style="cursor:pointer">Importer<input type="file" accept="application/json,.json" data-importer hidden></label>
+        </div>
+        <ul class="g-liste" data-liste aria-label="Éléments enregistrés"></ul>
+        <p style="margin-top:14px"><button type="button" class="lien" data-reinit>Revenir à la version du site</button></p>
+      </div>
+      <form class="g-form formulaire" data-form novalidate aria-labelledby="g-form-t"></form>
+    </div>
+  </div>
+</section>
