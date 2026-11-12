@@ -36,6 +36,18 @@
         "accueil"
       ],
       "port": 5530
+    },
+    {
+      "name": "cave",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "5540",
+        "--directory",
+        "cave"
+      ],
+      "port": 5540
     }
   ]
 }

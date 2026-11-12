@@ -1,0 +1,341 @@
+/* Vinochope · « La descente »
+   Palette : tuffeau, lie-de-vin, cire, vert bouteille + blanc
+   Titres Gloock · texte Instrument Sans · repères IBM Plex Mono */
+
+:root {
+  --tuffeau: #E8DDC8;
+  --lie: #3B1020;
+  --cire: #B4302A;
+  --vert: #1F2B24;
+  --blanc: #FFFFFF;
+  --lie-90: #2E0C19;           /* fond le plus profond, dérivé de la lie */
+  --encre: var(--lie);
+  --gouttiere: clamp(20px, 5vw, 72px);
+  --jauge: 0px;
+  --t-titre: "Gloock", Georgia, serif;
+  --t-texte: "Instrument Sans", system-ui, sans-serif;
+  --t-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --ease: cubic-bezier(.2, .7, .1, 1);
+}
+@media (min-width: 900px) { :root { --jauge: 88px; } }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+body {
+  margin: 0; background: var(--lie); color: var(--blanc);
+  font: 400 17px/1.6 var(--t-texte);
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+img, canvas { display: block; max-width: 100%; }
+h1, h2, h3 { font-family: var(--t-titre); font-weight: 400; margin: 0; letter-spacing: -.01em; }
+p { margin: 0; }
+a { color: inherit; }
+em, i { font-style: normal; }
+:focus-visible { outline: 2px solid var(--cire); outline-offset: 3px; }
+.visuellement-cache { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.evite { position: fixed; left: 12px; top: -60px; z-index: 100; background: var(--cire); color: var(--blanc); padding: 10px 16px; text-decoration: none; }
+.evite:focus { top: 12px; }
+
+/* ---------- Repères en mono ---------- */
+.repere, .code {
+  font: 500 12px/1.4 var(--t-mono); letter-spacing: .02em; color: var(--cire);
+}
+.repere { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+.repere::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+.repere.discret { color: inherit; opacity: .6; margin: 0; }
+.repere.discret::before { display: none; }
+
+/* ---------- Étiquette : le bouton maison, coins coupés comme une étiquette de bouteille ---------- */
+.etiquette {
+  --coin: 10px;
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 16px 26px; border: 0; cursor: pointer;
+  background: var(--cire); color: var(--blanc);
+  font: 600 15px/1 var(--t-texte); text-decoration: none;
+  clip-path: polygon(var(--coin) 0, 100% 0, 100% calc(100% - var(--coin)), calc(100% - var(--coin)) 100%, 0 100%, 0 var(--coin));
+  transition: background .25s, color .25s;
+}
+.etiquette::after { content: "→"; font-family: var(--t-mono); transition: transform .3s var(--ease); }
+.etiquette:hover { background: var(--blanc); color: var(--lie); }
+.etiquette:hover::after { transform: translateX(4px); }
+.etiquette.petite { --coin: 7px; padding: 11px 16px; font-size: 13px; }
+.etiquette.ligne { background: transparent; color: inherit; box-shadow: inset 0 0 0 1px currentColor; }
+.etiquette.ligne::after { content: none; }
+.etiquette.ligne:hover { background: var(--blanc); color: var(--lie); }
+
+/* ---------- Lien souligné à la cire ---------- */
+.lien {
+  display: inline-flex; gap: 10px; align-items: baseline;
+  font-weight: 600; text-decoration: none; padding-bottom: 4px;
+  background: linear-gradient(var(--cire), var(--cire)) left bottom / 100% 2px no-repeat;
+  transition: background-size .35s var(--ease);
+}
+.lien::after { content: "→"; font-family: var(--t-mono); color: var(--cire); }
+.lien:hover { background-size: 30% 2px; }
+
+/* ---------- En-tête ---------- */
+.tete {
+  position: fixed; inset: 0 0 auto 0; z-index: 30;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  padding: 18px var(--gouttiere) 18px calc(var(--gouttiere) + var(--jauge));
+  color: var(--lie); transition: color .4s, background-color .4s, transform .5s var(--ease);
+}
+.tete.range { transform: translateY(-110%); }
+.tete[data-ton="sombre"] { color: var(--blanc); }
+.marque { position: relative; font: 400 26px/1 var(--t-titre); text-decoration: none; padding-right: 16px; }
+.sceau { position: absolute; right: 0; top: 2px; width: 9px; height: 9px; border-radius: 50%; background: var(--cire); }
+.nav { display: flex; gap: 30px; font-size: 14px; font-weight: 500; }
+.nav a { text-decoration: none; position: relative; padding: 4px 0; }
+.nav a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: 0; height: 2px; background: var(--cire); transition: right .3s var(--ease); }
+.nav a:hover::after, .nav a[aria-current]::after { right: 0; }
+@media (max-width: 899px) { .nav { display: none; } }
+
+/* ---------- Jauge de profondeur ---------- */
+.jauge {
+  position: fixed; z-index: 29; left: 0; top: 0; bottom: 0; width: var(--jauge);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
+  color: var(--lie); pointer-events: none; transition: color .4s;
+}
+.jauge[data-ton="sombre"] { color: var(--blanc); }
+.jauge-lecture { display: flex; flex-direction: column; align-items: center; gap: 4px; font: 500 11px/1.2 var(--t-mono); white-space: nowrap; }
+.jauge-lecture [data-temp] { color: var(--cire); }
+.jauge-rail { position: relative; width: 1px; height: 46vh; background: currentColor; opacity: .5; }
+.jauge-rail::before {   /* graduations */
+  content: ""; position: absolute; left: -4px; width: 9px; top: 0; bottom: 0;
+  background: repeating-linear-gradient(to bottom, currentColor 0 1px, transparent 1px 10%);
+}
+.jauge-bille { position: absolute; left: -5px; top: 0; width: 11px; height: 11px; border-radius: 50%; background: var(--cire); transform: translateY(var(--y, 0)); }
+@media (max-width: 899px) {
+  .jauge { top: auto; left: auto; right: 14px; bottom: 14px; width: auto; height: auto; flex-direction: row; gap: 10px; }
+  .jauge-rail { display: none; }
+  .jauge-lecture { flex-direction: row; gap: 10px; padding: 8px 10px; background: var(--lie); color: var(--blanc); }
+}
+
+/* ---------- Enveloppe des niveaux ---------- */
+.enveloppe { max-width: 1240px; margin: 0 auto; padding: 0 var(--gouttiere) 0 calc(var(--gouttiere) + var(--jauge)); }
+.niveau { position: relative; padding: clamp(110px, 16vh, 180px) 0; }
+h2 { font-size: clamp(40px, 6.4vw, 92px); line-height: .98; }
+h2 .accent, h1 .accent { color: var(--cire); }
+.chapo { font-size: clamp(18px, 1.5vw, 21px); line-height: 1.55; max-width: 34em; margin-top: 28px; }
+
+/* Apparition au défilement */
+.js .montee { opacity: 0; transform: translateY(28px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.js .montee.vu { opacity: 1; transform: none; }
+
+/* ---------- Niveau 0 · La rue ---------- */
+.rue { position: relative; height: 230vh; background: var(--tuffeau); color: var(--lie); }
+.rue-colle {
+  position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden;
+  display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 4vw;
+  padding: 90px var(--gouttiere) 40px calc(var(--gouttiere) + var(--jauge));
+}
+.rue h1 { font-size: clamp(54px, 9vw, 150px); line-height: .9; letter-spacing: -.02em; }
+.rue .chapo { max-width: 24em; margin: 30px 0 40px; }
+.rue-texte { opacity: calc(1 - var(--p, 0) * 2.6); transform: translateY(calc(var(--p, 0) * -80px)); }
+.porte { position: relative; justify-self: center; width: min(36vw, 480px, calc((100svh - 160px) * .72)); aspect-ratio: 5 / 7; }
+.porte-voute {
+  position: absolute; inset: 0; border-radius: 999px 999px 0 0; overflow: hidden;
+  background: radial-gradient(120% 80% at 50% 60%, #4a1528 0%, var(--lie) 55%, var(--lie-90) 100%);
+  transform-origin: 50% 52%; transform: scale(var(--s, 1));
+  will-change: transform;
+}
+.porte-grappe {
+  position: absolute; left: 50%; top: 52%; width: 74%; height: auto;
+  transform: translate(-50%, -50%) scale(calc(1 / var(--s, 1) * (1 + var(--p, 0) * .6)));
+  opacity: calc(1.5 - var(--p, 0) * 2.4);
+  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, .45));
+}
+/* Clé de voûte : petit sceau de cire */
+.cle {
+  position: absolute; left: 50%; top: -10px; width: 22px; height: 22px; margin-left: -11px;
+  background: var(--cire); transform: rotate(45deg); box-shadow: 0 0 0 5px var(--tuffeau);
+}
+.porte .cle { opacity: calc(1 - var(--p, 0) * 4); }
+@media (max-width: 799px) {
+  .rue-colle { grid-template-columns: 1fr; align-content: center; gap: 30px; padding-top: 80px; text-align: left; }
+  .rue h1 { font-size: clamp(48px, 15vw, 80px); }
+  .rue .chapo { margin: 18px 0 0; font-size: 17px; }
+  .rue .repere.discret { display: none; }
+  .porte { width: min(62vw, 300px, calc((100svh - 380px) * .72)); justify-self: start; }
+}
+
+/* ---------- Niveau −1 · La cave (le casier) ---------- */
+.cave { background: var(--lie); }
+.cave::before {      /* treillis de casier en losanges, très discret */
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .07;
+  background:
+    repeating-linear-gradient(45deg, var(--tuffeau) 0 1px, transparent 1px 64px),
+    repeating-linear-gradient(-45deg, var(--tuffeau) 0 1px, transparent 1px 64px);
+  -webkit-mask: linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent);
+  mask: linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent);
+}
+.cave h2 { max-width: 12em; }
+.cave h2 .accent { color: var(--cire); }
+.casiers { list-style: none; margin: 90px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(255, 255, 255, .25); }
+.casier { position: relative; padding: 34px 28px 40px 0; display: grid; gap: 6px; }
+.casier + .casier { padding-left: 28px; border-left: 1px solid rgba(255, 255, 255, .25); }
+.casier strong { font: 400 clamp(64px, 8vw, 120px)/.9 var(--t-titre); color: var(--blanc); margin-top: 18px; }
+.casier .quoi { font: 400 26px/1.1 var(--t-titre); color: var(--cire); }
+.casier .note { font-size: 15px; opacity: .75; }
+.casier:nth-child(2) { transition-delay: .1s; }
+.casier:nth-child(3) { transition-delay: .2s; }
+@media (max-width: 799px) {
+  .casiers { grid-template-columns: 1fr; margin-top: 56px; }
+  .casier, .casier + .casier { padding: 26px 0 30px; border-left: 0; border-bottom: 1px solid rgba(255, 255, 255, .25); }
+}
+
+/* ---------- Niveau −2 · Du raisin au verre ---------- */
+.film { height: 420vh; padding: 0; background: var(--vert); }
+.film-colle {
+  position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden;
+  display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 4vw;
+  padding: 90px var(--gouttiere) 40px calc(var(--gouttiere) + var(--jauge));
+}
+.etapes { list-style: none; margin: 0; padding: 0; display: grid; }
+.etape { grid-area: 1 / 1; max-width: 26em; transition: opacity .6s var(--ease), transform .6s var(--ease); opacity: 0; transform: translateY(24px); pointer-events: none; }
+.etape.on { opacity: 1; transform: none; pointer-events: auto; }
+.etape .code { display: block; font-size: 14px; margin-bottom: 18px; }
+.etape h3 { font-size: clamp(48px, 6vw, 96px); line-height: .95; }
+.etape p { margin-top: 24px; font-size: clamp(17px, 1.4vw, 20px); opacity: .85; }
+.film-texte .repere { color: var(--cire); }
+.voute-film {
+  position: relative; justify-self: center;
+  width: min(42vw, 600px, calc((100svh - 150px) * .86)); aspect-ratio: 6 / 7;
+}
+.film-toile, .film-grappe {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  border-radius: 999px 999px 0 0; overflow: hidden;
+}
+.film-toile { background: #2a1a1f; box-shadow: 0 0 0 1px rgba(232, 221, 200, .35), 0 0 0 12px var(--vert), 0 0 0 13px rgba(232, 221, 200, .18); }
+.film-grappe { object-fit: contain; padding: 12% 16%; opacity: var(--g, 1); transform: scale(var(--gs, 1)); filter: blur(var(--gb, 0px)); pointer-events: none; }
+.voute-film .cle { box-shadow: 0 0 0 5px var(--vert); top: -24px; }
+@media (max-width: 799px) {
+  .film { height: 400vh; }
+  .film-colle { grid-template-columns: 1fr; grid-template-rows: 1fr auto; align-content: stretch; gap: 22px; padding: 76px 20px 28px; }
+  .film-texte { order: 2; min-height: 200px; }
+  .film-texte .repere { margin-bottom: 14px; }
+  .etape h3 { font-size: 40px; }
+  .etape p { margin-top: 12px; font-size: 16px; }
+  .voute-film { order: 1; width: min(84vw, calc((100svh - 330px) * .86)); align-self: end; }
+}
+
+/* ---------- Niveau −3 · Le bar, à la bougie ---------- */
+.bar { background: #170A10; overflow: hidden; }
+.bar .enveloppe { position: relative; z-index: 1; }
+.bar h2 { max-width: 11em; }
+.bar-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 6vw; margin-top: 10px; align-items: start; }
+.carte { margin: 28px 0 0; border-top: 1px solid rgba(255, 255, 255, .22); }
+.carte div { display: grid; grid-template-columns: 9em 1fr; gap: 20px; padding: 20px 0; border-bottom: 1px solid rgba(255, 255, 255, .22); }
+.carte dt { font: 400 22px/1.2 var(--t-titre); color: var(--cire); }
+.carte dd { margin: 0; opacity: .85; }
+.bougie {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: radial-gradient(circle 46vmax at var(--bx, 50%) var(--by, 45%), rgba(255, 170, 90, .10) 0, rgba(23, 10, 16, 0) 22%, rgba(23, 10, 16, .55) 58%, rgba(23, 10, 16, .72) 100%);
+}
+@media (max-width: 799px) {
+  .bar-grille { grid-template-columns: 1fr; gap: 0; }
+  .carte div { grid-template-columns: 1fr; gap: 4px; }
+}
+@media (prefers-reduced-motion: reduce) { .bougie { display: none; } }
+
+/* ---------- Niveau −4 · La scène, le registre ---------- */
+.scene { background: var(--tuffeau); color: var(--lie); }
+.scene .repere { color: var(--cire); }
+.registre { width: 100%; border-collapse: collapse; margin: 70px 0 44px; font-size: 16px; }
+.registre thead th { font: 500 12px/1.4 var(--t-mono); text-align: left; color: var(--cire); padding: 0 16px 14px 0; border-bottom: 2px solid var(--lie); }
+.registre td, .registre tbody th { padding: 26px 16px 26px 0; border-bottom: 1px solid rgba(59, 16, 32, .25); vertical-align: baseline; text-align: left; }
+.registre tbody th { font: 400 clamp(28px, 3.2vw, 44px)/1 var(--t-titre); }
+.registre td.code { width: 4em; }
+.registre tbody tr { transition: background .3s; }
+.registre tbody tr:hover { background: rgba(180, 48, 42, .07); }
+.registre tbody tr:hover th { color: var(--cire); }
+@media (max-width: 699px) {
+  .registre thead { display: none; }
+  .registre tr { display: grid; grid-template-columns: 3em 1fr; padding: 18px 0; border-bottom: 1px solid rgba(59, 16, 32, .25); }
+  .registre td, .registre tbody th { border: 0; padding: 2px 0; }
+  .registre td.code { grid-row: span 3; }
+  .registre td:last-child { font: 500 12px/1.4 var(--t-mono); color: var(--cire); }
+}
+
+/* ---------- Niveau −5 · Tireuses ---------- */
+.tireuses { background: var(--vert); }
+.tir-grille { display: grid; grid-template-columns: 1.2fr .8fr; gap: 6vw; align-items: center; }
+.options { list-style: none; padding: 0; margin: 36px 0 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; }
+.options li { padding: 14px 0 14px 26px; border-bottom: 1px solid rgba(255, 255, 255, .2); position: relative; }
+.options li::before { content: ""; position: absolute; left: 0; top: 23px; width: 9px; height: 9px; background: var(--cire); transform: rotate(45deg); }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 28px; }
+.tarif {
+  --coin: 26px; position: relative; background: var(--tuffeau); color: var(--lie);
+  padding: 64px 40px 48px; text-align: center;
+  clip-path: polygon(var(--coin) 0, calc(100% - var(--coin)) 0, 100% var(--coin), 100% calc(100% - var(--coin)), calc(100% - var(--coin)) 100%, var(--coin) 100%, 0 calc(100% - var(--coin)), 0 var(--coin));
+}
+.tarif::before { content: ""; position: absolute; inset: 12px; border: 1px solid rgba(59, 16, 32, .35); clip-path: inherit; pointer-events: none; }
+.cachet {
+  display: grid; place-items: center; width: 108px; height: 108px; margin: 0 auto 28px; border-radius: 50%;
+  background: var(--cire); color: var(--blanc); font: 400 17px/1.05 var(--t-titre);
+  box-shadow: inset 0 0 0 4px var(--cire), inset 0 0 0 5px rgba(255, 255, 255, .5);
+  transform: rotate(-8deg);
+}
+.tarif-prix { font: 400 clamp(64px, 7vw, 100px)/1 var(--t-titre); }
+.tarif-prix span { font: 500 13px/1 var(--t-mono); color: var(--cire); vertical-align: top; margin-right: 6px; }
+.tarif-quoi { font: 400 24px/1.2 var(--t-titre); margin-top: 6px; }
+.tarif-demi { margin-top: 18px; padding-top: 18px; border-top: 1px solid rgba(59, 16, 32, .25); font: 500 13px/1.4 var(--t-mono); color: var(--cire); }
+@media (max-width: 799px) {
+  .tir-grille { grid-template-columns: 1fr; gap: 56px; }
+  .options { grid-template-columns: 1fr; }
+}
+
+/* ---------- Retour à la surface ---------- */
+.venir { background: var(--tuffeau); color: var(--lie); padding: clamp(110px, 16vh, 180px) 0 120px; }
+.venir .repere { color: var(--cire); }
+.venir-grille { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 80px; padding-top: 34px; border-top: 2px solid var(--lie); }
+.venir h3 { font: 500 12px/1.4 var(--t-mono); color: var(--cire); margin-bottom: 16px; }
+.venir-grille p { font-size: 19px; margin-bottom: 18px; }
+.tel { font: 400 32px/1.1 var(--t-titre); text-decoration: none; }
+.statut { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; }
+.statut::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: rgba(59, 16, 32, .4); }
+.statut.ouvert::before { background: #2f7d4f; box-shadow: 0 0 0 4px rgba(47, 125, 79, .18); }
+.horaires { border-collapse: collapse; width: 100%; font-size: 15px; }
+.horaires th, .horaires td { text-align: left; padding: 8px 0; border-bottom: 1px solid rgba(59, 16, 32, .2); vertical-align: top; font-weight: 400; }
+.horaires td { text-align: right; }
+.horaires tr.aujourdhui th, .horaires tr.aujourdhui td { color: var(--cire); font-weight: 600; }
+@media (max-width: 799px) { .venir-grille { grid-template-columns: 1fr; gap: 44px; margin-top: 56px; } }
+
+/* ---------- Pied ---------- */
+.pied { background: var(--lie); color: var(--tuffeau); padding: 80px var(--gouttiere) 34px calc(var(--gouttiere) + var(--jauge)); overflow: hidden; }
+.pied-marque { font: 400 clamp(64px, 15.5vw, 260px)/.8 var(--t-titre); letter-spacing: -.03em; color: var(--blanc); margin-left: -.04em; }
+.pied-bas { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 30px; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(232, 221, 200, .3); font: 500 12px/1.5 var(--t-mono); }
+
+/* ---------- Le seuil (18 ans) ---------- */
+.seuil {
+  position: fixed; inset: 0; z-index: 90; display: grid; place-items: center; align-content: center; gap: 24px;
+  background: var(--tuffeau); color: var(--lie); padding: 24px;
+}
+.seuil[hidden] { display: none; }
+.seuil-voute {
+  position: relative; width: min(480px, 100%); padding: 90px 40px 44px; text-align: center;
+  background: var(--lie); color: var(--blanc); border-radius: 999px 999px 0 0;
+}
+.seuil-voute::before { content: ""; position: absolute; left: 50%; top: -11px; width: 22px; height: 22px; margin-left: -11px; background: var(--cire); transform: rotate(45deg); box-shadow: 0 0 0 5px var(--tuffeau); }
+.seuil .repere { justify-content: center; }
+.seuil .repere::before { display: none; }
+.seuil h2 { font-size: clamp(36px, 7vw, 52px); line-height: 1; }
+.seuil-txt { margin: 18px 0 32px; opacity: .8; }
+.seuil-btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+.seuil-non { margin-top: 22px; color: var(--tuffeau); }
+.seuil-pied { font: 500 12px/1.4 var(--t-mono); }
+
+/* ---------- Grain de pierre, très léger ---------- */
+.grain {
+  position: fixed; inset: 0; z-index: 80; pointer-events: none; opacity: .05; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .montee { opacity: 1; transform: none; transition: none; }
+  .etape { transition: none; }
+}
