@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vinochope · Wireframe le bar</title>
+<link rel="stylesheet" href="assets/wf.css?v=3">
+</head>
+<body data-page="bar">
+<main>
+  <header class="page-head">
+    <div class="wrap grid">
+      <div class="s8 stack">
+        <nav class="crumbs" aria-label="Fil d'Ariane"><a href="index.html">Accueil</a> / Le bar et la carte</nav>
+        <h1>Le bar et la carte</h1>
+        <p class="lead">Au verre ou à la bouteille, avec de quoi grignoter. La carte change avec les arrivages.</p>
+      </div>
+      <div class="s4 al-end stack-s">
+        <span class="eyebrow">Horaires du bar</span>
+        <p class="num">Mar – Jeu · 17 h – 0 h<br>Ven – Sam · 17 h – 1 h</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- La carte : ce qui compte en premier -->
+  <section class="section" aria-labelledby="t-carte">
+    <div class="wrap stack" style="gap:40px">
+      <div class="section-head">
+        <h2 id="t-carte">La carte des vins</h2>
+        <div class="filters" role="group" aria-label="Filtrer la carte">
+          <button aria-pressed="true">Rouges</button><button aria-pressed="false">Blancs</button><button aria-pressed="false">Rosés</button><button aria-pressed="false">Bulles</button>
+        </div>
+      </div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr><th scope="col">Vin</th><th scope="col">Appellation</th><th scope="col">Cépages</th><th scope="col">Verre</th><th scope="col">Bouteille</th></tr></thead>
+          <tbody>
+            <tr><td><strong>[Nom du vin]</strong><br><span class="small muted">[Domaine] · 2021</span></td><td>Collioure</td><td>Grenache, syrah</td><td>7 €</td><td>34 €</td></tr>
+            <tr><td><strong>[Nom du vin]</strong><br><span class="small muted">[Domaine] · 2020</span></td><td>Maury sec</td><td>Grenache noir</td><td>6 €</td><td>29 €</td></tr>
+            <tr><td><strong>[Nom du vin]</strong><br><span class="small muted">[Domaine] · 2022</span></td><td>Côtes du Roussillon</td><td>Carignan</td><td>5 €</td><td>24 €</td></tr>
+            <tr><td><strong>[Nom du vin]</strong><br><span class="small muted">[Domaine] · 2021</span></td><td>Corbières</td><td>Syrah, mourvèdre</td><td>6 €</td><td>28 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">la carte complète peut aussi être un PDF téléchargeable, mis à jour par le commerçant</p>
+    </div>
+  </section>
+
+  <section class="section tint" aria-labelledby="t-autres">
+    <div class="wrap">
+      <div class="grid">
+        <div class="s6 stack">
+          <h2 id="t-autres">Bières et sans alcool</h2>
+          <div class="list">
+            <div class="list-row"><div><div class="t">[Bière pression]</div><span class="small muted">Brasserie locale · 25 cl / 50 cl</span></div><span class="price">3,5 € · 6 €</span></div>
+            <div class="list-row"><div><div class="t">[Bière bouteille]</div><span class="small muted">IPA · 33 cl</span></div><span class="price">5 €</span></div>
+            <div class="list-row"><div><div class="t">[Jus artisanal]</div><span class="small muted">Sans alcool</span></div><span class="price">4 €</span></div>
+          </div>
+        </div>
+        <div class="s5 start-8 stack" id="snacking">
+          <h2>Snacking</h2>
+          <div class="list">
+            <div class="list-row"><div><div class="t">[Planche charcuterie]</div><span class="small muted">Produits catalans</span></div><span class="price">12 €</span></div>
+            <div class="list-row"><div><div class="t">[Planche fromages]</div><span class="small muted">Affinés par [fromager]</span></div><span class="price">12 €</span></div>
+            <div class="list-row"><div><div class="t">[Planche mixte]</div><span class="small muted">Pour deux</span></div><span class="price">18 €</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="t-lieu">
+    <div class="wrap">
+      <div class="grid">
+        <div class="s8 ph r-21"><span>Photo : la salle et le comptoir</span></div>
+        <div class="s4 stack al-c">
+          <h2 id="t-lieu">Réserver une table</h2>
+          <p class="muted small">Pour un groupe de plus de 6 personnes, appelez-nous.</p>
+          <p class="num">[04 68 00 00 00]</p>
+          <a class="link-arrow" href="infos-pratiques.html">Infos pratiques</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="assets/wf.js?v=3"></script>
+</body>
+</html>

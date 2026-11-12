@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vinochope · Wireframe accueil</title>
+<link rel="stylesheet" href="assets/wf.css?v=8">
+</head>
+<body data-page="accueil">
+<!-- La page défile normalement. L'animation est posée DANS la page et descend avec elle :
+     la grappe en haut, le vin coule jusqu'à la bouteille plus bas, la bouteille voyage
+     de section en section, puis sert le verre, qui est plein en bas de page. -->
+<main class="journey">
+
+  <svg class="stage-svg journey-layer" aria-hidden="true">
+    <defs>
+      <clipPath id="clip-bottle"><path d="M-11 -130 L11 -130 L11 -62 C11 -40 35 -38 35 -12 L35 124 Q35 130 29 130 L-29 130 Q-35 130 -35 124 L-35 -12 C-35 -38 -11 -40 -11 -62 Z"/></clipPath>
+      <clipPath id="clip-glass"><path d="M-38 0 C-40 40 -30 72 0 76 C30 72 40 40 38 0 Z"/></clipPath>
+    </defs>
+
+    <path id="ribbon" class="liquid-stroke ribbon" d=""/>
+    <g id="leaves">
+      <path class="leaf" d="M0 0 C-10 -20 -30 -24 -44 -12 C-38 -2 -32 8 -16 6 C-28 16 -22 32 -4 26 C-2 18 2 8 0 0 Z"/>
+      <path class="leaf" d="M0 0 C-10 -20 -30 -24 -44 -12 C-38 -2 -32 8 -16 6 C-28 16 -22 32 -4 26 C-2 18 2 8 0 0 Z"/>
+    </g>
+    <clipPath id="clip-hero"><rect id="clip-hero-rect" x="0" y="0" width="0" height="0"/></clipPath>
+    <g clip-path="url(#clip-hero)">
+    <g id="vine">
+      <g id="stem"><path class="outline" d="M200 60 L200 100 M200 84 C210 78 220 80 226 72"/></g>
+      <g id="hand">
+        <path class="hand" d="M168 -500 L168 26 C168 46 180 56 194 62 L200 66 L206 62 C220 56 232 46 232 26 L232 -500 Z"/>
+        <path class="outline thin" d="M200 66 L200 36 M184 30 C188 22 194 20 200 22"/>
+      </g>
+    </g>
+    </g>
+
+    <g id="glass" opacity="0">
+      <rect id="glass-liquid" class="liquid" x="-45" y="76" width="90" height="4" clip-path="url(#clip-glass)"/>
+      <path class="outline" d="M-38 0 C-40 40 -30 72 0 76 C30 72 40 40 38 0"/>
+      <line class="outline" x1="0" y1="76" x2="0" y2="150"/>
+      <ellipse class="outline" cx="0" cy="152" rx="30" ry="5"/>
+      <g id="glint" opacity="0"><path class="outline thin" d="M-26 10 C-28 24 -24 36 -18 44 M-30 -14 L-36 -24 M0 -18 L0 -30 M30 -14 L36 -24"/></g>
+    </g>
+
+    <g id="bottle" opacity="0">
+      <rect id="bottle-liquid" class="liquid" x="-40" y="130" width="80" height="0" clip-path="url(#clip-bottle)"/>
+      <path class="outline" d="M-11 -130 L11 -130 L11 -62 C11 -40 35 -38 35 -12 L35 124 Q35 130 29 130 L-29 130 Q-35 130 -35 124 L-35 -12 C-35 -38 -11 -40 -11 -62 Z"/>
+      <rect class="outline thin" x="-35" y="22" width="70" height="56"/>
+      <line class="outline thin" x1="-12" y1="-118" x2="12" y2="-118"/>
+    </g>
+
+    <path id="stream" class="liquid-stroke" d="" opacity="0"/>
+    <g id="grapes"></g>
+  </svg>
+
+  <!-- 1. Ouverture : la grappe -->
+  <section class="section j-hero" aria-labelledby="t-hero">
+    <div class="wrap grid">
+      <div class="s5 stack al-c reveal" data-dir="-1">
+        <span class="eyebrow">Cave · bar · concerts · Perpignan</span>
+        <h1 id="t-hero">Vinochope</h1>
+        <p class="lead">Des vins choisis chez ceux qui les font, à boire sur place ou à emporter.</p>
+        <span class="scroll-hint">Faites défiler, on vous sert un verre ↓</span>
+      </div>
+      <div class="s6 start-7 cell" data-anchor="0"><span class="note">zone animation · la grappe</span></div>
+    </div>
+  </section>
+
+  <!-- 2. Infos rapides -->
+  <section class="quick" aria-label="Infos rapides">
+    <div class="wrap">
+      <div class="grid">
+        <div class="s4 quick-item reveal" data-dir="1"><span class="eyebrow">Aujourd'hui</span><strong class="num">Ouvert · 17 h – 0 h</strong><a class="small" href="infos-pratiques.html">Tous les horaires</a></div>
+        <div class="s4 quick-item reveal" data-dir="1"><span class="eyebrow">Adresse</span><strong>[Adresse], Perpignan</strong><a class="small" href="infos-pratiques.html#acces">Itinéraire</a></div>
+        <div class="s4 quick-item reveal" data-dir="1"><span class="eyebrow">Prochain concert</span><strong class="num">Ven. 14 nov · 21 h</strong><a class="small" href="programmation.html">Programmation</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. La cave : le vin coule dans la bouteille -->
+  <section class="section" aria-labelledby="t-cave">
+    <div class="wrap grid">
+      <div class="s6 cell" data-anchor="1"><span class="note">zone animation · la bouteille se remplit</span></div>
+      <div class="s5 start-8 stack al-c reveal" data-dir="1">
+        <span class="eyebrow">La cave</span>
+        <h2 id="t-cave">Trois cents bouteilles, un conseil à chaque fois.</h2>
+        <p class="muted">Vins de vignerons, bières artisanales et spiritueux. On vous aide à choisir selon le plat, l'occasion ou le budget.</p>
+        <a class="btn" href="la-cave.html" style="width:fit-content">Découvrir la cave</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Concerts : la bouteille traverse en tournant -->
+  <section class="section" aria-labelledby="t-concerts">
+    <div class="wrap grid">
+      <div class="s5 stack al-c reveal" data-dir="-1">
+        <span class="eyebrow">Programmation</span>
+        <h2 id="t-concerts">Le vendredi, on sert aussi de la musique.</h2>
+        <div class="list">
+          <div class="list-row"><div class="stack-s"><span class="tag">Prochain</span><span class="t num">14 nov · [Nom de l'artiste]</span><span class="small muted">Jazz manouche · 21 h · entrée libre</span></div></div>
+          <div class="list-row"><div class="stack-s"><span class="t num">21 nov · [Nom de l'artiste]</span><span class="small muted">Folk · 21 h · entrée libre</span></div></div>
+          <div class="list-row"><div class="stack-s"><span class="t num">28 nov · [Nom de l'artiste]</span><span class="small muted">Blues · 21 h · entrée libre</span></div></div>
+        </div>
+        <a class="link-arrow" href="programmation.html">Toute la programmation</a>
+      </div>
+      <div class="s6 start-7 cell" data-anchor="2"><span class="note">zone animation · la bouteille tourne</span></div>
+    </div>
+  </section>
+
+  <!-- 5. Le bar : le verre arrive -->
+  <section class="section" aria-labelledby="t-bar">
+    <div class="wrap grid">
+      <div class="s6 cell" data-anchor="3"><span class="note">zone animation · le verre arrive</span></div>
+      <div class="s5 start-8 stack al-c reveal" data-dir="1">
+        <span class="eyebrow">Le bar</span>
+        <h2 id="t-bar">Au verre, au comptoir.</h2>
+        <div class="list">
+          <div class="list-row"><div><div class="t">[Vin rouge]</div><span class="small muted">Roussillon · grenache</span></div><span class="price">6 €</span></div>
+          <div class="list-row"><div><div class="t">[Vin blanc]</div><span class="small muted">Languedoc · macabeu</span></div><span class="price">6 €</span></div>
+          <div class="list-row"><div><div class="t">[Planche mixte]</div><span class="small muted">Charcuterie et fromages</span></div><span class="price">14 €</span></div>
+        </div>
+        <a class="link-arrow" href="le-bar.html">Voir toute la carte</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Tireuses : le service commence -->
+  <section class="section" aria-labelledby="t-tireuses">
+    <div class="wrap grid">
+      <div class="s5 stack al-c reveal" data-dir="-1">
+        <span class="eyebrow">Location de tireuses</span>
+        <h2 id="t-tireuses">Une tireuse pour votre événement.</h2>
+        <p class="muted">Mariage, anniversaire, fête d'entreprise ou association. On livre, on installe, on reprend.</p>
+        <div class="actions"><a class="btn" href="location-tireuses.html#devis">Demander un devis</a><a class="link-arrow" href="location-tireuses.html">Voir les modèles</a></div>
+      </div>
+      <div class="s6 start-7 cell" data-anchor="4"><span class="note">zone animation · le service</span></div>
+    </div>
+  </section>
+
+  <!-- 7. Fin : le verre est servi -->
+  <section class="section" aria-labelledby="t-fin">
+    <div class="wrap grid">
+      <div class="s6 cell" data-anchor="5"><span class="note">zone animation · le verre est servi</span></div>
+      <div class="s5 start-8 stack al-c reveal" data-dir="1">
+        <span class="eyebrow">Votre verre est servi</span>
+        <h2 id="t-fin">Les nouveautés et les concerts, une fois par mois.</h2>
+        <form class="stack" aria-label="Inscription à la newsletter">
+          <div class="field">
+            <label for="nl-email">Adresse e-mail</label>
+            <div class="inline-form">
+              <input id="nl-email" type="email" placeholder="prenom@exemple.fr" required>
+              <button class="btn" type="submit">S'inscrire</button>
+            </div>
+          </div>
+          <label class="check"><input type="checkbox" id="nl-ok" required> J'accepte de recevoir la newsletter. Désinscription en un clic.</label>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+<span class="journey-caption note" data-caption>La grappe</span>
+<script src="assets/wf.js?v=8"></script>
+<script src="assets/journey.js?v=8"></script>
+</body>
+</html>

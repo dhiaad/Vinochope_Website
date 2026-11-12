@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vinochope · Maquette accueil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/maquette.css?v=3">
+</head>
+<body>
+<!-- Principe (inspiré de klimtwine.com) : le dessin reste à l'écran et voyage de gauche à droite,
+     les sections défilent autour de lui, le fond change de couleur à chaque section,
+     les phrases s'éclairent mot par mot. L'histoire : main + grappe → bouteille → verre plein. -->
+
+<header class="top">
+  <a class="logo" href="maquette.html">Vinochope</a>
+  <nav class="nav" aria-label="Navigation principale">
+    <a href="la-cave.html">La cave</a>
+    <a href="le-bar.html">Le bar</a>
+    <a href="programmation.html">Programmation</a>
+    <a href="infos-pratiques.html">Infos pratiques</a>
+  </nav>
+  <a class="btn btn-s" href="location-tireuses.html">Louer une tireuse</a>
+</header>
+
+<svg class="scene" id="scene" aria-hidden="true">
+  <defs>
+    <radialGradient id="glow">
+      <stop offset="0" stop-color="#C4A35A" stop-opacity=".20"/>
+      <stop offset=".55" stop-color="#6B1E2A" stop-opacity=".10"/>
+      <stop offset="1" stop-color="#6B1E2A" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="clip-bottle"><path d="M-11 -130 L11 -130 L11 -62 C11 -40 35 -38 35 -12 L35 124 Q35 130 29 130 L-29 130 Q-35 130 -35 124 L-35 -12 C-35 -38 -11 -40 -11 -62 Z"/></clipPath>
+    <clipPath id="clip-glass"><path d="M-38 0 C-40 40 -30 72 0 76 C30 72 40 40 38 0 Z"/></clipPath>
+  </defs>
+
+  <circle id="glow-c" r="0" fill="url(#glow)"/>
+  <path id="ribbon" class="wine-line" d=""/>
+  <g id="leaves">
+    <path class="leaf" d="M0 0 C-10 -20 -30 -24 -44 -12 C-38 -2 -32 8 -16 6 C-28 16 -22 32 -4 26 C-2 18 2 8 0 0 Z"/>
+    <path class="leaf" d="M0 0 C-10 -20 -30 -24 -44 -12 C-38 -2 -32 8 -16 6 C-28 16 -22 32 -4 26 C-2 18 2 8 0 0 Z"/>
+  </g>
+  <g id="vine">
+    <g id="stem"><path class="line gold" d="M200 60 L200 100 M200 84 C210 78 220 80 226 72"/></g>
+    <g id="hand">
+      <path class="hand" d="M168 -900 L168 26 C168 46 180 56 194 62 L200 66 L206 62 C220 56 232 46 232 26 L232 -900 Z"/>
+      <path class="line thin" d="M200 66 L200 36 M184 30 C188 22 194 20 200 22"/>
+    </g>
+  </g>
+
+  <g id="glass" opacity="0">
+    <rect id="glass-liquid" class="wine" x="-45" y="76" width="90" height="4" clip-path="url(#clip-glass)"/>
+    <line id="glass-surface" class="line gold" x1="-30" x2="30" y1="76" y2="76" opacity="0"/>
+    <path class="line" d="M-38 0 C-40 40 -30 72 0 76 C30 72 40 40 38 0"/>
+    <line class="line" x1="0" y1="76" x2="0" y2="150"/>
+    <ellipse class="line" cx="0" cy="152" rx="30" ry="5"/>
+    <g id="glint" opacity="0"><path class="line gold" d="M-26 10 C-28 24 -24 36 -18 44 M-30 -14 L-36 -24 M0 -18 L0 -30 M30 -14 L36 -24"/></g>
+  </g>
+
+  <g id="bottle" opacity="0">
+    <rect id="bottle-liquid" class="wine" x="-40" y="130" width="80" height="0" clip-path="url(#clip-bottle)"/>
+    <path class="line" d="M-11 -130 L11 -130 L11 -62 C11 -40 35 -38 35 -12 L35 124 Q35 130 29 130 L-29 130 Q-35 130 -35 124 L-35 -12 C-35 -38 -11 -40 -11 -62 Z"/>
+    <rect class="label" x="-35" y="22" width="70" height="56"/>
+    <text class="label-txt" x="0" y="54" text-anchor="middle">VINOCHOPE</text>
+    <line class="line gold" x1="-12" y1="-118" x2="12" y2="-118"/>
+  </g>
+
+  <path id="stream" class="wine-line" d="" opacity="0"/>
+  <g id="grapes"></g>
+</svg>
+
+<main>
+  <section class="zone z-right" data-zone="0" aria-labelledby="t0">
+    <div class="txt">
+      <span class="eyebrow">Cave · bar · concerts · Perpignan</span>
+      <h1 id="t0">Vinochope</h1>
+      <p class="lead words">Des vins choisis chez ceux qui les font, <span class="or">à boire sur place</span> ou à emporter.</p>
+      <p class="hint">Faites défiler, on vous sert un verre</p>
+      <dl class="facts">
+        <div><dt>Aujourd'hui</dt><dd>Ouvert · 17 h – 0 h</dd></div>
+        <div><dt>Prochain concert</dt><dd>Ven. 14 nov · 21 h</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="zone z-left" data-zone="1" aria-labelledby="t1">
+    <div class="txt">
+      <span class="eyebrow"><span class="n">01</span> La cave</span>
+      <h2 id="t1" class="words">Trois cents bouteilles, <span class="or">un conseil</span> à chaque fois.</h2>
+      <p class="body">Vins de vignerons, bières artisanales et spiritueux. On vous aide à choisir selon le plat, l'occasion ou le budget.</p>
+      <a class="btn" href="la-cave.html">Découvrir la cave</a>
+    </div>
+  </section>
+
+  <section class="zone z-right" data-zone="2" aria-labelledby="t2">
+    <div class="txt">
+      <span class="eyebrow"><span class="n">02</span> Programmation</span>
+      <h2 id="t2" class="words">Le vendredi, on sert aussi <span class="or">de la musique</span>.</h2>
+      <ul class="rows">
+        <li><span class="d">14 nov</span><span>[Nom de l'artiste]<small>Jazz manouche · 21 h · entrée libre</small></span></li>
+        <li><span class="d">21 nov</span><span>[Nom de l'artiste]<small>Folk · 21 h · entrée libre</small></span></li>
+        <li><span class="d">28 nov</span><span>[Nom de l'artiste]<small>Blues · 21 h · entrée libre</small></span></li>
+      </ul>
+      <a class="link" href="programmation.html">Toute la programmation</a>
+    </div>
+  </section>
+
+  <section class="zone z-left" data-zone="3" aria-labelledby="t3">
+    <div class="txt">
+      <span class="eyebrow"><span class="n">03</span> Le bar</span>
+      <h2 id="t3" class="words">Au verre, <span class="or">au comptoir</span>.</h2>
+      <ul class="rows">
+        <li><span>[Vin rouge]<small>Roussillon · grenache</small></span><span class="p">6 €</span></li>
+        <li><span>[Vin blanc]<small>Languedoc · macabeu</small></span><span class="p">6 €</span></li>
+        <li><span>[Planche mixte]<small>Charcuterie et fromages</small></span><span class="p">14 €</span></li>
+      </ul>
+      <a class="link" href="le-bar.html">Voir toute la carte</a>
+    </div>
+  </section>
+
+  <section class="zone z-right" data-zone="4" aria-labelledby="t4">
+    <div class="txt">
+      <span class="eyebrow"><span class="n">04</span> Location de tireuses</span>
+      <h2 id="t4" class="words">Une tireuse pour <span class="or">votre événement</span>.</h2>
+      <p class="body">Mariage, anniversaire, fête d'entreprise ou association. On livre, on installe, on reprend.</p>
+      <div class="actions"><a class="btn" href="location-tireuses.html#devis">Demander un devis</a><a class="link" href="location-tireuses.html">Voir les modèles</a></div>
+    </div>
+  </section>
+
+  <section class="zone z-left" data-zone="5" aria-labelledby="t5">
+    <div class="txt">
+      <span class="eyebrow"><span class="n">05</span> Votre verre est servi</span>
+      <h2 id="t5" class="words">Les nouveautés et les concerts, <span class="or">une fois par mois</span>.</h2>
+      <form class="nl" aria-label="Inscription à la newsletter" onsubmit="event.preventDefault()">
+        <label for="nl-email">Adresse e-mail</label>
+        <div class="nl-row"><input id="nl-email" type="email" placeholder="prenom@exemple.fr" required><button class="btn" type="submit">S'inscrire</button></div>
+        <label class="check"><input type="checkbox" required> J'accepte de recevoir la newsletter. Désinscription en un clic.</label>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div><strong class="logo">Vinochope</strong><p>[Adresse], Perpignan · Mar.–sam. 17 h – 0 h</p></div>
+  <p class="evin">L'abus d'alcool est dangereux pour la santé, à consommer avec modération.</p>
+</footer>
+
+<script src="assets/maquette.js?v=5"></script>
+</body>
+</html>

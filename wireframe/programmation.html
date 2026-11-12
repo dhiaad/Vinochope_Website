@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vinochope · Wireframe programmation</title>
+<link rel="stylesheet" href="assets/wf.css?v=3">
+</head>
+<body data-page="prog">
+<main>
+  <header class="page-head">
+    <div class="wrap grid">
+      <div class="s8 stack">
+        <nav class="crumbs" aria-label="Fil d'Ariane"><a href="index.html">Accueil</a> / Programmation</nav>
+        <h1>Programmation</h1>
+        <p class="lead">Des concerts acoustiques le vendredi et le samedi soir. Entrée libre, chapeau pour les artistes.</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Le prochain concert en grand -->
+  <section class="section" aria-labelledby="t-next">
+    <div class="wrap">
+      <div class="grid">
+        <div class="s6 ph r-43"><span>Photo de l'artiste</span></div>
+        <div class="s5 start-8 stack al-c">
+          <span class="tag">Prochain concert</span>
+          <span class="event"><span class="date num" style="border:0">Ven. 14 nov</span></span>
+          <h2 id="t-next">[Nom de l'artiste]</h2>
+          <p class="muted">Jazz manouche · 21 h · entrée libre</p>
+          <p class="small">[Deux ou trois lignes sur l'artiste.]</p>
+          <a class="link-arrow" href="#">Écouter un extrait</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="t-agenda">
+    <div class="wrap stack" style="gap:24px">
+      <div class="section-head">
+        <h2 id="t-agenda">À venir</h2>
+        <div class="filters" role="group" aria-label="Filtrer par mois"><button aria-pressed="true">Novembre</button><button aria-pressed="false">Décembre</button><button aria-pressed="false">Janvier</button></div>
+      </div>
+      <div style="border-top:1px solid var(--ink)">
+        <div class="event-row"><span class="date num">21 · nov</span><div><h3>[Nom de l'artiste]</h3><span class="small muted">Folk</span></div><span class="num small">Ven. · 21 h</span><span class="small">Entrée libre</span></div>
+        <div class="event-row"><span class="date num">28 · nov</span><div><h3>[Nom de l'artiste]</h3><span class="small muted">Blues acoustique</span></div><span class="num small">Ven. · 21 h</span><span class="small">Entrée libre</span></div>
+        <div class="event-row"><span class="date num">05 · déc</span><div><h3>[Nom de l'artiste]</h3><span class="small muted">Chanson</span></div><span class="num small">Ven. · 21 h</span><span class="small">Entrée libre</span></div>
+        <div class="event-row"><span class="date num">06 · déc</span><div><h3>[Soirée dégustation]</h3><span class="small muted">Avec [domaine]</span></div><span class="num small">Sam. · 19 h</span><span class="small">Sur inscription</span></div>
+      </div>
+      <p class="note">liste alimentée par events.json, puis par un Google Sheet tenu par le commerçant</p>
+    </div>
+  </section>
+
+  <section class="section tint" aria-labelledby="t-jouer">
+    <div class="wrap">
+      <div class="grid">
+        <div class="s6 stack">
+          <h2 id="t-jouer">Vous êtes musicien ?</h2>
+          <p class="muted">On programme surtout de l'acoustique : jazz, folk, blues, chanson. Envoyez-nous un lien vers votre musique.</p>
+        </div>
+        <form class="s5 start-8 form" aria-label="Proposer un concert">
+          <div class="field full"><label for="m-nom">Nom du groupe ou de l'artiste</label><input id="m-nom" required></div>
+          <div class="field full"><label for="m-lien">Lien vers votre musique</label><input id="m-lien" type="url" placeholder="https://" required></div>
+          <div class="field full"><label for="m-mail">E-mail</label><input id="m-mail" type="email" required></div>
+          <div class="full"><button class="btn" type="submit">Envoyer</button></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="t-passe">
+    <div class="wrap stack" style="gap:32px">
+      <h2 id="t-passe">Ils sont passés par ici</h2>
+      <div class="grid">
+        <div class="s3 m2 ph r-11"><span>Photo concert</span></div>
+        <div class="s3 m2 ph r-11"><span>Photo concert</span></div>
+        <div class="s3 m2 ph r-11"><span>Photo concert</span></div>
+        <div class="s3 m2 ph r-11"><span>Photo concert</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="assets/wf.js?v=3"></script>
+</body>
+</html>

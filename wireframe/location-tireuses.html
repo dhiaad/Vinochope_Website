@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vinochope · Wireframe location de tireuses</title>
+<link rel="stylesheet" href="assets/wf.css?v=3">
+</head>
+<body data-page="tireuses">
+<main>
+  <header class="page-head">
+    <div class="wrap grid">
+      <div class="s7 stack">
+        <nav class="crumbs" aria-label="Fil d'Ariane"><a href="index.html">Accueil</a> / Location de tireuses</nav>
+        <h1>Location de tireuses</h1>
+        <p class="lead">Pour un mariage, une fête ou un événement d'entreprise : la tireuse, les fûts et les gobelets. On livre, on installe, on reprend.</p>
+        <div class="actions"><a class="btn" href="#devis">Demander un devis</a><a class="link-arrow" href="#tarifs">Voir les tarifs</a></div>
+      </div>
+      <div class="s4 start-9 ph r-34"><span>Photo : tireuse en situation</span></div>
+    </div>
+  </header>
+
+  <!-- Le processus : une vraie séquence, d'où la numérotation -->
+  <section class="section" aria-labelledby="t-how">
+    <div class="wrap stack" style="gap:40px">
+      <h2 id="t-how">Comment ça marche</h2>
+      <ol class="steps">
+        <li><h3>Vous demandez un devis</h3><p class="small muted">Date, lieu, nombre d'invités.</p></li>
+        <li><h3>On choisit les bières</h3><p class="small muted">Parmi nos fûts du moment, on vous conseille les quantités.</p></li>
+        <li><h3>On livre et on installe</h3><p class="small muted">La veille ou le jour même, avec une explication rapide.</p></li>
+        <li><h3>On reprend le matériel</h3><p class="small muted">Les fûts entamés sont facturés au volume consommé.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section tint" aria-labelledby="t-mod">
+    <div class="wrap stack" style="gap:40px">
+      <h2 id="t-mod">Les modèles</h2>
+      <div class="grid">
+        <article class="s4 card"><div class="ph r-43"><span>Tireuse 1 bec</span></div><div class="body"><h3>Tireuse 1 bec</h3><p class="small muted">Jusqu'à 50 personnes · 1 fût de 20 L</p><span class="price">à partir de [xx] €</span></div></article>
+        <article class="s4 card"><div class="ph r-43"><span>Tireuse 2 becs</span></div><div class="body"><h3>Tireuse 2 becs</h3><p class="small muted">50 à 150 personnes · 2 fûts</p><span class="price">à partir de [xx] €</span></div></article>
+        <article class="s4 card"><div class="ph r-43"><span>Comptoir mobile</span></div><div class="body"><h3>Comptoir mobile</h3><p class="small muted">Plus de 150 personnes · 4 becs</p><span class="price">sur devis</span></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="tarifs" aria-labelledby="t-tarifs">
+    <div class="wrap">
+      <div class="grid">
+        <div class="s4 stack"><h2 id="t-tarifs">Tarifs</h2><p class="muted small">Prix indicatifs TTC. La caution est rendue au retour du matériel.</p><p class="note">tarifs à fournir par le commerçant</p></div>
+        <div class="s8 tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th scope="col">Prestation</th><th scope="col">Prix</th><th scope="col">Détail</th></tr></thead>
+            <tbody>
+              <tr><td>Location tireuse 1 bec</td><td>[xx] €</td><td class="small muted">Par jour, gobelets inclus</td></tr>
+              <tr><td>Location tireuse 2 becs</td><td>[xx] €</td><td class="small muted">Par jour, gobelets inclus</td></tr>
+              <tr><td>Fût 20 L</td><td>[xx] €</td><td class="small muted">Selon la bière</td></tr>
+              <tr><td>Livraison et installation</td><td>[xx] €</td><td class="small muted">Perpignan et 20 km autour</td></tr>
+              <tr><td>Caution</td><td>[xx] €</td><td class="small muted">Chèque ou empreinte bancaire</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tint" id="devis" aria-labelledby="t-devis">
+    <div class="wrap">
+      <div class="grid">
+        <div class="s4 stack">
+          <h2 id="t-devis">Demander un devis</h2>
+          <p class="muted small">Réponse sous 48 h. Pour une date proche, appelez-nous.</p>
+          <p class="num">[04 68 00 00 00]</p>
+        </div>
+        <form class="s7 start-6 form" aria-label="Demande de devis">
+          <div class="field"><label for="d-nom">Nom</label><input id="d-nom" required></div>
+          <div class="field"><label for="d-tel">Téléphone</label><input id="d-tel" type="tel" required></div>
+          <div class="field full"><label for="d-mail">E-mail</label><input id="d-mail" type="email" required></div>
+          <div class="field"><label for="d-date">Date de l'événement</label><input id="d-date" type="date" required></div>
+          <div class="field"><label for="d-nb">Nombre d'invités</label><select id="d-nb"><option>Moins de 50</option><option>50 à 150</option><option>Plus de 150</option></select></div>
+          <div class="field full"><label for="d-lieu">Lieu (ville)</label><input id="d-lieu"></div>
+          <div class="field full"><label for="d-msg">Message</label><textarea id="d-msg" placeholder="Type d'événement, bières souhaitées…"></textarea></div>
+          <div class="full"><button class="btn" type="submit">Envoyer la demande</button></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="t-faq">
+    <div class="wrap grid">
+      <h2 class="s4" id="t-faq">Questions fréquentes</h2>
+      <div class="s8">
+        <details class="faq"><summary>Combien de bière prévoir ?</summary><p>Comptez environ 1 litre par personne pour une soirée. On ajuste avec vous au moment du devis.</p></details>
+        <details class="faq"><summary>Faut-il savoir se servir d'une tireuse ?</summary><p>Non, on vous montre à l'installation. Ça prend cinq minutes.</p></details>
+        <details class="faq"><summary>Que se passe-t-il pour un fût non entamé ?</summary><p>Il est repris et n'est pas facturé.</p></details>
+        <details class="faq"><summary>Livrez-vous en dehors de Perpignan ?</summary><p>Oui, avec un supplément selon la distance.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="assets/wf.js?v=3"></script>
+</body>
+</html>

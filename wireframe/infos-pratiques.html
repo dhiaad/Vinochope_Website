@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vinochope · Wireframe infos pratiques</title>
+<link rel="stylesheet" href="assets/wf.css?v=3">
+</head>
+<body data-page="infos">
+<main>
+  <header class="page-head">
+    <div class="wrap grid">
+      <div class="s8 stack">
+        <nav class="crumbs" aria-label="Fil d'Ariane"><a href="index.html">Accueil</a> / Infos pratiques</nav>
+        <h1>Infos pratiques</h1>
+      </div>
+    </div>
+  </header>
+
+  <!-- Horaires et adresse : ce qui compte en premier -->
+  <section class="section" style="border-top:0" aria-labelledby="t-hor">
+    <div class="wrap">
+      <div class="grid">
+        <div class="s5 stack">
+          <h2 id="t-hor">Horaires</h2>
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <thead><tr><th scope="col">Jour</th><th scope="col">Cave</th><th scope="col">Bar</th></tr></thead>
+              <tbody>
+                <tr><td>Lundi</td><td>Fermé</td><td>Fermé</td></tr>
+                <tr><td>Mardi – Jeudi</td><td>10 h – 13 h · 16 h – 20 h</td><td>17 h – 0 h</td></tr>
+                <tr><td>Vendredi – Samedi</td><td>10 h – 13 h · 16 h – 20 h</td><td>17 h – 1 h</td></tr>
+                <tr><td>Dimanche</td><td>Fermé</td><td>Fermé</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note">horaires à confirmer avec le commerçant</p>
+        </div>
+        <div class="s6 start-7 stack" id="acces">
+          <h2>Adresse et accès</h2>
+          <div class="ph r-43"><span>Carte (lien vers Google Maps, pas d'iframe)</span></div>
+          <p>[Adresse]<br>66000 Perpignan</p>
+          <p class="small muted">[Parking le plus proche] · [arrêt de bus] · accessible en fauteuil : [à confirmer]</p>
+          <a class="link-arrow" href="#">Ouvrir l'itinéraire</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tint" id="contact" aria-labelledby="t-contact">
+    <div class="wrap">
+      <div class="grid">
+        <div class="s4 stack">
+          <h2 id="t-contact">Nous contacter</h2>
+          <div class="stack-s">
+            <span class="eyebrow">Téléphone</span><p class="num">[04 68 00 00 00]</p>
+            <span class="eyebrow" style="margin-top:12px">E-mail</span><p>[contact@vinochope.fr]</p>
+          </div>
+        </div>
+        <form class="s7 start-6 form" aria-label="Formulaire de contact">
+          <div class="field"><label for="c-nom">Nom</label><input id="c-nom" required></div>
+          <div class="field"><label for="c-mail">E-mail</label><input id="c-mail" type="email" required></div>
+          <div class="field full"><label for="c-sujet">Sujet</label><select id="c-sujet"><option>Question sur la cave</option><option>Réservation au bar</option><option>Location de tireuse</option><option>Concert</option><option>Autre</option></select></div>
+          <div class="field full"><label for="c-msg">Message</label><textarea id="c-msg" required></textarea></div>
+          <div class="full"><button class="btn" type="submit">Envoyer</button></div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="assets/wf.js?v=3"></script>
+</body>
+</html>

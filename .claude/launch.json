@@ -1,0 +1,41 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "wireframe",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "5510",
+        "--directory",
+        "wireframe"
+      ],
+      "port": 5510
+    },
+    {
+      "name": "site",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "5520",
+        "--directory",
+        "site"
+      ],
+      "port": 5520
+    },
+    {
+      "name": "accueil",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "5530",
+        "--directory",
+        "accueil"
+      ],
+      "port": 5530
+    }
+  ]
+}
