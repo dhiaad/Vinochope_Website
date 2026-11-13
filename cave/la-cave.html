@@ -5,15 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>La cave et la carte · Vinochope, cave à vins et bar à Perpignan</title>
 <meta name="description" content="La carte du bar Vinochope (vins au verre, bières pression, spiritueux, planches) et la sélection de la cave : Banyuls, Maury, Rivesaltes, portos et xérès, avec prix et conseils.">
-<meta name="theme-color" content="#3B1020">
+<meta name="theme-color" content="#220000">
 <meta property="og:title" content="La cave et la carte · Vinochope, cave à vins et bar à Perpignan">
 <meta property="og:description" content="La carte du bar Vinochope (vins au verre, bières pression, spiritueux, planches) et la sélection de la cave : Banyuls, Maury, Rivesaltes, portos et xérès, avec prix et conseils.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gloock&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/cave.css?v=3">
-<link rel="stylesheet" href="assets/pages.css?v=3">
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/cave.css?v=10">
+<link rel="stylesheet" href="assets/pages.css?v=10">
+<script>try{if(sessionStorage.getItem("vc-intro"))document.documentElement.classList.add("intro-vue")}catch(e){}</script>
 </head>
 <body class="">
 <a class="evite" href="#contenu">Aller au contenu</a>
@@ -28,12 +29,18 @@
   </div>
 </header>
 <div class="menu" id="menu" hidden>
-  <nav aria-label="Menu"><ol class="menu-liens"><li><a href="index.html"><span class="code">00</span>Accueil</a></li><li><a href="la-cave.html" aria-current="page"><span class="code">01</span>La cave et la carte</a></li><li><a href="evenements.html"><span class="code">02</span>Événements</a></li><li><a href="tireuses.html"><span class="code">03</span>Tireuses et fûts</a></li><li><a href="histoire.html"><span class="code">04</span>Notre histoire</a></li><li><a href="contact.html"><span class="code">05</span>Contact</a></li></ol></nav>
-  <div class="menu-infos">
-    <p class="repere">Vinochope</p>
-    <p>26 rue Mathieu de Dombasle<br>66000 Perpignan</p>
-    <p><a href="tel:+33468899143">04 68 89 91 43</a></p>
-    <p data-statut>Lun. 15 h – 21 h · mar.–sam. 10 h – 12 h 30 et 14 h 30 – 21 h</p>
+  <div class="menu-carte">
+    <div class="menu-cadre">
+      <p class="menu-maison">Vinochope</p>
+      <p class="menu-sous">La cave à vin, Perpignan</p>
+      <span class="menu-filet" aria-hidden="true"></span>
+      <nav aria-label="Menu"><ol class="menu-liens"><li><a href="index.html"><span class="m-nom">Accueil</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">La maison</span></a></li><li><a href="la-cave.html" aria-current="page"><span class="m-nom">La cave et la carte</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Vins, bières, planches</span></a></li><li><a href="evenements.html"><span class="m-nom">Événements</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Concerts, expositions</span></a></li><li><a href="tireuses.html"><span class="m-nom">Tireuses et fûts</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Dès 80 €</span></a></li><li><a href="histoire.html"><span class="m-nom">Notre histoire</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Depuis 2013</span></a></li><li><a href="contact.html"><span class="m-nom">Contact</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">04 68 89 91 43</span></a></li></ol></nav>
+      <span class="menu-filet" aria-hidden="true"></span>
+      <div class="menu-infos">
+        <p>26 rue Mathieu de Dombasle, 66000 Perpignan</p>
+        <p data-statut>Lun. 15 h – 21 h · mar.–sam. 10 h – 12 h 30 et 14 h 30 – 21 h</p>
+      </div>
+    </div>
   </div>
 </div>
 <!--/TETE-->
@@ -42,7 +49,7 @@
 <section class="entete clair" data-ton="clair" aria-labelledby="t-page">
   <div class="enveloppe entete-grille">
     <div>
-      <p class="repere">Niveau −1 · La cave et le bar</p>
+      <p class="repere">La cave et le bar</p>
       <h1 id="t-page">Ce qu'on <span class="accent">sert</span>,<br>ce qu'on <span class="accent">vend</span>.</h1>
       <p class="chapo">Au bar, la carte du jour. En cave, deux cents vins dont huit sur dix du Roussillon, quatre cent cinquante bières, deux cents bières craft et cent cinquante spiritueux.</p>
       <nav class="saut" aria-label="Sur cette page">
@@ -69,6 +76,12 @@
       <p class="petit-mono">Prix TTC, service compris</p>
     </div>
     <div class="carte-grille">
+      <div class="carte-papier">
+        <div class="carte-papier-tete">
+          <p class="menu-maison">Vinochope</p>
+          <p class="menu-sous">La carte du bar · prix TTC, service compris</p>
+          <span class="menu-filet" aria-hidden="true"></span>
+        </div>
       <div class="carte-cols">
         <div class="rubrique">
           <h3>Vins au verre <small>12 cl</small></h3>
@@ -112,8 +125,9 @@
           <div class="plat"><b>Olives et chips artisanales</b><span>3,50 €</span></div>
         </div>
       </div>
-      <aside class="qr" aria-labelledby="qr-t">
-        <p class="repere" style="justify-content:center;margin-bottom:12px">Sur votre téléphone</p>
+      </div>
+      <aside class="qr" data-relief aria-labelledby="qr-t">
+        <p class="repere" style="margin-bottom:12px">Sur votre téléphone</p>
         <h3 id="qr-t">Scannez,<br>la carte s'ouvre.</h3>
         <img src="media/qr-carte.svg" alt="QR code qui ouvre la carte du bar Vinochope" width="330" height="330">
         <p>Visez le code avec l'appareil photo de votre téléphone.</p>
@@ -148,10 +162,10 @@
     <p class="repere">Le conseil en plus</p>
     <h2 id="services-t" class="montee">Ce que la cave<br>fait <span class="accent">pour vous</span>.</h2>
     <div class="services montee" style="margin-top:56px">
-      <div><span class="code">01</span><h3>Coffrets cadeaux</h3><p>On compose un coffret selon le budget et les goûts de la personne à gâter.</p></div>
-      <div><span class="code">02</span><h3>Recherche de millésimes</h3><p>Une année de naissance, de mariage ? On cherche la bouteille pour vous.</p></div>
-      <div><span class="code">03</span><h3>Verrerie et accessoires</h3><p>Verres, carafes, tire-bouchons : tout pour bien servir à la maison.</p></div>
-      <div><span class="code">04</span><h3>Soirées dégustation</h3><p>Spiritueux, vins, bières : des soirées découverte en petit comité. <a href="evenements.html" style="color:var(--cire)">Voir les dates</a></p></div>
+      <div><h3>Coffrets cadeaux</h3><p>On compose un coffret selon le budget et les goûts de la personne à gâter.</p></div>
+      <div><h3>Recherche de millésimes</h3><p>Une année de naissance, de mariage ? On cherche la bouteille pour vous.</p></div>
+      <div><h3>Verrerie et accessoires</h3><p>Verres, carafes, tire-bouchons : tout pour bien servir à la maison.</p></div>
+      <div><h3>Soirées dégustation</h3><p>Spiritueux, vins, bières : des soirées découverte en petit comité. <a href="evenements.html" style="color:var(--cire)">Voir les dates</a></p></div>
     </div>
     <div class="chiffres montee">
       <div><strong>200</strong><span>vins, dont 80 % du Roussillon</span></div>
@@ -206,7 +220,7 @@
 
 <div class="seuil" id="seuil" role="dialog" aria-modal="true" aria-labelledby="seuil-t" hidden>
   <div class="seuil-voute">
-    <p class="repere">Avant de descendre</p>
+    <p class="repere">Avant d'entrer</p>
     <h2 id="seuil-t">Avez-vous<br>18 ans ou plus ?</h2>
     <p class="seuil-txt">Ce site parle de vin, de bière et de spiritueux.</p>
     <div class="seuil-btns">
@@ -217,9 +231,13 @@
   </div>
   <p class="seuil-pied">L'abus d'alcool est dangereux pour la santé.</p>
 </div>
-<div class="grain" aria-hidden="true"></div>
+<div class="intro" aria-hidden="true">
+  <svg class="intro-arche" viewBox="0 0 120 160"><path d="M8 156V64a52 52 0 0 1 104 0v92"/><path class="intro-cle" d="M60 0l9 9-9 9-9-9z"/></svg>
+  <p class="intro-marque">Vinochope</p>
+  <p class="intro-lieu">La cave à vin, Perpignan</p>
+</div>
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="assets/commun.js?v=3"></script>
-<script src="assets/la-cave.js?v=3"></script>
+<script src="assets/commun.js?v=10"></script>
+<script src="assets/la-cave.js?v=10"></script>
 </body>
 </html>

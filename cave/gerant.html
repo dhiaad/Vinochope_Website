@@ -6,15 +6,16 @@
 <title>Espace gérant · Vinochope</title>
 <meta name="description" content="Gestion des événements, des fûts, des options de location et de la cave.">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#3B1020">
+<meta name="theme-color" content="#220000">
 <meta property="og:title" content="Espace gérant · Vinochope">
 <meta property="og:description" content="Gestion des événements, des fûts, des options de location et de la cave.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gloock&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/cave.css?v=3">
-<link rel="stylesheet" href="assets/pages.css?v=3">
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/cave.css?v=10">
+<link rel="stylesheet" href="assets/pages.css?v=10">
+<script>try{if(sessionStorage.getItem("vc-intro"))document.documentElement.classList.add("intro-vue")}catch(e){}</script>
 </head>
 <body class="page-gerant">
 <a class="evite" href="#contenu">Aller au contenu</a>
@@ -29,12 +30,18 @@
   </div>
 </header>
 <div class="menu" id="menu" hidden>
-  <nav aria-label="Menu"><ol class="menu-liens"><li><a href="index.html"><span class="code">00</span>Accueil</a></li><li><a href="la-cave.html"><span class="code">01</span>La cave et la carte</a></li><li><a href="evenements.html"><span class="code">02</span>Événements</a></li><li><a href="tireuses.html"><span class="code">03</span>Tireuses et fûts</a></li><li><a href="histoire.html"><span class="code">04</span>Notre histoire</a></li><li><a href="contact.html"><span class="code">05</span>Contact</a></li></ol></nav>
-  <div class="menu-infos">
-    <p class="repere">Vinochope</p>
-    <p>26 rue Mathieu de Dombasle<br>66000 Perpignan</p>
-    <p><a href="tel:+33468899143">04 68 89 91 43</a></p>
-    <p data-statut>Lun. 15 h – 21 h · mar.–sam. 10 h – 12 h 30 et 14 h 30 – 21 h</p>
+  <div class="menu-carte">
+    <div class="menu-cadre">
+      <p class="menu-maison">Vinochope</p>
+      <p class="menu-sous">La cave à vin, Perpignan</p>
+      <span class="menu-filet" aria-hidden="true"></span>
+      <nav aria-label="Menu"><ol class="menu-liens"><li><a href="index.html"><span class="m-nom">Accueil</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">La maison</span></a></li><li><a href="la-cave.html"><span class="m-nom">La cave et la carte</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Vins, bières, planches</span></a></li><li><a href="evenements.html"><span class="m-nom">Événements</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Concerts, expositions</span></a></li><li><a href="tireuses.html"><span class="m-nom">Tireuses et fûts</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Dès 80 €</span></a></li><li><a href="histoire.html"><span class="m-nom">Notre histoire</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Depuis 2013</span></a></li><li><a href="contact.html"><span class="m-nom">Contact</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">04 68 89 91 43</span></a></li></ol></nav>
+      <span class="menu-filet" aria-hidden="true"></span>
+      <div class="menu-infos">
+        <p>26 rue Mathieu de Dombasle, 66000 Perpignan</p>
+        <p data-statut>Lun. 15 h – 21 h · mar.–sam. 10 h – 12 h 30 et 14 h 30 – 21 h</p>
+      </div>
+    </div>
   </div>
 </div>
 <!--/TETE-->
@@ -107,8 +114,12 @@
 <!--/PIED-->
 
 
-<div class="grain" aria-hidden="true"></div>
-<script src="assets/commun.js?v=3"></script>
-<script src="assets/gerant.js?v=3"></script>
+<div class="intro" aria-hidden="true">
+  <svg class="intro-arche" viewBox="0 0 120 160"><path d="M8 156V64a52 52 0 0 1 104 0v92"/><path class="intro-cle" d="M60 0l9 9-9 9-9-9z"/></svg>
+  <p class="intro-marque">Vinochope</p>
+  <p class="intro-lieu">La cave à vin, Perpignan</p>
+</div>
+<script src="assets/commun.js?v=10"></script>
+<script src="assets/gerant.js?v=10"></script>
 </body>
 </html>

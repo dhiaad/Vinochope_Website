@@ -11,15 +11,15 @@ Lancer : python tools/build_cave.py
 import json, pathlib, re
 
 RACINE = pathlib.Path(__file__).resolve().parent.parent / "cave"
-V = "3"  # version des fichiers css/js, à monter quand ils changent
+V = "10"  # version des fichiers css/js, à monter quand ils changent
 
-PAGES = [  # (fichier, libellé, numéro de niveau)
-    ("index.html", "Accueil", "00"),
-    ("la-cave.html", "La cave et la carte", "01"),
-    ("evenements.html", "Événements", "02"),
-    ("tireuses.html", "Tireuses et fûts", "03"),
-    ("histoire.html", "Notre histoire", "04"),
-    ("contact.html", "Contact", "05"),
+PAGES = [  # (fichier, libellé, ce qu'on y trouve : écrit comme le détail d'un plat sur une carte)
+    ("index.html", "Accueil", "La maison"),
+    ("la-cave.html", "La cave et la carte", "Vins, bières, planches"),
+    ("evenements.html", "Événements", "Concerts, expositions"),
+    ("tireuses.html", "Tireuses et fûts", "Dès 80 €"),
+    ("histoire.html", "Notre histoire", "Depuis 2013"),
+    ("contact.html", "Contact", "04 68 89 91 43"),
 ]
 
 
@@ -30,7 +30,7 @@ def tete_html(actif):
         for f, l, _ in PAGES[1:]
     )
     menu = "".join(
-        f'<li><a href="{f}"{ac(f)}><span class="code">{n}</span>{l}</a></li>'
+        f'<li><a href="{f}"{ac(f)}><span class="m-nom">{l}</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">{n}</span></a></li>'
         for f, l, n in PAGES
     )
     return f"""<!--TETE-->
@@ -43,12 +43,18 @@ def tete_html(actif):
   </div>
 </header>
 <div class="menu" id="menu" hidden>
-  <nav aria-label="Menu"><ol class="menu-liens">{menu}</ol></nav>
-  <div class="menu-infos">
-    <p class="repere">Vinochope</p>
-    <p>26 rue Mathieu de Dombasle<br>66000 Perpignan</p>
-    <p><a href="tel:+33468899143">04 68 89 91 43</a></p>
-    <p data-statut>Lun. 15 h – 21 h · mar.–sam. 10 h – 12 h 30 et 14 h 30 – 21 h</p>
+  <div class="menu-carte">
+    <div class="menu-cadre">
+      <p class="menu-maison">Vinochope</p>
+      <p class="menu-sous">La cave à vin, Perpignan</p>
+      <span class="menu-filet" aria-hidden="true"></span>
+      <nav aria-label="Menu"><ol class="menu-liens">{menu}</ol></nav>
+      <span class="menu-filet" aria-hidden="true"></span>
+      <div class="menu-infos">
+        <p>26 rue Mathieu de Dombasle, 66000 Perpignan</p>
+        <p data-statut>Lun. 15 h – 21 h · mar.–sam. 10 h – 12 h 30 et 14 h 30 – 21 h</p>
+      </div>
+    </div>
   </div>
 </div>
 <!--/TETE-->"""
@@ -93,7 +99,7 @@ PIED = """<!--PIED-->
 
 SEUIL = """<div class="seuil" id="seuil" role="dialog" aria-modal="true" aria-labelledby="seuil-t" hidden>
   <div class="seuil-voute">
-    <p class="repere">Avant de descendre</p>
+    <p class="repere">Avant d'entrer</p>
     <h2 id="seuil-t">Avez-vous<br>18 ans ou plus ?</h2>
     <p class="seuil-txt">Ce site parle de vin, de bière et de spiritueux.</p>
     <div class="seuil-btns">
@@ -103,6 +109,15 @@ SEUIL = """<div class="seuil" id="seuil" role="dialog" aria-modal="true" aria-la
     <p class="seuil-non" hidden>Revenez nous voir à vos 18 ans.</p>
   </div>
   <p class="seuil-pied">L'abus d'alcool est dangereux pour la santé.</p>
+</div>"""
+
+
+# Lancement : l'arche se dessine, le nom apparaît, puis le rideau rouge se lève. Une fois par visite.
+INTRO_TETE = """<script>try{if(sessionStorage.getItem("vc-intro"))document.documentElement.classList.add("intro-vue")}catch(e){}</script>"""
+INTRO = """<div class="intro" aria-hidden="true">
+  <svg class="intro-arche" viewBox="0 0 120 160"><path d="M8 156V64a52 52 0 0 1 104 0v92"/><path class="intro-cle" d="M60 0l9 9-9 9-9-9z"/></svg>
+  <p class="intro-marque">Vinochope</p>
+  <p class="intro-lieu">La cave à vin, Perpignan</p>
 </div>"""
 
 
@@ -121,15 +136,16 @@ def page(nom, reglages, corps):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{titre}</title>
 <meta name="description" content="{desc}">{robots}
-<meta name="theme-color" content="#3B1020">
+<meta name="theme-color" content="#220000">
 <meta property="og:title" content="{titre}">
 <meta property="og:description" content="{desc}">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gloock&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/cave.css?v={V}">
 <link rel="stylesheet" href="assets/pages.css?v={V}">
+{INTRO_TETE}
 </head>
 <body class="{classe}">
 <a class="evite" href="#contenu">Aller au contenu</a>
@@ -143,7 +159,7 @@ def page(nom, reglages, corps):
 {PIED}
 
 {seuil}
-<div class="grain" aria-hidden="true"></div>{lenis}
+{INTRO}{lenis}
 <script src="assets/commun.js?v={V}"></script>{scripts}
 </body>
 </html>
@@ -165,6 +181,8 @@ def main():
     t = re.sub(r"<!--TETE-->.*?<!--/TETE-->", lambda _: tete_html("index.html"), t, flags=re.S)
     t = re.sub(r"<!--PIED-->.*?<!--/PIED-->", lambda _: PIED, t, flags=re.S)
     t = re.sub(r'(assets/(?:cave|pages|commun)\.(?:css|js))\?v=\d+', rf"\1?v={V}", t)
+    t = re.sub(r"<!--INTRO-->.*?<!--/INTRO-->", lambda _: "<!--INTRO-->" + INTRO + "<!--/INTRO-->", t, flags=re.S)
+    t = re.sub(r"<!--INTRO_TETE-->.*?<!--/INTRO_TETE-->", lambda _: "<!--INTRO_TETE-->" + INTRO_TETE + "<!--/INTRO_TETE-->", t, flags=re.S)
     acc.write_text(t, encoding="utf-8")
     print("accueil mis à jour")
 
