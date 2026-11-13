@@ -1,23 +1,23 @@
-/* Vinochope · « La descente »
-   Palette : tuffeau, lie-de-vin, cire, vert bouteille + blanc
-   Titres Gloock · texte Instrument Sans · repères IBM Plex Mono */
+/* Vinochope · la cave à vin, Perpignan
+   Palette : tuffeau, rouge sombre, cire, vert bouteille + blanc
+   Titres Gloock · texte Instrument Sans */
 
 :root {
   --tuffeau: #E8DDC8;
-  --lie: #3B1020;
-  --cire: #B4302A;
-  --vert: #1F2B24;
+  --lie: #220000;            /* rouge sombre lisse */
+  --cire: #A05423;
+  --vert: #011504;           /* vert bouteille, sous le marbre */
   --blanc: #FFFFFF;
-  --lie-90: #2E0C19;           /* fond le plus profond, dérivé de la lie */
+  /* marbre vert dessiné par le navigateur : net à toutes les tailles, sans image agrandie */
+  --tex-vert: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1400' height='1400'%3E%3Cfilter id='m' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='turbulence' baseFrequency='.0026 .0042' numOctaves='6' seed='11' stitchTiles='stitch' result='t'/%3E%3CfeColorMatrix in='t' type='matrix' values='0 0 0 0 .004  .19 .07 0 0 .008  .035 0 0 0 .006  0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E") 0 0 / 1400px 1400px repeat;
   --encre: var(--lie);
   --gouttiere: clamp(20px, 5vw, 72px);
   --jauge: 0px;
   --t-titre: "Gloock", Georgia, serif;
   --t-texte: "Instrument Sans", system-ui, sans-serif;
-  --t-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --t-mono: var(--t-texte);   /* plus de chasse fixe : les chiffres s'alignent en tabulaire */
   --ease: cubic-bezier(.2, .7, .1, 1);
 }
-@media (min-width: 900px) { .accueil { --jauge: 88px; } }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
@@ -27,7 +27,7 @@ html.lenis, html.lenis body { height: auto; }
 body {
   margin: 0; background: var(--lie); color: var(--blanc);
   font: 400 17px/1.6 var(--t-texte);
-  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; font-variant-numeric: tabular-nums;
   overflow-x: hidden;
 }
 img, canvas { display: block; max-width: 100%; }
@@ -40,14 +40,10 @@ em, i { font-style: normal; }
 .evite { position: fixed; left: 12px; top: -60px; z-index: 100; background: var(--cire); color: var(--blanc); padding: 10px 16px; text-decoration: none; }
 .evite:focus { top: 12px; }
 
-/* ---------- Repères en mono ---------- */
-.repere, .code {
-  font: 500 12px/1.4 var(--t-mono); letter-spacing: .02em; color: var(--cire);
-}
-.repere { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
-.repere::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+/* ---------- Repères : une petite ligne en couleur au-dessus des titres ---------- */
+.repere, .code { font: 500 14px/1.4 var(--t-texte); letter-spacing: 0; color: var(--cire); }
+.repere { margin-bottom: 24px; }
 .repere.discret { color: inherit; opacity: .6; margin: 0; }
-.repere.discret::before { display: none; }
 
 /* ---------- Étiquette : le bouton maison, coins coupés comme une étiquette de bouteille ---------- */
 .etiquette {
@@ -59,12 +55,10 @@ em, i { font-style: normal; }
   clip-path: polygon(var(--coin) 0, 100% 0, 100% calc(100% - var(--coin)), calc(100% - var(--coin)) 100%, 0 100%, 0 var(--coin));
   transition: background .25s, color .25s;
 }
-.etiquette::after { content: "→"; font-family: var(--t-mono); transition: transform .3s var(--ease); }
 .etiquette:hover { background: var(--blanc); color: var(--lie); }
-.etiquette:hover::after { transform: translateX(4px); }
+.etiquette:active { transform: scale(.98); }
 .etiquette.petite { --coin: 7px; padding: 11px 16px; font-size: 13px; }
 .etiquette.ligne { background: transparent; color: inherit; box-shadow: inset 0 0 0 1px currentColor; }
-.etiquette.ligne::after { content: none; }
 .etiquette.ligne:hover { background: var(--blanc); color: var(--lie); }
 
 /* ---------- Lien souligné à la cire ---------- */
@@ -74,7 +68,6 @@ em, i { font-style: normal; }
   background: linear-gradient(var(--cire), var(--cire)) left bottom / 100% 2px no-repeat;
   transition: background-size .35s var(--ease);
 }
-.lien::after { content: "→"; font-family: var(--t-mono); color: var(--cire); }
 .lien:hover { background-size: 30% 2px; }
 
 /* ---------- En-tête ---------- */
@@ -94,27 +87,6 @@ em, i { font-style: normal; }
 .nav a:hover::after, .nav a[aria-current]::after { right: 0; }
 @media (max-width: 899px) { .nav { display: none; } }
 
-/* ---------- Jauge de profondeur ---------- */
-.jauge {
-  position: fixed; z-index: 29; left: 0; top: 0; bottom: 0; width: var(--jauge);
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
-  color: var(--lie); pointer-events: none; transition: color .4s;
-}
-.jauge[data-ton="sombre"] { color: var(--blanc); }
-.jauge-lecture { display: flex; flex-direction: column; align-items: center; gap: 4px; font: 500 11px/1.2 var(--t-mono); white-space: nowrap; }
-.jauge-lecture [data-temp] { color: var(--cire); }
-.jauge-rail { position: relative; width: 1px; height: 46vh; background: currentColor; opacity: .5; }
-.jauge-rail::before {   /* graduations */
-  content: ""; position: absolute; left: -4px; width: 9px; top: 0; bottom: 0;
-  background: repeating-linear-gradient(to bottom, currentColor 0 1px, transparent 1px 10%);
-}
-.jauge-bille { position: absolute; left: -5px; top: 0; width: 11px; height: 11px; border-radius: 50%; background: var(--cire); transform: translateY(var(--y, 0)); }
-@media (max-width: 899px) {
-  .jauge { top: auto; left: auto; right: 14px; bottom: 14px; width: auto; height: auto; flex-direction: row; gap: 10px; }
-  .jauge-rail { display: none; }
-  .jauge-lecture { flex-direction: row; gap: 10px; padding: 8px 10px; background: var(--lie); color: var(--blanc); }
-}
-
 /* ---------- Enveloppe des niveaux ---------- */
 .enveloppe { max-width: 1240px; margin: 0 auto; padding: 0 var(--gouttiere) 0 calc(var(--gouttiere) + var(--jauge)); }
 .niveau { position: relative; padding: clamp(110px, 16vh, 180px) 0; }
@@ -126,53 +98,13 @@ h2 .accent, h1 .accent { color: var(--cire); }
 .js .montee { opacity: 0; transform: translateY(28px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
 .js .montee.vu { opacity: 1; transform: none; }
 
-/* ---------- Niveau 0 · La rue ---------- */
-.rue { position: relative; height: 230vh; background: var(--tuffeau); color: var(--lie); }
-.rue-colle {
-  position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden;
-  display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 4vw;
-  padding: 90px var(--gouttiere) 40px calc(var(--gouttiere) + var(--jauge));
-}
-.rue h1 { font-size: clamp(54px, 9vw, 150px); line-height: .9; letter-spacing: -.02em; }
-.rue .chapo { max-width: 24em; margin: 30px 0 40px; }
-.rue-texte { opacity: calc(1 - var(--p, 0) * 2.6); transform: translateY(calc(var(--p, 0) * -80px)); }
-.porte { position: relative; justify-self: center; width: min(36vw, 480px, calc((100svh - 160px) * .72)); aspect-ratio: 5 / 7; }
-.porte-voute {
-  position: absolute; inset: 0; border-radius: 999px 999px 0 0; overflow: hidden;
-  background: radial-gradient(120% 80% at 50% 60%, #4a1528 0%, var(--lie) 55%, var(--lie-90) 100%);
-  transform-origin: 50% 52%; transform: scale(var(--s, 1));
-  will-change: transform;
-}
-.porte-grappe {
-  position: absolute; left: 50%; top: 52%; width: 74%; height: auto;
-  transform: translate(-50%, -50%) scale(calc(1 / var(--s, 1) * (1 + var(--p, 0) * .6)));
-  opacity: calc(1.5 - var(--p, 0) * 2.4);
-  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, .45));
-}
 /* Clé de voûte : petit sceau de cire */
 .cle {
   position: absolute; left: 50%; top: -10px; width: 22px; height: 22px; margin-left: -11px;
   background: var(--cire); transform: rotate(45deg); box-shadow: 0 0 0 5px var(--tuffeau);
 }
-.porte .cle { opacity: calc(1 - var(--p, 0) * 4); }
-@media (max-width: 799px) {
-  .rue-colle { grid-template-columns: 1fr; align-content: center; gap: 30px; padding-top: 80px; text-align: left; }
-  .rue h1 { font-size: clamp(48px, 15vw, 80px); }
-  .rue .chapo { margin: 18px 0 0; font-size: 17px; }
-  .rue .repere.discret { display: none; }
-  .porte { width: min(62vw, 300px, calc((100svh - 380px) * .72)); justify-self: start; }
-}
-
 /* ---------- Niveau −1 · La cave (le casier) ---------- */
 .cave { background: var(--lie); }
-.cave::before {      /* treillis de casier en losanges, très discret */
-  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .07;
-  background:
-    repeating-linear-gradient(45deg, var(--tuffeau) 0 1px, transparent 1px 64px),
-    repeating-linear-gradient(-45deg, var(--tuffeau) 0 1px, transparent 1px 64px);
-  -webkit-mask: linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent);
-  mask: linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent);
-}
 .cave h2 { max-width: 12em; }
 .cave h2 .accent { color: var(--cire); }
 .casiers { list-style: none; margin: 90px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(255, 255, 255, .25); }
@@ -188,53 +120,25 @@ h2 .accent, h1 .accent { color: var(--cire); }
   .casier, .casier + .casier { padding: 26px 0 30px; border-left: 0; border-bottom: 1px solid rgba(255, 255, 255, .25); }
 }
 
-/* ---------- Niveau −2 · Du raisin au verre ---------- */
-.film { height: 420vh; padding: 0; background: var(--vert); }
-.film-colle {
-  position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden;
-  display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 4vw;
-  padding: 90px var(--gouttiere) 40px calc(var(--gouttiere) + var(--jauge));
-}
-.etapes { list-style: none; margin: 0; padding: 0; display: grid; }
-.etape { grid-area: 1 / 1; max-width: 26em; transition: opacity .6s var(--ease), transform .6s var(--ease); opacity: 0; transform: translateY(24px); pointer-events: none; }
-.etape.on { opacity: 1; transform: none; pointer-events: auto; }
-.etape .code { display: block; font-size: 14px; margin-bottom: 18px; }
-.etape h3 { font-size: clamp(48px, 6vw, 96px); line-height: .95; }
-.etape p { margin-top: 24px; font-size: clamp(17px, 1.4vw, 20px); opacity: .85; }
-.film-texte .repere { color: var(--cire); }
-.voute-film {
-  position: relative; justify-self: center;
-  width: min(42vw, 600px, calc((100svh - 150px) * .86)); aspect-ratio: 6 / 7;
-}
-.film-toile, .film-grappe {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  border-radius: 999px 999px 0 0; overflow: hidden;
-}
-.film-toile { background: #2a1a1f; box-shadow: 0 0 0 1px rgba(232, 221, 200, .35), 0 0 0 12px var(--vert), 0 0 0 13px rgba(232, 221, 200, .18); }
-.film-grappe { object-fit: contain; padding: 12% 16%; opacity: var(--g, 1); transform: scale(var(--gs, 1)); filter: blur(var(--gb, 0px)); pointer-events: none; }
-.voute-film .cle { box-shadow: 0 0 0 5px var(--vert); top: -24px; }
-@media (max-width: 799px) {
-  .film { height: 400vh; }
-  .film-colle { grid-template-columns: 1fr; grid-template-rows: 1fr auto; align-content: stretch; gap: 22px; padding: 76px 20px 28px; }
-  .film-texte { order: 2; min-height: 200px; }
-  .film-texte .repere { margin-bottom: 14px; }
-  .etape h3 { font-size: 40px; }
-  .etape p { margin-top: 12px; font-size: 16px; }
-  .voute-film { order: 1; width: min(84vw, calc((100svh - 330px) * .86)); align-self: end; }
-}
-
 /* ---------- Niveau −3 · Le bar, à la bougie ---------- */
-.bar { background: #170A10; overflow: hidden; }
-.bar .enveloppe { position: relative; z-index: 1; }
+.bar { background: var(--lie); overflow: hidden; }
+.bar .enveloppe { position: relative; z-index: 3; }
 .bar h2 { max-width: 11em; }
 .bar-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 6vw; margin-top: 10px; align-items: start; }
-.carte { margin: 28px 0 0; border-top: 1px solid rgba(255, 255, 255, .22); }
-.carte div { display: grid; grid-template-columns: 9em 1fr; gap: 20px; padding: 20px 0; border-bottom: 1px solid rgba(255, 255, 255, .22); }
+/* La carte posée sur le comptoir : un vrai carton, avec son cadre et son ombre */
+.carte {
+  position: relative; margin: 8px 0 0; padding: 44px 36px 28px; background: var(--tuffeau); color: var(--lie);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, .25), 0 40px 80px -20px rgba(0, 0, 0, .7);
+}
+.carte::before { content: ""; position: absolute; inset: 10px; border: 1px solid rgba(34, 0, 0, .35); outline: 1px solid rgba(34, 0, 0, .18); outline-offset: -5px; pointer-events: none; }
+.carte::after { content: "Au comptoir"; position: absolute; top: 22px; left: 50%; transform: translateX(-50%); font: 400 15px/1 var(--t-titre); color: var(--cire); white-space: nowrap; }
+.carte div { display: grid; grid-template-columns: 9em 1fr; gap: 20px; padding: 16px 0; border-bottom: 1px dotted rgba(34, 0, 0, .3); }
+.carte div:last-child { border-bottom: 0; }
 .carte dt { font: 400 22px/1.2 var(--t-titre); color: var(--cire); }
-.carte dd { margin: 0; opacity: .85; }
+.carte dd { margin: 0; }
 .bougie {
   position: absolute; inset: 0; z-index: 2; pointer-events: none;
-  background: radial-gradient(circle 46vmax at var(--bx, 50%) var(--by, 45%), rgba(255, 170, 90, .10) 0, rgba(23, 10, 16, 0) 22%, rgba(23, 10, 16, .55) 58%, rgba(23, 10, 16, .72) 100%);
+  background: radial-gradient(circle 46vmax at var(--bx, 50%) var(--by, 45%), rgba(160, 84, 35, .16) 0, rgba(34, 0, 0, 0) 22%, rgba(34, 0, 0, .55) 58%, rgba(34, 0, 0, .72) 100%);
 }
 @media (max-width: 799px) {
   .bar-grille { grid-template-columns: 1fr; gap: 0; }
@@ -247,22 +151,22 @@ h2 .accent, h1 .accent { color: var(--cire); }
 .scene .repere { color: var(--cire); }
 .registre { width: 100%; border-collapse: collapse; margin: 70px 0 44px; font-size: 16px; }
 .registre thead th { font: 500 12px/1.4 var(--t-mono); text-align: left; color: var(--cire); padding: 0 16px 14px 0; border-bottom: 2px solid var(--lie); }
-.registre td, .registre tbody th { padding: 26px 16px 26px 0; border-bottom: 1px solid rgba(59, 16, 32, .25); vertical-align: baseline; text-align: left; }
+.registre td, .registre tbody th { padding: 26px 16px 26px 0; border-bottom: 1px solid rgba(34, 0, 0, .25); vertical-align: baseline; text-align: left; }
 .registre tbody th { font: 400 clamp(28px, 3.2vw, 44px)/1 var(--t-titre); }
 .registre td.code { width: 4em; }
 .registre tbody tr { transition: background .3s; }
-.registre tbody tr:hover { background: rgba(180, 48, 42, .07); }
+.registre tbody tr:hover { background: rgba(160, 84, 35, .07); }
 .registre tbody tr:hover th { color: var(--cire); }
 @media (max-width: 699px) {
   .registre thead { display: none; }
-  .registre tr { display: grid; grid-template-columns: 3em 1fr; padding: 18px 0; border-bottom: 1px solid rgba(59, 16, 32, .25); }
+  .registre tr { display: grid; grid-template-columns: 3em 1fr; padding: 18px 0; border-bottom: 1px solid rgba(34, 0, 0, .25); }
   .registre td, .registre tbody th { border: 0; padding: 2px 0; }
   .registre td.code { grid-row: span 3; }
   .registre td:last-child { font: 500 12px/1.4 var(--t-mono); color: var(--cire); }
 }
 
 /* ---------- Niveau −5 · Tireuses ---------- */
-.tireuses { background: var(--vert); }
+.tireuses { background: var(--tex-vert), var(--vert); }
 .tir-grille { display: grid; grid-template-columns: 1.2fr .8fr; gap: 6vw; align-items: center; }
 .options { list-style: none; padding: 0; margin: 36px 0 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; }
 .options li { padding: 14px 0 14px 26px; border-bottom: 1px solid rgba(255, 255, 255, .2); position: relative; }
@@ -273,17 +177,12 @@ h2 .accent, h1 .accent { color: var(--cire); }
   padding: 64px 40px 48px; text-align: center;
   clip-path: polygon(var(--coin) 0, calc(100% - var(--coin)) 0, 100% var(--coin), 100% calc(100% - var(--coin)), calc(100% - var(--coin)) 100%, var(--coin) 100%, 0 calc(100% - var(--coin)), 0 var(--coin));
 }
-.tarif::before { content: ""; position: absolute; inset: 12px; border: 1px solid rgba(59, 16, 32, .35); clip-path: inherit; pointer-events: none; }
-.cachet {
-  display: grid; place-items: center; width: 108px; height: 108px; margin: 0 auto 28px; border-radius: 50%;
-  background: var(--cire); color: var(--blanc); font: 400 17px/1.05 var(--t-titre);
-  box-shadow: inset 0 0 0 4px var(--cire), inset 0 0 0 5px rgba(255, 255, 255, .5);
-  transform: rotate(-8deg);
-}
+.tarif::before { content: ""; position: absolute; inset: 12px; border: 1px solid rgba(34, 0, 0, .35); clip-path: inherit; pointer-events: none; }
+.cachet { font: 500 14px/1.4 var(--t-texte); color: var(--cire); margin-bottom: 16px; }
 .tarif-prix { font: 400 clamp(64px, 7vw, 100px)/1 var(--t-titre); }
 .tarif-prix span { font: 500 13px/1 var(--t-mono); color: var(--cire); vertical-align: top; margin-right: 6px; }
 .tarif-quoi { font: 400 24px/1.2 var(--t-titre); margin-top: 6px; }
-.tarif-demi { margin-top: 18px; padding-top: 18px; border-top: 1px solid rgba(59, 16, 32, .25); font: 500 13px/1.4 var(--t-mono); color: var(--cire); }
+.tarif-demi { margin-top: 18px; padding-top: 18px; border-top: 1px solid rgba(34, 0, 0, .25); font: 500 13px/1.4 var(--t-mono); color: var(--cire); }
 @media (max-width: 799px) {
   .tir-grille { grid-template-columns: 1fr; gap: 56px; }
   .options { grid-template-columns: 1fr; }
@@ -297,10 +196,10 @@ h2 .accent, h1 .accent { color: var(--cire); }
 .venir-grille p { font-size: 19px; margin-bottom: 18px; }
 .tel { font: 400 32px/1.1 var(--t-titre); text-decoration: none; }
 .statut { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; }
-.statut::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: rgba(59, 16, 32, .4); }
-.statut.ouvert::before { background: #2f7d4f; box-shadow: 0 0 0 4px rgba(47, 125, 79, .18); }
+.statut::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: rgba(34, 0, 0, .4); }
+.statut.ouvert::before { background: var(--cire); box-shadow: 0 0 0 4px rgba(160, 84, 35, .22); }
 .horaires { border-collapse: collapse; width: 100%; font-size: 15px; }
-.horaires th, .horaires td { text-align: left; padding: 8px 0; border-bottom: 1px solid rgba(59, 16, 32, .2); vertical-align: top; font-weight: 400; }
+.horaires th, .horaires td { text-align: left; padding: 8px 0; border-bottom: 1px solid rgba(34, 0, 0, .2); vertical-align: top; font-weight: 400; }
 .horaires td { text-align: right; }
 .horaires tr.aujourdhui th, .horaires tr.aujourdhui td { color: var(--cire); font-weight: 600; }
 @media (max-width: 799px) { .venir-grille { grid-template-columns: 1fr; gap: 44px; margin-top: 56px; } }
@@ -324,13 +223,114 @@ h2 .accent, h1 .accent { color: var(--cire); }
 .seuil-non { margin-top: 22px; color: var(--tuffeau); }
 .seuil-pied { font: 500 12px/1.4 var(--t-mono); }
 
-/* ---------- Grain de pierre, très léger ---------- */
-.grain {
-  position: fixed; inset: 0; z-index: 80; pointer-events: none; opacity: .05; mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+@media (prefers-reduced-motion: reduce) { .bougie { display: none; } }
+
+/* =================================================================
+   Ouverture de l'accueil : un seul écran tenu pendant tout le défilement.
+   1. la fenêtre voûtée, en relief, suit la souris ;
+   2. on avance dedans (vraie perspective : le cadre passe plus vite que la grappe) ;
+   3. la bouteille apparaît en plein écran et le vin est servi, chapitre par chapitre.
+   ================================================================= */
+.ouverture { position: relative; height: 600vh; background: var(--tuffeau); color: var(--lie); }
+.ouv-colle {
+  position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden;
+  display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 4vw;
+  padding: 96px var(--gouttiere) 48px;
+  perspective: 1400px;
+}
+.ouv-colle::before {   /* le rouge qui reste quand on est passé dans la fenêtre */
+  content: ""; position: absolute; inset: 0; background: var(--lie); opacity: var(--n, 0); z-index: 2; pointer-events: none;
+}
+.ouv-texte { position: relative; z-index: 1; opacity: var(--t, 1); visibility: var(--tv, visible); }
+.ouverture h1 { font-size: clamp(52px, 6.6vw, 124px); line-height: .94; letter-spacing: -.02em; }
+.sans-coupure { white-space: nowrap; }
+.ouverture .chapo { max-width: 26em; margin: 28px 0 40px; }
+.porte {
+  position: relative; z-index: 1; justify-self: center;
+  width: min(34vw, 460px, calc((100svh - 200px) * .7)); aspect-ratio: 5 / 7;
+  transform-style: preserve-3d; will-change: transform;
+  transform: translate3d(var(--dx, 0px), var(--dy, 0px), var(--z, 0px)) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+}
+.porte-corps { position: absolute; inset: 0; transform-style: preserve-3d; }
+/* L'embrasure : quatre anneaux de pierre de plus en plus sombres, posés en profondeur */
+.porte-tranche { position: absolute; inset: 0; border-radius: 999px 999px 0 0; border: 7px solid #D8C9AC; border-bottom: 0; }
+.porte-tranche:nth-child(1) { transform: translateZ(0); border-color: #E2D5BC; }
+.porte-tranche:nth-child(2) { transform: translateZ(-22px); border-color: #CDBB9A; }
+.porte-tranche:nth-child(3) { transform: translateZ(-44px); border-color: #A99372; }
+.porte-tranche:nth-child(4) { transform: translateZ(-66px); border-color: #6E5843; }
+.porte-voute {
+  position: absolute; inset: 7px 7px 0; border-radius: 999px 999px 0 0; overflow: hidden;
+  background: var(--lie); transform: translateZ(-80px);
+}
+.porte-fond { position: absolute; inset: 0; background: radial-gradient(70% 55% at 50% 58%, #3a0505 0, var(--lie) 70%); }
+.porte-grappe {
+  position: absolute; left: 50%; top: 54%; width: 76%; height: auto;
+  transform: translate(-50%, -50%) translate3d(var(--gx, 0px), var(--gy, 0px), 0) scale(var(--gs, 1));
+  opacity: var(--go, 1); filter: blur(var(--gb, 0px)) drop-shadow(0 30px 30px rgba(0, 0, 0, .5));
+}
+.porte-ombre { position: absolute; inset: 0; box-shadow: inset 0 40px 70px rgba(0, 0, 0, .6), inset 0 -10px 30px rgba(0, 0, 0, .35); pointer-events: none; }
+.porte .cle { top: -12px; transform: translateZ(2px) rotate(45deg); box-shadow: 0 0 0 5px var(--tuffeau), 0 6px 14px rgba(34, 0, 0, .25); }
+.ouv-film { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 3; opacity: var(--f, 0); pointer-events: none; }
+.chapitres { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; z-index: 4; pointer-events: none; color: var(--blanc); }
+.chapitre-film {
+  position: absolute; top: 50%; left: calc(var(--gouttiere) + 2vw); width: min(30vw, 420px);
+  opacity: var(--o, 0); transform: translateY(calc(-50% + var(--y, 0px))); will-change: transform, opacity;
+}
+.chapitre-film:nth-child(2) { left: auto; right: calc(var(--gouttiere) + 2vw); }
+.chapitre-film h2 { font-size: clamp(44px, 5.6vw, 92px); }
+.chapitre-film p { margin-top: 20px; font-size: clamp(17px, 1.4vw, 20px); color: rgba(255, 255, 255, .82); max-width: 22em; }
+@media (max-width: 799px) {
+  .ouverture { height: 520vh; }
+  .ouv-colle { grid-template-columns: 1fr; grid-template-rows: auto 1fr; align-content: start; gap: 24px; padding: 88px 20px 24px; }
+  .ouverture h1 { font-size: clamp(46px, 13.5vw, 76px); }
+  .ouverture .chapo { margin: 16px 0 24px; font-size: 17px; }
+  .porte { width: min(64vw, 300px, calc((100svh - 470px) * .7)); min-width: 170px; align-self: center; }
+  .chapitre-film, .chapitre-film:nth-child(2) { top: auto; bottom: 7svh; left: 20px; right: 20px; width: auto; transform: translateY(var(--y, 0px)); }
+  .chapitre-film h2 { font-size: 44px; }
+  .chapitre-film p { margin-top: 10px; font-size: 16px; }
+}
+
+/* ---------- Lancement : l'arche se dessine, le nom monte, le rideau rouge se lève ---------- */
+.intro {
+  position: fixed; inset: 0; z-index: 95; display: grid; place-content: center; justify-items: center; gap: 16px;
+  background: var(--lie); color: var(--tuffeau); text-align: center; cursor: pointer;
+  clip-path: inset(0 0 0 0); animation: intro-leve .9s cubic-bezier(.7, 0, .2, 1) 1.7s forwards;
+}
+.intro-vue .intro, .intro.fini { display: none; }
+.intro-arche { width: 56px; height: auto; overflow: visible; margin-bottom: 8px; }
+.intro-arche path { fill: none; stroke: var(--cire); stroke-width: 2; stroke-dasharray: 340; stroke-dashoffset: 340; animation: intro-trait 1s var(--ease) .1s forwards; }
+.intro-arche .intro-cle { fill: var(--cire); stroke: none; transform-origin: 60px 9px; transform: scale(0); animation: intro-cle .5s var(--ease) .85s forwards; }
+.intro-marque { font: 400 clamp(46px, 8vw, 92px)/1 var(--t-titre); clip-path: inset(0 0 100% 0); transform: translateY(24px); animation: intro-nom .9s var(--ease) .35s forwards; }
+.intro-lieu { font: 500 14px/1.4 var(--t-texte); color: var(--cire); opacity: 0; animation: intro-fondu .6s ease .8s forwards; }
+@keyframes intro-trait { to { stroke-dashoffset: 0; } }
+@keyframes intro-cle { to { transform: scale(1); } }
+@keyframes intro-nom { to { clip-path: inset(0 0 -10% 0); transform: none; } }
+@keyframes intro-fondu { to { opacity: 1; } }
+@keyframes intro-leve { to { clip-path: inset(0 0 100% 0); visibility: hidden; } }
+.intro.vite { animation: intro-leve .5s cubic-bezier(.7, 0, .2, 1) forwards; }
+/* le titre de l'accueil arrive juste après le rideau */
+.js .ouv-texte > * { animation: entree .9s var(--ease) both; }
+.js .ouv-texte > :nth-child(2) { animation-delay: .08s; }
+.js .ouv-texte > :nth-child(3) { animation-delay: .16s; }
+.js .ouv-texte > :nth-child(4) { animation-delay: .24s; }
+.js:not(.intro-vue) .ouv-texte > * { animation-delay: 2.1s; }
+.js:not(.intro-vue) .ouv-texte > :nth-child(2) { animation-delay: 2.18s; }
+.js:not(.intro-vue) .ouv-texte > :nth-child(3) { animation-delay: 2.26s; }
+.js:not(.intro-vue) .ouv-texte > :nth-child(4) { animation-delay: 2.34s; }
+@keyframes entree { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Flux très léger sur les pages claires ---------- */
+.flux { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; mix-blend-mode: multiply; }
+
+/* ---------- Relief : les objets s'inclinent doucement sous la souris ---------- */
+[data-relief] { transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .6s var(--ease); will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  .intro, .flux { display: none; }
+  .js .ouv-texte > * { animation: none; }
+  [data-relief] { transform: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .js .montee { opacity: 1; transform: none; transition: none; }
-  .etape { transition: none; }
 }

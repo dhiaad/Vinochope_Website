@@ -3,15 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vinochope · Cave à vins, bar et scène à Perpignan</title>
-<meta name="description" content="Descendez à la cave : deux cents vins dont huit sur dix du Roussillon, un bar à vins avec tapas, une scène culturelle et la location de tireuses à bière. 26 rue Mathieu de Dombasle, Perpignan.">
-<meta name="theme-color" content="#3B1020">
+<title>Vinochope · La cave à vin, Perpignan</title>
+<meta name="description" content="La cave à vin de Perpignan : deux cents vins dont huit sur dix du Roussillon, un bar à vins avec tapas, une scène culturelle et la location de tireuses à bière. 26 rue Mathieu de Dombasle, Perpignan.">
+<meta name="theme-color" content="#220000">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gloock&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="media/raisin-lg.webp">
-<link rel="stylesheet" href="assets/cave.css?v=3">
-<link rel="stylesheet" href="assets/pages.css?v=3">
+<link rel="stylesheet" href="assets/cave.css?v=10">
+<link rel="stylesheet" href="assets/pages.css?v=10">
+<!--INTRO_TETE--><script>try{if(sessionStorage.getItem("vc-intro"))document.documentElement.classList.add("intro-vue")}catch(e){}</script><!--/INTRO_TETE-->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":["LiquorStore","BarOrPub"],"name":"Vinochope","telephone":"+33468899143",
 "address":{"@type":"PostalAddress","streetAddress":"26 rue Mathieu de Dombasle","postalCode":"66000","addressLocality":"Perpignan","addressCountry":"FR"},
@@ -33,83 +34,78 @@
   </div>
 </header>
 <div class="menu" id="menu" hidden>
-  <nav aria-label="Menu"><ol class="menu-liens"><li><a href="index.html" aria-current="page"><span class="code">00</span>Accueil</a></li><li><a href="la-cave.html"><span class="code">01</span>La cave et la carte</a></li><li><a href="evenements.html"><span class="code">02</span>Événements</a></li><li><a href="tireuses.html"><span class="code">03</span>Tireuses et fûts</a></li><li><a href="histoire.html"><span class="code">04</span>Notre histoire</a></li><li><a href="contact.html"><span class="code">05</span>Contact</a></li></ol></nav>
-  <div class="menu-infos">
-    <p class="repere">Vinochope</p>
-    <p>26 rue Mathieu de Dombasle<br>66000 Perpignan</p>
-    <p><a href="tel:+33468899143">04 68 89 91 43</a></p>
-    <p data-statut>Lun. 15 h – 21 h · mar.–sam. 10 h – 12 h 30 et 14 h 30 – 21 h</p>
+  <div class="menu-carte">
+    <div class="menu-cadre">
+      <p class="menu-maison">Vinochope</p>
+      <p class="menu-sous">La cave à vin, Perpignan</p>
+      <span class="menu-filet" aria-hidden="true"></span>
+      <nav aria-label="Menu"><ol class="menu-liens"><li><a href="index.html" aria-current="page"><span class="m-nom">Accueil</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">La maison</span></a></li><li><a href="la-cave.html"><span class="m-nom">La cave et la carte</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Vins, bières, planches</span></a></li><li><a href="evenements.html"><span class="m-nom">Événements</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Concerts, expositions</span></a></li><li><a href="tireuses.html"><span class="m-nom">Tireuses et fûts</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Dès 80 €</span></a></li><li><a href="histoire.html"><span class="m-nom">Notre histoire</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Depuis 2013</span></a></li><li><a href="contact.html"><span class="m-nom">Contact</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">04 68 89 91 43</span></a></li></ol></nav>
+      <span class="menu-filet" aria-hidden="true"></span>
+      <div class="menu-infos">
+        <p>26 rue Mathieu de Dombasle, 66000 Perpignan</p>
+        <p data-statut>Lun. 15 h – 21 h · mar.–sam. 10 h – 12 h 30 et 14 h 30 – 21 h</p>
+      </div>
+    </div>
   </div>
 </div>
 <!--/TETE-->
 
-<!-- ============ Jauge de profondeur ============ -->
-<aside class="jauge" aria-hidden="true">
-  <div class="jauge-lecture"><span data-prof>0,0 m</span><span data-temp>18 °C</span></div>
-  <div class="jauge-rail"><i class="jauge-bille"></i></div>
-</aside>
-
 <main id="contenu">
 
-  <!-- Niveau 0 · La rue : la porte voûtée s'ouvre et on entre -->
-  <section class="rue" id="rue" data-prof="0" data-ton="clair" aria-labelledby="t-rue">
-    <div class="rue-colle">
-      <div class="rue-texte">
-        <p class="repere">Niveau 0 · Rue Mathieu de Dombasle</p>
-        <h1 id="t-rue">Descendez<br>à la <span class="accent">cave.</span></h1>
-        <p class="chapo">Deux cents vins, un comptoir, une scène. Depuis 2013, à Perpignan.</p>
-        <p class="repere discret">Faites défiler pour descendre</p>
-      </div>
-      <div class="porte">
-        <div class="porte-voute">
-          <img class="porte-grappe" src="media/raisin-lg.webp" srcset="media/raisin-sm.webp 714w, media/raisin-lg.webp 1250w" sizes="40vw" alt="Une grappe de raisin rouge suspendue dans l'ombre" width="1250" height="1576">
+  <!-- Ouverture : la fenêtre voûtée s'approche, on passe dedans, la bouteille apparaît et le vin est servi.
+       Tout se joue dans un seul écran tenu : la page ne monte pas pendant l'animation. -->
+  <section class="ouverture" id="rue" data-ton="clair" aria-labelledby="t-rue">
+    <div class="ouv-colle">
+      <div class="ouv-texte">
+        <p class="repere">Cave, bar et scène depuis 2013</p>
+        <h1 id="t-rue"><span class="sans-coupure">La cave à vin,</span><br><span class="accent">Perpignan.</span></h1>
+        <p class="chapo">Deux cents vins, dont huit sur dix du Roussillon. Un comptoir pour les goûter, une scène pour les soirs de concert.</p>
+        <div class="actions">
+          <a class="etiquette" href="la-cave.html#carte">Voir la carte</a>
+          <a class="lien" href="contact.html#venir">Venir à la cave</a>
         </div>
-        <span class="cle" aria-hidden="true"></span>
       </div>
+      <div class="porte" aria-hidden="true">
+        <div class="porte-corps">
+          <span class="porte-tranche"></span><span class="porte-tranche"></span><span class="porte-tranche"></span><span class="porte-tranche"></span>
+          <div class="porte-voute">
+            <span class="porte-fond"></span>
+            <img class="porte-grappe" src="media/raisin-lg.webp" srcset="media/raisin-sm.webp 714w, media/raisin-lg.webp 1250w" sizes="40vw" alt="" width="1250" height="1576">
+            <span class="porte-ombre"></span>
+          </div>
+          <span class="cle"></span>
+        </div>
+      </div>
+      <canvas class="ouv-film" aria-hidden="true"></canvas>
+      <ol class="chapitres" aria-label="De la bouteille au verre">
+        <li class="chapitre-film" data-de=".36" data-a=".58"><h2>La bouteille</h2><p>Elle a attendu au frais, à l'abri de la lumière. Ce soir, c'est son tour.</p></li>
+        <li class="chapitre-film" data-de=".58" data-a=".8"><h2>Le service</h2><p>On l'ouvre au comptoir, devant vous, et on vous raconte d'où elle vient.</p></li>
+        <li class="chapitre-film" data-de=".8" data-a="1.02"><h2>Le verre</h2><p>Si elle vous plaît, vous repartez avec. Au prix de la cave.</p></li>
+      </ol>
     </div>
   </section>
 
-  <!-- Niveau −1 · La cave -->
-  <section class="niveau cave" id="cave" data-prof="3" data-ton="sombre" aria-labelledby="t-cave">
+  <!-- La cave -->
+  <section class="niveau cave" id="cave" data-ton="sombre" aria-labelledby="t-cave">
     <div class="enveloppe">
       <header class="niveau-tete">
-        <p class="repere">Niveau −1 · La cave</p>
+        <p class="repere">La cave</p>
         <h2 id="t-cave" class="montee">Deux cents vins.<br><span class="accent">Huit sur dix</span> du Roussillon.</h2>
         <p class="chapo montee">Chaque bouteille est goûtée avant d'entrer en rayon. On vous conseille selon le moment, le plat et le budget, des petits prix aux grandes cuvées.</p>
       </header>
       <ul class="casiers" aria-label="Ce que l'on trouve à la cave">
-        <li class="casier montee"><span class="code">Casier A</span><strong>200</strong><span class="quoi">vins</span><span class="note">dont 80 % du Roussillon</span></li>
-        <li class="casier montee"><span class="code">Casier B</span><strong>450</strong><span class="quoi">bières</span><span class="note">artisanales et brassées avec soin</span></li>
-        <li class="casier montee"><span class="code">Casier C</span><strong>150</strong><span class="quoi">spiritueux</span><span class="note">whiskys, rhums, gins, liqueurs</span></li>
+        <li class="casier montee"><strong>200</strong><span class="quoi">vins</span><span class="note">dont 80 % du Roussillon</span></li>
+        <li class="casier montee"><strong>450</strong><span class="quoi">bières</span><span class="note">artisanales et brassées avec soin</span></li>
+        <li class="casier montee"><strong>150</strong><span class="quoi">spiritueux</span><span class="note">whiskys, rhums, gins, liqueurs</span></li>
       </ul>
       <p class="montee suite"><a class="lien" href="la-cave.html">La carte du bar et les grandes bouteilles</a></p>
     </div>
   </section>
 
-  <!-- Niveau −2 · Du raisin au verre : la vidéo dans la voûte -->
-  <section class="niveau film" id="raisin" data-prof="5" data-ton="sombre" aria-labelledby="t-film">
-    <div class="film-colle">
-      <div class="film-texte">
-        <p class="repere">Niveau −2 · Du raisin au verre</p>
-        <h2 id="t-film" class="visuellement-cache">Du raisin au verre</h2>
-        <ol class="etapes">
-          <li class="etape" data-etape="0"><span class="code">01</span><h3>La vigne</h3><p>Des raisins du Roussillon, cueillis chez des vignerons que l'on connaît par leur prénom.</p></li>
-          <li class="etape" data-etape="1"><span class="code">02</span><h3>La bouteille</h3><p>Elle descend à la cave, au frais, à l'abri de la lumière. Elle attend son moment.</p></li>
-          <li class="etape" data-etape="2"><span class="code">03</span><h3>Le verre</h3><p>On l'ouvre au comptoir, on vous la sert. Si elle vous plaît, vous repartez avec.</p></li>
-        </ol>
-      </div>
-      <div class="voute-film">
-        <canvas class="film-toile" aria-hidden="true"></canvas>
-        <img class="film-grappe" src="media/raisin-sm.webp" alt="" width="714" height="900" aria-hidden="true">
-        <span class="cle" aria-hidden="true"></span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Niveau −3 · Le bar, à la bougie -->
-  <section class="niveau bar" id="bar" data-prof="7" data-ton="sombre" aria-labelledby="t-bar">
+  <!-- Le bar, à la bougie -->
+  <section class="niveau bar" id="bar" data-ton="sombre" aria-labelledby="t-bar">
     <div class="enveloppe">
-      <p class="repere">Niveau −3 · Le bar</p>
+      <p class="repere">Le bar</p>
       <h2 id="t-bar" class="montee">Au verre, au <span class="accent">comptoir</span>,<br>avec des tapas.</h2>
       <div class="bar-grille">
         <p class="chapo montee">Une large part des références de la cave se boit sur place. On ouvre, on goûte, on discute. Un cadre chaleureux où l'on vient seul, à deux ou à dix.</p>
@@ -123,10 +119,10 @@
     <div class="bougie" aria-hidden="true"></div>
   </section>
 
-  <!-- Niveau −4 · La scène : le registre -->
-  <section class="niveau scene" id="scene" data-prof="9" data-ton="clair" aria-labelledby="t-scene">
+  <!-- La scène : le registre -->
+  <section class="niveau scene" id="scene" data-ton="clair" aria-labelledby="t-scene">
     <div class="enveloppe">
-      <p class="repere">Niveau −4 · La scène</p>
+      <p class="repere">La scène</p>
       <h2 id="t-scene" class="montee">On sert aussi<br>de la <span class="accent">culture.</span></h2>
       <p class="chapo montee">Quatre cents mètres carrés, une programmation renouvelée chaque trimestre.</p>
       <table class="registre montee">
@@ -144,10 +140,10 @@
   </section>
 
   <!-- Niveau −5 · Les tireuses -->
-  <section class="niveau tireuses" id="tireuses" data-prof="11" data-ton="sombre" aria-labelledby="t-tir">
+  <section class="niveau tireuses" id="tireuses" data-ton="sombre" aria-labelledby="t-tir">
     <div class="enveloppe tir-grille">
       <div>
-        <p class="repere">Niveau −5 · Location de tireuses</p>
+        <p class="repere">Location de tireuses</p>
         <h2 id="t-tir" class="montee">Une tireuse<br>pour votre <span class="accent">fête.</span></h2>
         <p class="chapo montee">Mariage, anniversaire, association. On vous conseille les fûts, on livre et on installe si vous le souhaitez, puis on reprend le matériel.</p>
         <ul class="options montee">
@@ -161,8 +157,8 @@
           <a class="lien" href="tel:+33468899143">04 68 89 91 43</a>
         </div>
       </div>
-      <div class="tarif montee" aria-label="Tarifs">
-        <span class="cachet">Tireuse<br>offerte</span>
+      <div class="tarif montee" data-relief aria-label="Tarifs">
+        <p class="cachet">Tireuse offerte</p>
         <p class="tarif-prix"><span>dès</span> 80 €</p>
         <p class="tarif-quoi">le fût de 30 litres</p>
         <p class="tarif-demi">soit 0,67 € le demi de 25 cl</p>
@@ -171,9 +167,9 @@
   </section>
 
   <!-- Remonter · Venir -->
-  <section class="venir" id="venir" data-prof="0" data-ton="clair" aria-labelledby="t-venir">
+  <section class="venir" id="venir" data-ton="clair" aria-labelledby="t-venir">
     <div class="enveloppe">
-      <p class="repere">Retour à la surface</p>
+      <p class="repere">Venir</p>
       <h2 id="t-venir" class="montee">Il ne manque<br>plus que <span class="accent">vous.</span></h2>
       <div class="venir-grille montee">
         <div>
@@ -253,9 +249,13 @@
   <p class="seuil-pied">L'abus d'alcool est dangereux pour la santé.</p>
 </div>
 
-<div class="grain" aria-hidden="true"></div>
+<!--INTRO--><div class="intro" aria-hidden="true">
+  <svg class="intro-arche" viewBox="0 0 120 160"><path d="M8 156V64a52 52 0 0 1 104 0v92"/><path class="intro-cle" d="M60 0l9 9-9 9-9-9z"/></svg>
+  <p class="intro-marque">Vinochope</p>
+  <p class="intro-lieu">La cave à vin, Perpignan</p>
+</div><!--/INTRO-->
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="assets/commun.js?v=3"></script>
-<script src="assets/cave.js?v=3"></script>
+<script src="assets/commun.js?v=10"></script>
+<script src="assets/cave.js?v=10"></script>
 </body>
 </html>

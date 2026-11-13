@@ -3,7 +3,7 @@
 <section class="entete clair" data-ton="clair" aria-labelledby="t-page">
   <div class="enveloppe entete-grille">
     <div>
-      <p class="repere">Niveau −1 · La cave et le bar</p>
+      <p class="repere">La cave et le bar</p>
       <h1 id="t-page">Ce qu'on <span class="accent">sert</span>,<br>ce qu'on <span class="accent">vend</span>.</h1>
       <p class="chapo">Au bar, la carte du jour. En cave, deux cents vins dont huit sur dix du Roussillon, quatre cent cinquante bières, deux cents bières craft et cent cinquante spiritueux.</p>
       <nav class="saut" aria-label="Sur cette page">
@@ -30,6 +30,12 @@
       <p class="petit-mono">Prix TTC, service compris</p>
     </div>
     <div class="carte-grille">
+      <div class="carte-papier">
+        <div class="carte-papier-tete">
+          <p class="menu-maison">Vinochope</p>
+          <p class="menu-sous">La carte du bar · prix TTC, service compris</p>
+          <span class="menu-filet" aria-hidden="true"></span>
+        </div>
       <div class="carte-cols">
         <div class="rubrique">
           <h3>Vins au verre <small>12 cl</small></h3>
@@ -73,8 +79,9 @@
           <div class="plat"><b>Olives et chips artisanales</b><span>3,50 €</span></div>
         </div>
       </div>
-      <aside class="qr" aria-labelledby="qr-t">
-        <p class="repere" style="justify-content:center;margin-bottom:12px">Sur votre téléphone</p>
+      </div>
+      <aside class="qr" data-relief aria-labelledby="qr-t">
+        <p class="repere" style="margin-bottom:12px">Sur votre téléphone</p>
         <h3 id="qr-t">Scannez,<br>la carte s'ouvre.</h3>
         <img src="media/qr-carte.svg" alt="QR code qui ouvre la carte du bar Vinochope" width="330" height="330">
         <p>Visez le code avec l'appareil photo de votre téléphone.</p>
@@ -109,10 +116,10 @@
     <p class="repere">Le conseil en plus</p>
     <h2 id="services-t" class="montee">Ce que la cave<br>fait <span class="accent">pour vous</span>.</h2>
     <div class="services montee" style="margin-top:56px">
-      <div><span class="code">01</span><h3>Coffrets cadeaux</h3><p>On compose un coffret selon le budget et les goûts de la personne à gâter.</p></div>
-      <div><span class="code">02</span><h3>Recherche de millésimes</h3><p>Une année de naissance, de mariage ? On cherche la bouteille pour vous.</p></div>
-      <div><span class="code">03</span><h3>Verrerie et accessoires</h3><p>Verres, carafes, tire-bouchons : tout pour bien servir à la maison.</p></div>
-      <div><span class="code">04</span><h3>Soirées dégustation</h3><p>Spiritueux, vins, bières : des soirées découverte en petit comité. <a href="evenements.html" style="color:var(--cire)">Voir les dates</a></p></div>
+      <div><h3>Coffrets cadeaux</h3><p>On compose un coffret selon le budget et les goûts de la personne à gâter.</p></div>
+      <div><h3>Recherche de millésimes</h3><p>Une année de naissance, de mariage ? On cherche la bouteille pour vous.</p></div>
+      <div><h3>Verrerie et accessoires</h3><p>Verres, carafes, tire-bouchons : tout pour bien servir à la maison.</p></div>
+      <div><h3>Soirées dégustation</h3><p>Spiritueux, vins, bières : des soirées découverte en petit comité. <a href="evenements.html" style="color:var(--cire)">Voir les dates</a></p></div>
     </div>
     <div class="chiffres montee">
       <div><strong>200</strong><span>vins, dont 80 % du Roussillon</span></div>
