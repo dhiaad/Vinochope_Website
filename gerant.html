@@ -4,17 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Espace gérant · Vinochope</title>
-<meta name="description" content="Gestion des événements, des fûts, des options de location et de la cave.">
+<meta name="description" content="Gestion du site Vinochope : événements, carte, prix, cave, tireuses, infos pratiques et demandes à Qamar.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#220000">
+<link rel="icon" href="media/logo/symbole.svg" type="image/svg+xml">
 <meta property="og:title" content="Espace gérant · Vinochope">
-<meta property="og:description" content="Gestion des événements, des fûts, des options de location et de la cave.">
+<meta property="og:description" content="Gestion du site Vinochope : événements, carte, prix, cave, tireuses, infos pratiques et demandes à Qamar.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/cave.css?v=10">
-<link rel="stylesheet" href="assets/pages.css?v=10">
+<link rel="stylesheet" href="assets/cave.css?v=29">
+<link rel="stylesheet" href="assets/pages.css?v=29">
 <script>try{if(sessionStorage.getItem("vc-intro"))document.documentElement.classList.add("intro-vue")}catch(e){}</script>
 </head>
 <body class="page-gerant">
@@ -22,20 +23,21 @@
 
 <!--TETE-->
 <header class="tete" data-ton="clair">
-  <a class="marque" href="index.html" aria-label="Vinochope, accueil">Vinochope<span class="sceau" aria-hidden="true"></span></a>
+  <a class="marque" href="index.html" aria-label="Vinochope, accueil"><svg class="symbole" viewBox="18 10 204 184" aria-hidden="true" focusable="false"><path class="s-biere" d="M41.8 125 L45.6 187 H78.4 L82.2 125 Z"/><path class="s-mousse" d="M41 116 Q41 106 51 106 Q55 98 64 100 Q71 95 77 102 Q84 103 83 116 L82.2 126 H41.8 Z"/><path class="s-trait" d="M41.8 126 L45.6 188 H78.4 L82.2 126"/><path class="s-bouteille" d="M98 183 Q98 188 103 188 H137 Q142 188 142 183 V98 C142 81 127.5 77 127.5 64 V26 H129.5 V15 H110.5 V26 H112.5 V64 C112.5 77 98 81 98 98 Z"/><path class="s-vin" d="M160.6 122 C163 139 171 149 184 149 C197 149 205 139 207.4 122 Z"/><path class="s-trait" d="M159 94 C157 126 166 149 184 149 C202 149 211 126 209 94 Z"/><path class="s-trait" d="M184 149 V185 M168 186 H200 M22 190.5 H218"/></svg><span class="marque-nom">Vinochope</span></a>
   <nav class="nav" aria-label="Navigation principale"><a href="la-cave.html">La cave</a><a href="evenements.html">Événements</a><a href="tireuses.html">Tireuses</a><a href="histoire.html">Histoire</a><a href="contact.html">Contact</a></nav>
   <div class="tete-droite">
-    <a class="etiquette petite" href="la-cave.html#carte">La carte</a>
+    <a class="etiquette bouton-carte" href="carte.html">La carte</a>
     <button type="button" class="menu-btn" aria-expanded="false" aria-controls="menu">Menu</button>
   </div>
 </header>
-<div class="menu" id="menu" hidden>
+<div class="menu" id="menu" data-lenis-prevent hidden>
   <div class="menu-carte">
     <div class="menu-cadre">
+      <svg class="symbole menu-symbole" viewBox="18 10 204 184" aria-hidden="true" focusable="false"><path class="s-biere" d="M41.8 125 L45.6 187 H78.4 L82.2 125 Z"/><path class="s-mousse" d="M41 116 Q41 106 51 106 Q55 98 64 100 Q71 95 77 102 Q84 103 83 116 L82.2 126 H41.8 Z"/><path class="s-trait" d="M41.8 126 L45.6 188 H78.4 L82.2 126"/><path class="s-bouteille" d="M98 183 Q98 188 103 188 H137 Q142 188 142 183 V98 C142 81 127.5 77 127.5 64 V26 H129.5 V15 H110.5 V26 H112.5 V64 C112.5 77 98 81 98 98 Z"/><path class="s-vin" d="M160.6 122 C163 139 171 149 184 149 C197 149 205 139 207.4 122 Z"/><path class="s-trait" d="M159 94 C157 126 166 149 184 149 C202 149 211 126 209 94 Z"/><path class="s-trait" d="M184 149 V185 M168 186 H200 M22 190.5 H218"/></svg>
       <p class="menu-maison">Vinochope</p>
-      <p class="menu-sous">La cave à vin, Perpignan</p>
+      <p class="menu-sous">Bar · cave · location de tireuses</p>
       <span class="menu-filet" aria-hidden="true"></span>
-      <nav aria-label="Menu"><ol class="menu-liens"><li><a href="index.html"><span class="m-nom">Accueil</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">La maison</span></a></li><li><a href="la-cave.html"><span class="m-nom">La cave et la carte</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Vins, bières, planches</span></a></li><li><a href="evenements.html"><span class="m-nom">Événements</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Concerts, expositions</span></a></li><li><a href="tireuses.html"><span class="m-nom">Tireuses et fûts</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Dès 80 €</span></a></li><li><a href="histoire.html"><span class="m-nom">Notre histoire</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Depuis 2013</span></a></li><li><a href="contact.html"><span class="m-nom">Contact</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">04 68 89 91 43</span></a></li></ol></nav>
+      <nav aria-label="Menu"><ol class="menu-liens"><li><a href="index.html"><span class="m-nom">Accueil</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">La maison</span></a></li><li><a href="carte.html"><span class="m-nom">La carte du bar</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Au verre, à grignoter</span></a></li><li><a href="la-cave.html"><span class="m-nom">La cave</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Vins, bières, spiritueux</span></a></li><li><a href="evenements.html"><span class="m-nom">Événements</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Concerts, expositions</span></a></li><li><a href="tireuses.html"><span class="m-nom">Tireuses et fûts</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Dès 80 €</span></a></li><li><a href="histoire.html"><span class="m-nom">Notre histoire</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Depuis 2013</span></a></li><li><a href="contact.html"><span class="m-nom">Contact</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">04 68 89 91 43</span></a></li></ol></nav>
       <span class="menu-filet" aria-hidden="true"></span>
       <div class="menu-infos">
         <p>26 rue Mathieu de Dombasle, 66000 Perpignan</p>
@@ -49,28 +51,54 @@
 <main id="contenu">
 <section class="gerant clair" data-ton="clair" aria-labelledby="t-page">
   <div class="enveloppe">
-    <p class="repere">Espace gérant</p>
-    <h1 id="t-page" style="font-size:clamp(44px,6vw,84px);line-height:.95">Gérer le <span class="accent">site</span>.</h1>
-    <p class="avertissement"><b>Version de démonstration.</b> Vos modifications s'enregistrent dans ce navigateur et s'affichent tout de suite sur le site, sur cet appareil. Pour les publier pour tout le monde, utilisez « Exporter » et transmettez le fichier, ou branchez cet espace sur un hébergement avec comptes (prévu à la mise en ligne).</p>
-
-    <div class="onglets" role="tablist" aria-label="Ce que vous gérez" data-onglets>
-      <button type="button" class="filtre" role="tab" aria-selected="true" aria-pressed="true" data-onglet="evenements">Événements</button>
-      <button type="button" class="filtre" role="tab" aria-selected="false" aria-pressed="false" data-onglet="futs">Fûts</button>
-      <button type="button" class="filtre" role="tab" aria-selected="false" aria-pressed="false" data-onglet="options">Options de location</button>
-      <button type="button" class="filtre" role="tab" aria-selected="false" aria-pressed="false" data-onglet="vins">Grandes bouteilles</button>
+    <div class="g-haut">
+      <div>
+        <p class="repere">Espace gérant</p>
+        <h1 id="t-page">Gérer le site.</h1>
+        <p class="g-intro">Tout ce que vous changez ici apparaît sur le site. Choisissez ce que vous voulez modifier.</p>
+      </div>
+      <div class="g-connexion" data-connexion aria-live="polite"></div>
     </div>
 
-    <div class="g-grille">
+    <nav class="onglets" aria-label="Ce que vous gérez" data-onglets>
+      <button type="button" class="filtre" aria-pressed="true" data-onglet="evenements">Événements</button>
+      <button type="button" class="filtre" aria-pressed="false" data-onglet="carte">La carte et les prix</button>
+      <button type="button" class="filtre" aria-pressed="false" data-onglet="vins">Grandes bouteilles</button>
+      <button type="button" class="filtre" aria-pressed="false" data-onglet="futs">Fûts</button>
+      <button type="button" class="filtre" aria-pressed="false" data-onglet="options">Options de location</button>
+      <button type="button" class="filtre" aria-pressed="false" data-onglet="infos">Horaires et contact</button>
+      <button type="button" class="filtre g-onglet-qamar" aria-pressed="false" data-onglet="demandes">Demande à Qamar</button>
+    </nav>
+
+    <p class="g-etat" data-etat aria-live="polite"></p>
+
+    <!-- Les listes : événements, bouteilles, fûts, options -->
+    <div class="g-grille" data-panneau="liste">
       <div>
         <div class="g-outils">
           <button type="button" class="etiquette" data-nouveau>Ajouter</button>
-          <button type="button" class="etiquette ligne" data-exporter>Exporter</button>
-          <label class="etiquette ligne" style="cursor:pointer">Importer<input type="file" accept="application/json,.json" data-importer hidden></label>
+          <button type="button" class="etiquette ligne" data-exporter>Sauvegarder un fichier</button>
+          <label class="etiquette ligne" style="cursor:pointer">Reprendre un fichier<input type="file" accept="application/json,.json" data-importer hidden></label>
         </div>
         <ul class="g-liste" data-liste aria-label="Éléments enregistrés"></ul>
-        <p style="margin-top:14px"><button type="button" class="lien" data-reinit>Revenir à la version du site</button></p>
+        <p style="margin-top:14px"><button type="button" class="lien" data-reinit>Annuler mes changements non publiés</button></p>
       </div>
       <form class="g-form formulaire" data-form novalidate aria-labelledby="g-form-t"></form>
+    </div>
+
+    <!-- La carte du bar -->
+    <form class="g-panneau formulaire" data-panneau="carte" hidden novalidate aria-label="La carte du bar"></form>
+
+    <!-- Horaires et contact -->
+    <form class="g-panneau formulaire" data-panneau="infos" hidden novalidate aria-label="Horaires et contact"></form>
+
+    <!-- Demandes à Qamar -->
+    <div class="g-panneau g-demandes" data-panneau="demandes" hidden>
+      <form class="g-form formulaire" data-demande novalidate aria-labelledby="g-dem-t"></form>
+      <div class="g-suivi">
+        <h2>Vos demandes</h2>
+        <ul class="g-fils" data-fils></ul>
+      </div>
     </div>
   </div>
 </section>
@@ -87,7 +115,7 @@
     <div>
       <h2 class="pied-t">Horaires</h2>
       <p data-statut>Lundi 15 h – 21 h</p>
-      <p class="pied-petit">Lundi 15 h – 21 h<br>Mardi au samedi 10 h – 12 h 30, 14 h 30 – 21 h<br>Plus tard les soirs d'événement</p>
+      <p class="pied-petit" data-info="horaires">Lundi 15 h – 21 h<br>Mardi au samedi 10 h – 12 h 30, 14 h 30 – 21 h<br>Plus tard les soirs d'événement</p>
     </div>
     <div>
       <h2 class="pied-t">Nous joindre</h2>
@@ -97,7 +125,8 @@
     <nav aria-label="Plan du site">
       <h2 class="pied-t">Le site</h2>
       <ul class="pied-liens">
-        <li><a href="la-cave.html">La cave et la carte</a></li>
+        <li><a href="carte.html">La carte du bar</a></li>
+        <li><a href="la-cave.html">La cave</a></li>
         <li><a href="evenements.html">Événements</a></li>
         <li><a href="tireuses.html">Tireuses et fûts</a></li>
         <li><a href="histoire.html">Notre histoire</a></li>
@@ -105,7 +134,7 @@
       </ul>
     </nav>
   </div>
-  <p class="pied-marque" aria-hidden="true">Vinochope</p>
+  <p class="pied-marque" aria-hidden="true"><svg class="symbole pied-symbole" viewBox="18 10 204 184" aria-hidden="true" focusable="false"><path class="s-biere" d="M41.8 125 L45.6 187 H78.4 L82.2 125 Z"/><path class="s-mousse" d="M41 116 Q41 106 51 106 Q55 98 64 100 Q71 95 77 102 Q84 103 83 116 L82.2 126 H41.8 Z"/><path class="s-trait" d="M41.8 126 L45.6 188 H78.4 L82.2 126"/><path class="s-bouteille" d="M98 183 Q98 188 103 188 H137 Q142 188 142 183 V98 C142 81 127.5 77 127.5 64 V26 H129.5 V15 H110.5 V26 H112.5 V64 C112.5 77 98 81 98 98 Z"/><path class="s-vin" d="M160.6 122 C163 139 171 149 184 149 C197 149 205 139 207.4 122 Z"/><path class="s-trait" d="M159 94 C157 126 166 149 184 149 C202 149 211 126 209 94 Z"/><path class="s-trait" d="M184 149 V185 M168 186 H200 M22 190.5 H218"/></svg><span>Vinochope</span></p>
   <div class="pied-bas">
     <p>L'abus d'alcool est dangereux pour la santé, à consommer avec modération.</p>
     <p>© <span data-annee>2026</span> Vinochope · <a href="gerant.html">Espace gérant</a></p>
@@ -115,11 +144,11 @@
 
 
 <div class="intro" aria-hidden="true">
-  <svg class="intro-arche" viewBox="0 0 120 160"><path d="M8 156V64a52 52 0 0 1 104 0v92"/><path class="intro-cle" d="M60 0l9 9-9 9-9-9z"/></svg>
+  <svg class="symbole intro-symbole" viewBox="18 10 204 184" aria-hidden="true" focusable="false"><path class="s-biere" d="M41.8 125 L45.6 187 H78.4 L82.2 125 Z"/><path class="s-mousse" d="M41 116 Q41 106 51 106 Q55 98 64 100 Q71 95 77 102 Q84 103 83 116 L82.2 126 H41.8 Z"/><path class="s-trait" d="M41.8 126 L45.6 188 H78.4 L82.2 126"/><path class="s-bouteille" d="M98 183 Q98 188 103 188 H137 Q142 188 142 183 V98 C142 81 127.5 77 127.5 64 V26 H129.5 V15 H110.5 V26 H112.5 V64 C112.5 77 98 81 98 98 Z"/><path class="s-vin" d="M160.6 122 C163 139 171 149 184 149 C197 149 205 139 207.4 122 Z"/><path class="s-trait" d="M159 94 C157 126 166 149 184 149 C202 149 211 126 209 94 Z"/><path class="s-trait" d="M184 149 V185 M168 186 H200 M22 190.5 H218"/></svg>
   <p class="intro-marque">Vinochope</p>
   <p class="intro-lieu">La cave à vin, Perpignan</p>
 </div>
-<script src="assets/commun.js?v=10"></script>
-<script src="assets/gerant.js?v=10"></script>
+<script src="assets/commun.js?v=29"></script>
+<script src="assets/gerant.js?v=29"></script>
 </body>
 </html>

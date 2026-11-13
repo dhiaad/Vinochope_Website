@@ -1,29 +1,55 @@
-<!-- {"titre": "Espace gérant · Vinochope", "description": "Gestion des événements, des fûts, des options de location et de la cave.", "scripts": ["gerant.js"], "sans_seuil": true, "sans_lenis": true, "noindex": true, "classe": "page-gerant"} -->
+<!-- {"titre": "Espace gérant · Vinochope", "description": "Gestion du site Vinochope : événements, carte, prix, cave, tireuses, infos pratiques et demandes à Qamar.", "scripts": ["gerant.js"], "sans_seuil": true, "sans_lenis": true, "noindex": true, "classe": "page-gerant"} -->
 
 <section class="gerant clair" data-ton="clair" aria-labelledby="t-page">
   <div class="enveloppe">
-    <p class="repere">Espace gérant</p>
-    <h1 id="t-page" style="font-size:clamp(44px,6vw,84px);line-height:.95">Gérer le <span class="accent">site</span>.</h1>
-    <p class="avertissement"><b>Version de démonstration.</b> Vos modifications s'enregistrent dans ce navigateur et s'affichent tout de suite sur le site, sur cet appareil. Pour les publier pour tout le monde, utilisez « Exporter » et transmettez le fichier, ou branchez cet espace sur un hébergement avec comptes (prévu à la mise en ligne).</p>
-
-    <div class="onglets" role="tablist" aria-label="Ce que vous gérez" data-onglets>
-      <button type="button" class="filtre" role="tab" aria-selected="true" aria-pressed="true" data-onglet="evenements">Événements</button>
-      <button type="button" class="filtre" role="tab" aria-selected="false" aria-pressed="false" data-onglet="futs">Fûts</button>
-      <button type="button" class="filtre" role="tab" aria-selected="false" aria-pressed="false" data-onglet="options">Options de location</button>
-      <button type="button" class="filtre" role="tab" aria-selected="false" aria-pressed="false" data-onglet="vins">Grandes bouteilles</button>
+    <div class="g-haut">
+      <div>
+        <p class="repere">Espace gérant</p>
+        <h1 id="t-page">Gérer le site.</h1>
+        <p class="g-intro">Tout ce que vous changez ici apparaît sur le site. Choisissez ce que vous voulez modifier.</p>
+      </div>
+      <div class="g-connexion" data-connexion aria-live="polite"></div>
     </div>
 
-    <div class="g-grille">
+    <nav class="onglets" aria-label="Ce que vous gérez" data-onglets>
+      <button type="button" class="filtre" aria-pressed="true" data-onglet="evenements">Événements</button>
+      <button type="button" class="filtre" aria-pressed="false" data-onglet="carte">La carte et les prix</button>
+      <button type="button" class="filtre" aria-pressed="false" data-onglet="vins">Grandes bouteilles</button>
+      <button type="button" class="filtre" aria-pressed="false" data-onglet="futs">Fûts</button>
+      <button type="button" class="filtre" aria-pressed="false" data-onglet="options">Options de location</button>
+      <button type="button" class="filtre" aria-pressed="false" data-onglet="infos">Horaires et contact</button>
+      <button type="button" class="filtre g-onglet-qamar" aria-pressed="false" data-onglet="demandes">Demande à Qamar</button>
+    </nav>
+
+    <p class="g-etat" data-etat aria-live="polite"></p>
+
+    <!-- Les listes : événements, bouteilles, fûts, options -->
+    <div class="g-grille" data-panneau="liste">
       <div>
         <div class="g-outils">
           <button type="button" class="etiquette" data-nouveau>Ajouter</button>
-          <button type="button" class="etiquette ligne" data-exporter>Exporter</button>
-          <label class="etiquette ligne" style="cursor:pointer">Importer<input type="file" accept="application/json,.json" data-importer hidden></label>
+          <button type="button" class="etiquette ligne" data-exporter>Sauvegarder un fichier</button>
+          <label class="etiquette ligne" style="cursor:pointer">Reprendre un fichier<input type="file" accept="application/json,.json" data-importer hidden></label>
         </div>
         <ul class="g-liste" data-liste aria-label="Éléments enregistrés"></ul>
-        <p style="margin-top:14px"><button type="button" class="lien" data-reinit>Revenir à la version du site</button></p>
+        <p style="margin-top:14px"><button type="button" class="lien" data-reinit>Annuler mes changements non publiés</button></p>
       </div>
       <form class="g-form formulaire" data-form novalidate aria-labelledby="g-form-t"></form>
+    </div>
+
+    <!-- La carte du bar -->
+    <form class="g-panneau formulaire" data-panneau="carte" hidden novalidate aria-label="La carte du bar"></form>
+
+    <!-- Horaires et contact -->
+    <form class="g-panneau formulaire" data-panneau="infos" hidden novalidate aria-label="Horaires et contact"></form>
+
+    <!-- Demandes à Qamar -->
+    <div class="g-panneau g-demandes" data-panneau="demandes" hidden>
+      <form class="g-form formulaire" data-demande novalidate aria-labelledby="g-dem-t"></form>
+      <div class="g-suivi">
+        <h2>Vos demandes</h2>
+        <ul class="g-fils" data-fils></ul>
+      </div>
     </div>
   </div>
 </section>

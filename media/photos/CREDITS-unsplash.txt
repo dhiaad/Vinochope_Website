@@ -31,3 +31,13 @@ t6 1785744563469-9c1223bf2ebb
 f1 1761110429384-0678d7015545
 f2 1692311358804-34b31f6ef43c
 f3 1629567971554-0cc0883dd57b
+v1 1662624335971-57960e9e669f  Beatrice Zinetti (@beatricezinetti) · unsplash.com/photos/7Bk2QKqwQRY · accueil, vignes au coucher du soleil
+a1 1544776527-68e63addedf7  Wolfgang Hasselmann (@wolfgang_hasselmann) · unsplash.com/photos/GPwuH2q9mcs · accueil, bouteille et verre de rouge à l'automne
+s1 1724398931548-1738e808c640  Gary Walker-Jones (@gwj72) · unsplash.com/photos/DIfl5GDtOD8 · accueil, section la cave
+s2 1768497262022-2afdf6b1266f  phoebe lynch (@siorraidh) · unsplash.com/photos/H4XpA8JSYuQ · accueil, section le bar
+s3 1779551247281-dbfdfb8fe967  Jonathan Borba (@jonathanborba) · unsplash.com/photos/lnRyUhIO3H4 · accueil, section la scène
+s4 1535958636474-b021ee887b13  BENCE BOROS (@benceboros) · unsplash.com/photos/8T5UAV6KkZA · accueil, section tireuses (même photo que t2)
+
+Photo d'ouverture (ouverture-lg.webp, ouverture-sm.webp)
+  Anastasia Koren (@photosmiile) sur Pexels, photo 9674562, licence Pexels (usage libre, sans attribution obligatoire)
+  https://www.pexels.com/photo/9674562/

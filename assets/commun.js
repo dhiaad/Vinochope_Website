@@ -58,8 +58,7 @@
     var cs = sous && sous.getAttribute("data-fond-tete") !== "non" ? getComputedStyle(sous) : null;
     var fond = cs ? cs.backgroundColor : "", img = cs ? cs.backgroundImage : "";
     var actif = y > 80 && fond && fond !== "rgba(0, 0, 0, 0)";
-    tete.style.backgroundColor = actif ? fond : "";
-    tete.setAttribute("data-fond", actif ? (img.indexOf("svg") > -1 ? "vert" : "") : "");
+    // la barre du haut reste rouge sur tout le site (essai)
   }
   VC.majTete = majTete;
   addEventListener("scroll", function () { if (!tic) { tic = true; requestAnimationFrame(majTete); } }, { passive: true });
@@ -111,6 +110,7 @@
   /* ---------- Ouvert / fermé (heure de Perpignan) ---------- */
   var HOURS = { 0: [], 1: [[900, 1260]], 2: [[600, 750], [870, 1260]], 3: [[600, 750], [870, 1260]], 4: [[600, 750], [870, 1260]], 5: [[600, 750], [870, 1260]], 6: [[600, 750], [870, 1260]] };
   var DAYS = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
+  function minutes(t) { var p = String(t || "").split(":"); return (+p[0] || 0) * 60 + (+p[1] || 0); }
   function hm(m) { var h = Math.floor(m / 60), mi = m % 60; return h + " h" + (mi ? " " + (mi < 10 ? "0" : "") + mi : ""); }
   function parisNow() {
     try {
@@ -131,7 +131,11 @@
     return { open: false, text: "Fermé" };
   }
   var st = status(), now = parisNow();
-  document.querySelectorAll("[data-statut]").forEach(function (el) { el.textContent = st.text; el.classList.add("statut"); el.classList.toggle("ouvert", st.open); });
+  function majStatut() {
+    st = status();
+    document.querySelectorAll("[data-statut]").forEach(function (el) { el.textContent = st.text; el.classList.add("statut"); el.classList.toggle("ouvert", st.open); });
+  }
+  majStatut();
   document.querySelectorAll("tr[data-jours]").forEach(function (tr) {
     if (tr.getAttribute("data-jours").split(",").indexOf(String(now.d)) > -1) { tr.classList.add("aujourdhui"); tr.setAttribute("aria-current", "date"); }
   });
@@ -140,11 +144,102 @@
   /* ---------- Données gérables depuis l'espace gérant ----------
      Le site lit d'abord data/<nom>.json ; si le gérant a modifié la liste sur cet appareil, c'est sa version qui s'affiche. */
   VC.cleGerant = function (nom) { return "vc-gerant-" + nom; };
-  VC.donnees = function (nom) {
-    var local = store.get(VC.cleGerant(nom));
-    if (local) { try { return Promise.resolve(JSON.parse(local)); } catch (e) {} }
-    return fetch("data/" + nom + ".json", { cache: "no-cache" }).then(function (r) { return r.json(); });
+  VC.lireLocal = function (nom) {
+    var local = store.get(VC.cleGerant(nom)); if (!local) return null;
+    try {
+      var o = JSON.parse(local);
+      if (o && o.v === 2) {
+        // publiée en ligne : on garde la copie locale le temps que le site se mette à jour (quelques minutes)
+        if (o.publie && Date.now() - o.t > 15 * 60 * 1000) { store.del(VC.cleGerant(nom)); return null; }
+        return o;
+      }
+      return { v: 2, t: 0, publie: false, data: o };
+    } catch (e) { return null; }
   };
+  VC.ecrireLocal = function (nom, data, publie) {
+    return store.set(VC.cleGerant(nom), JSON.stringify({ v: 2, t: Date.now(), publie: !!publie, data: data }));
+  };
+  VC.donnees = function (nom) {
+    var l = VC.lireLocal(nom);
+    if (l) return Promise.resolve(l.data);
+    return fetch("data/" + nom + ".json", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+  };
+
+  /* ---------- La carte du bar : dessinée à partir de data/carte.json (page carte, page cave) ---------- */
+  VC.ancre = function (s) { return String(s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); };
+  VC.carteHTML = function (c) {
+    var e = VC.echapper;
+    return (c.rubriques || []).map(function (r) {
+      return '<div class="rubrique" id="r-' + VC.ancre(r.titre) + '"><h3>' + e(r.titre) + (r.precision ? " <small>" + e(r.precision) + "</small>" : "") + "</h3>" +
+        (r.plats || []).map(function (p) {
+          return '<div class="plat"><b>' + e(p.nom) + "</b><span>" + e(p.prix) + "</span>" + (p.detail ? "<p>" + e(p.detail) + "</p>" : "") + "</div>";
+        }).join("") + "</div>";
+    }).join("");
+  };
+  document.querySelectorAll("[data-carte]").forEach(function (zone) {
+    VC.donnees("carte").then(function (c) {
+      zone.innerHTML = VC.carteHTML(c);
+      var nav = document.querySelector("[data-carte-nav]");
+      if (nav) nav.innerHTML = (c.rubriques || []).map(function (r) { return '<a href="#r-' + VC.ancre(r.titre) + '">' + VC.echapper(r.titre) + "</a>"; }).join("");
+      var sous = document.querySelector("[data-carte-sous]"); if (sous && c.sous_titre) sous.textContent = c.sous_titre;
+      var note = document.querySelector("[data-carte-note]"); if (note && c.note) note.textContent = c.note;
+    }).catch(function () {});
+  });
+
+  /* ---------- Infos pratiques : téléphone, adresse, horaires, annonce (data/infos.json) ---------- */
+  var JOURS_ORDRE = [1, 2, 3, 4, 5, 6, 0], JOURS_NOMS = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+  function plage(p) { return hm(minutes(p[0])) + " – " + hm(minutes(p[1])); }
+  VC.groupesHoraires = function (h) {
+    var g = [];
+    JOURS_ORDRE.forEach(function (d) {
+      var txt = (h[d] || []).map(plage).join(", ") || "Fermé", der = g[g.length - 1];
+      if (der && der.txt === txt) der.jours.push(d); else g.push({ jours: [d], txt: txt });
+    });
+    return g.map(function (x) {
+      var a = JOURS_NOMS[x.jours[0]], b = JOURS_NOMS[x.jours[x.jours.length - 1]];
+      return { jours: x.jours, nom: x.jours.length === 1 ? a : x.jours.length === 2 ? a + " et " + b.toLowerCase() : a + " au " + b.toLowerCase(), txt: x.txt };
+    });
+  };
+  var DEFAUT = { telephone: "04 68 89 91 43", email: "contact@vinochope.com" };
+  function remplaceTexte(ancien, neuf) {
+    if (!neuf || ancien === neuf) return;
+    var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT), n, l = [];
+    while ((n = w.nextNode())) if (n.nodeValue.indexOf(ancien) > -1) l.push(n);
+    l.forEach(function (n) { n.nodeValue = n.nodeValue.split(ancien).join(neuf); });
+  }
+  VC.donnees("infos").then(function (inf) {
+    if (inf.horaires) {
+      Object.keys(HOURS).forEach(function (d) { HOURS[d] = (inf.horaires[d] || []).map(function (p) { return [minutes(p[0]), minutes(p[1])]; }); });
+      majStatut();
+      var gr = VC.groupesHoraires(inf.horaires);
+      document.querySelectorAll('[data-info="horaires"]').forEach(function (el) {
+        el.innerHTML = gr.map(function (x) { return VC.echapper(x.nom + " " + (x.txt === "Fermé" ? "fermé" : x.txt)); }).join("<br>") + (inf.horaires_note ? "<br>" + VC.echapper(inf.horaires_note) : "");
+      });
+      document.querySelectorAll('[data-info="horaires-table"]').forEach(function (tb) {
+        tb.innerHTML = gr.map(function (x) {
+          return '<tr data-jours="' + x.jours.join(",") + '"' + (x.jours.indexOf(now.d) > -1 ? ' class="aujourdhui" aria-current="date"' : "") + '><th scope="row">' + VC.echapper(x.nom) + "</th><td>" + VC.echapper(x.txt).replace(/, /g, "<br>") + "</td></tr>";
+        }).join("");
+      });
+    }
+    if (inf.telephone && inf.telephone !== DEFAUT.telephone) {
+      var tel = "tel:+33" + inf.telephone.replace(/\D/g, "").replace(/^0/, "");
+      document.querySelectorAll('a[href^="tel:"]').forEach(function (a) { a.href = tel; });
+      remplaceTexte(DEFAUT.telephone, inf.telephone);
+    }
+    if (inf.email && inf.email !== DEFAUT.email) {
+      document.querySelectorAll('a[href^="mailto:"]').forEach(function (a) { a.href = "mailto:" + inf.email; });
+      remplaceTexte(DEFAUT.email, inf.email);
+    }
+    if (inf.annonce && !document.body.classList.contains("page-gerant")) {
+      var cle = "vc-annonce-" + inf.annonce.length + inf.annonce.slice(0, 20);
+      try { if (sessionStorage.getItem(cle)) return; } catch (e) {}
+      var b = document.createElement("aside");
+      b.className = "annonce"; b.setAttribute("role", "status");
+      b.innerHTML = '<p class="annonce-t">À savoir</p><p>' + VC.echapper(inf.annonce) + '</p><button type="button" aria-label="Fermer l\'annonce">Fermer</button>';
+      b.querySelector("button").addEventListener("click", function () { b.remove(); try { sessionStorage.setItem(cle, "1"); } catch (e) {} });
+      document.body.appendChild(b);
+    }
+  }).catch(function () {});
   VC.echapper = function (s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; });
   };
@@ -197,20 +292,28 @@
     majPlans();
   }
 
-  /* ---------- Flux : de longs fils de lumière, à peine visibles, qui ondulent sur les fonds clairs ---------- */
+  /* ---------- Bulles : comme dans le verre de bière du logo, quelques bulles remontent lentement sur les fonds clairs ---------- */
   var clairs = [].slice.call(document.querySelectorAll("main > section")).filter(function (x) { return x.hasAttribute("data-ton"); });
   if (clairs.length && !reduce) {
     var fx = document.createElement("canvas"); fx.className = "flux"; fx.setAttribute("aria-hidden", "true");
     document.body.appendChild(fx);
-    var c2 = fx.getContext("2d"), FW = 0, FH = 0, vide = true, dernier = 0;
-    var tailleFlux = function () { FW = fx.width = Math.round(innerWidth * .75); FH = fx.height = Math.round(innerHeight * .75); };
+    var c2 = fx.getContext("2d"), FW = 0, FH = 0, FD = Math.min(devicePixelRatio || 1, 1.5), vide = true, dernier = 0, bulles = [];
+    var nouvelle = function (partout) {
+      var r = 1.8 + Math.pow(Math.random(), 2) * 5.2;                  // surtout des petites, quelques grosses
+      return {
+        x: Math.random() * FW, y: partout ? Math.random() * FH : FH + r + Math.random() * 60,
+        r: r, v: 7 + r * 3.2 + Math.random() * 6,                         // les grosses montent plus vite, comme dans un verre
+        oa: 10 + Math.random() * 18, of: .4 + Math.random() * .9, op: Math.random() * 6.283,
+        a: .2 + Math.random() * .18
+      };
+    };
+    var tailleFlux = function () {
+      FW = innerWidth; FH = innerHeight;
+      fx.width = Math.round(FW * FD); fx.height = Math.round(FH * FD);
+      var n = Math.round(FW * FH / 30000);
+      bulles = []; for (var i = 0; i < n; i++) bulles.push(nouvelle(true));
+    };
     tailleFlux(); addEventListener("resize", tailleFlux);
-    // chaque courant : une nappe de fils fins qui suit une onde lente
-    var COURANTS = [
-      { y: .22, amp: .10, f: 1.3, v: .00006, fils: 14, ec: .006, coul: "160,84,35", a: .16 },
-      { y: .58, amp: .14, f: .9, v: .00004, fils: 18, ec: .005, coul: "34,0,0", a: .07 },
-      { y: .82, amp: .08, f: 1.7, v: .00007, fils: 10, ec: .007, coul: "160,84,35", a: .12 }
-    ];
     var visibleClair = function () {
       var h = innerHeight;
       for (var i = 0; i < clairs.length; i++) {
@@ -219,29 +322,33 @@
       }
       return false;
     };
+    var yPrec = scrollY;
     var dessinerFlux = function (t) {
       requestAnimationFrame(dessinerFlux);
-      if (t - dernier < 33 || document.hidden) return;        // 30 images par seconde suffisent
-      dernier = t;
-      if (!visibleClair()) { if (!vide) { c2.clearRect(0, 0, FW, FH); vide = true; } return; }
+      if (t - dernier < 30 || document.hidden) return;
+      var dt = Math.min(.1, (t - dernier) / 1000); dernier = t;
+      var dy = scrollY - yPrec; yPrec = scrollY;
+      if (!visibleClair()) { if (!vide) { c2.clearRect(0, 0, fx.width, fx.height); vide = true; } return; }
       vide = false;
-      c2.clearRect(0, 0, FW, FH); c2.lineWidth = 1;
-      COURANTS.forEach(function (k, ci) {
-        for (var j = 0; j < k.fils; j++) {
-          var dj = (j - k.fils / 2) * k.ec, ph = t * k.v * 6.283 + j * .06;
-          c2.beginPath();
-          for (var s = 0; s <= 48; s++) {
-            var u = s / 48, x = u * FW;
-            var y = (k.y + dj + Math.sin(u * k.f * 6.283 + ph + ci) * k.amp * (.6 + .4 * Math.sin(ph * .7 + u * 3))
-              + Math.sin(u * 13 + ph * 1.7) * .004) * FH;
-            s ? c2.lineTo(x, y) : c2.moveTo(x, y);
-          }
-          var g = c2.createLinearGradient(0, 0, FW, 0), al = k.a * (1 - Math.abs(j / k.fils - .5) * 1.6);
-          g.addColorStop(0, "rgba(" + k.coul + ",0)"); g.addColorStop(.35, "rgba(" + k.coul + "," + al.toFixed(3) + ")");
-          g.addColorStop(.7, "rgba(" + k.coul + "," + (al * .6).toFixed(3) + ")"); g.addColorStop(1, "rgba(" + k.coul + ",0)");
-          c2.strokeStyle = g; c2.stroke();
+      c2.setTransform(FD, 0, 0, FD, 0, 0);
+      c2.clearRect(0, 0, FW, FH);
+      for (var i = 0; i < bulles.length; i++) {
+        var b = bulles[i];
+        b.y -= b.v * dt + dy * .12;                                       // la page qui défile les entraîne un peu
+        if (b.y < -20) { bulles[i] = nouvelle(false); continue; }
+        if (b.y > FH + 80) b.y = -10;
+        var x = b.x + Math.sin(t / 1000 * b.of + b.op) * b.oa * (b.r / 6);
+        var fond = Math.min(1, (FH - b.y) / 120), haut = Math.min(1, b.y / (FH * .35));   // apparaît en bas, s'éteint en haut
+        var al = b.a * Math.max(0, fond) * Math.max(0, haut);
+        if (al <= .005) continue;
+        c2.beginPath(); c2.arc(x, b.y, b.r, 0, 6.283);
+        c2.fillStyle = "rgba(160,84,35," + (al * .22).toFixed(3) + ")"; c2.fill();
+        c2.lineWidth = b.r > 3 ? 1.1 : .9; c2.strokeStyle = "rgba(160,84,35," + al.toFixed(3) + ")"; c2.stroke();
+        if (b.r > 2.6) {                                                   // le petit reflet de la bulle
+          c2.beginPath(); c2.arc(x - b.r * .35, b.y - b.r * .35, b.r * .38, 3.5, 5.2);
+          c2.strokeStyle = "rgba(34,0,0," + (al * .5).toFixed(3) + ")"; c2.stroke();
         }
-      });
+      }
     };
     requestAnimationFrame(dessinerFlux);
   }

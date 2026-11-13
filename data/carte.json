@@ -1,0 +1,157 @@
+{
+ "sous_titre": "La carte du bar · prix TTC, service compris",
+ "note": "L'abus d'alcool est dangereux pour la santé, à consommer avec modération. Allergènes : demandez au comptoir.",
+ "rubriques": [
+  {
+   "titre": "Vins au verre",
+   "precision": "12 cl",
+   "plats": [
+    {
+     "nom": "Rouge du Roussillon",
+     "prix": "4,50 €",
+     "detail": "La sélection de la semaine, Côtes du Roussillon ou Collioure"
+    },
+    {
+     "nom": "Blanc du Roussillon",
+     "prix": "4,50 €",
+     "detail": "Frais et minéral, souvent de la vallée de l'Agly"
+    },
+    {
+     "nom": "Rosé",
+     "prix": "4,50 €",
+     "detail": "Selon la saison"
+    },
+    {
+     "nom": "Vin doux naturel",
+     "prix": "5 €",
+     "detail": "Banyuls, Maury ou Rivesaltes, 6 cl"
+    },
+    {
+     "nom": "Toute la cave à la bouteille",
+     "prix": "prix cave",
+     "detail": "Choisissez en rayon, on l'ouvre pour vous avec un droit de bouchon"
+    }
+   ]
+  },
+  {
+   "titre": "Bières pression",
+   "precision": "25 cl · 50 cl",
+   "plats": [
+    {
+     "nom": "Blonde",
+     "prix": "3 € · 5,50 €",
+     "detail": ""
+    },
+    {
+     "nom": "Blanche",
+     "prix": "3,50 € · 6 €",
+     "detail": ""
+    },
+    {
+     "nom": "Ambrée",
+     "prix": "3,50 € · 6 €",
+     "detail": ""
+    },
+    {
+     "nom": "La craft du moment",
+     "prix": "4 € · 7 €",
+     "detail": "Une brasserie artisanale différente chaque mois"
+    }
+   ]
+  },
+  {
+   "titre": "Bières en bouteille",
+   "precision": "",
+   "plats": [
+    {
+     "nom": "Plus de 200 bières craft",
+     "prix": "dès 3,50 €",
+     "detail": "Au frais, à choisir dans les frigos de la cave. Demandez conseil."
+    }
+   ]
+  },
+  {
+   "titre": "Spiritueux",
+   "precision": "4 cl",
+   "plats": [
+    {
+     "nom": "Rhums",
+     "prix": "dès 6 €",
+     "detail": "Agricoles, ambrés, arrangés"
+    },
+    {
+     "nom": "Whiskys",
+     "prix": "dès 6 €",
+     "detail": "Écosse, Irlande, Japon et France"
+    },
+    {
+     "nom": "Gins",
+     "prix": "dès 6 €",
+     "detail": "Servi en gin tonic, 9 €"
+    },
+    {
+     "nom": "Apéritifs du pays",
+     "prix": "4 €",
+     "detail": "Byrrh, vermouths et quinquinas catalans"
+    }
+   ]
+  },
+  {
+   "titre": "Sans alcool",
+   "precision": "",
+   "plats": [
+    {
+     "nom": "Jus de fruits artisanaux",
+     "prix": "3,50 €",
+     "detail": ""
+    },
+    {
+     "nom": "Sodas et limonades",
+     "prix": "3 €",
+     "detail": ""
+    },
+    {
+     "nom": "Bière sans alcool",
+     "prix": "3,50 €",
+     "detail": ""
+    },
+    {
+     "nom": "Sirop à l'eau",
+     "prix": "2 €",
+     "detail": ""
+    }
+   ]
+  },
+  {
+   "titre": "À grignoter",
+   "precision": "",
+   "plats": [
+    {
+     "nom": "Tapas du moment",
+     "prix": "5 €",
+     "detail": "Ardoise au comptoir"
+    },
+    {
+     "nom": "Planche de charcuterie catalane",
+     "prix": "12 €",
+     "detail": "Fuet, llonganissa, jambon, pain grillé"
+    },
+    {
+     "nom": "Planche de fromages",
+     "prix": "12 €",
+     "detail": "Fromages de brebis et de chèvre des Pyrénées"
+    },
+    {
+     "nom": "Planche mixte",
+     "prix": "18 €",
+     "detail": "Pour deux à quatre personnes"
+    },
+    {
+     "nom": "Olives et chips artisanales",
+     "prix": "3,50 €",
+     "detail": ""
+    }
+   ]
+  }
+ ]
+}

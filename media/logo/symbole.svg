@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 200">
+  <title>Vinochope</title>
+  <!-- verre de bière : la mousse déborde à peine -->
+  <path d="M41.8 125 L45.6 187 H78.4 L82.2 125 Z" fill="#A05423"/>
+  <path d="M41 116 Q41 106 51 106 Q55 98 64 100 Q71 95 77 102 Q84 103 83 116 L82.2 126 H41.8 Z" fill="#F4EAD8" stroke="#220000" stroke-width="3.5" stroke-linejoin="round"/>
+  <path d="M41.8 126 L45.6 188 H78.4 L82.2 126" fill="none" stroke="#220000" stroke-width="3.5" stroke-linejoin="round"/>
+  <!-- la bouteille -->
+  <path d="M98 183 Q98 188 103 188 H137 Q142 188 142 183 V98 C142 81 127.5 77 127.5 64 V26 H129.5 V15 H110.5 V26 H112.5 V64 C112.5 77 98 81 98 98 Z" fill="#3F6157"/>
+  <!-- verre de vin -->
+  <path d="M160.6 122 C163 139 171 149 184 149 C197 149 205 139 207.4 122 Z" fill="#7A1C22"/>
+  <path d="M159 94 C157 126 166 149 184 149 C202 149 211 126 209 94 Z" fill="none" stroke="#220000" stroke-width="3.5" stroke-linejoin="round"/>
+  <path d="M184 149 V185 M168 186 H200" stroke="#220000" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- la ligne du comptoir -->
+  <path d="M22 190.5 H218" stroke="#220000" stroke-width="3.5" stroke-linecap="round"/>
+</svg>

@@ -6,14 +6,15 @@
 <title>La cave et la carte · Vinochope, cave à vins et bar à Perpignan</title>
 <meta name="description" content="La carte du bar Vinochope (vins au verre, bières pression, spiritueux, planches) et la sélection de la cave : Banyuls, Maury, Rivesaltes, portos et xérès, avec prix et conseils.">
 <meta name="theme-color" content="#220000">
+<link rel="icon" href="media/logo/symbole.svg" type="image/svg+xml">
 <meta property="og:title" content="La cave et la carte · Vinochope, cave à vins et bar à Perpignan">
 <meta property="og:description" content="La carte du bar Vinochope (vins au verre, bières pression, spiritueux, planches) et la sélection de la cave : Banyuls, Maury, Rivesaltes, portos et xérès, avec prix et conseils.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/cave.css?v=10">
-<link rel="stylesheet" href="assets/pages.css?v=10">
+<link rel="stylesheet" href="assets/cave.css?v=29">
+<link rel="stylesheet" href="assets/pages.css?v=29">
 <script>try{if(sessionStorage.getItem("vc-intro"))document.documentElement.classList.add("intro-vue")}catch(e){}</script>
 </head>
 <body class="">
@@ -21,20 +22,21 @@
 
 <!--TETE-->
 <header class="tete" data-ton="clair">
-  <a class="marque" href="index.html" aria-label="Vinochope, accueil">Vinochope<span class="sceau" aria-hidden="true"></span></a>
+  <a class="marque" href="index.html" aria-label="Vinochope, accueil"><svg class="symbole" viewBox="18 10 204 184" aria-hidden="true" focusable="false"><path class="s-biere" d="M41.8 125 L45.6 187 H78.4 L82.2 125 Z"/><path class="s-mousse" d="M41 116 Q41 106 51 106 Q55 98 64 100 Q71 95 77 102 Q84 103 83 116 L82.2 126 H41.8 Z"/><path class="s-trait" d="M41.8 126 L45.6 188 H78.4 L82.2 126"/><path class="s-bouteille" d="M98 183 Q98 188 103 188 H137 Q142 188 142 183 V98 C142 81 127.5 77 127.5 64 V26 H129.5 V15 H110.5 V26 H112.5 V64 C112.5 77 98 81 98 98 Z"/><path class="s-vin" d="M160.6 122 C163 139 171 149 184 149 C197 149 205 139 207.4 122 Z"/><path class="s-trait" d="M159 94 C157 126 166 149 184 149 C202 149 211 126 209 94 Z"/><path class="s-trait" d="M184 149 V185 M168 186 H200 M22 190.5 H218"/></svg><span class="marque-nom">Vinochope</span></a>
   <nav class="nav" aria-label="Navigation principale"><a href="la-cave.html" aria-current="page">La cave</a><a href="evenements.html">Événements</a><a href="tireuses.html">Tireuses</a><a href="histoire.html">Histoire</a><a href="contact.html">Contact</a></nav>
   <div class="tete-droite">
-    <a class="etiquette petite" href="la-cave.html#carte">La carte</a>
+    <a class="etiquette bouton-carte" href="carte.html">La carte</a>
     <button type="button" class="menu-btn" aria-expanded="false" aria-controls="menu">Menu</button>
   </div>
 </header>
-<div class="menu" id="menu" hidden>
+<div class="menu" id="menu" data-lenis-prevent hidden>
   <div class="menu-carte">
     <div class="menu-cadre">
+      <svg class="symbole menu-symbole" viewBox="18 10 204 184" aria-hidden="true" focusable="false"><path class="s-biere" d="M41.8 125 L45.6 187 H78.4 L82.2 125 Z"/><path class="s-mousse" d="M41 116 Q41 106 51 106 Q55 98 64 100 Q71 95 77 102 Q84 103 83 116 L82.2 126 H41.8 Z"/><path class="s-trait" d="M41.8 126 L45.6 188 H78.4 L82.2 126"/><path class="s-bouteille" d="M98 183 Q98 188 103 188 H137 Q142 188 142 183 V98 C142 81 127.5 77 127.5 64 V26 H129.5 V15 H110.5 V26 H112.5 V64 C112.5 77 98 81 98 98 Z"/><path class="s-vin" d="M160.6 122 C163 139 171 149 184 149 C197 149 205 139 207.4 122 Z"/><path class="s-trait" d="M159 94 C157 126 166 149 184 149 C202 149 211 126 209 94 Z"/><path class="s-trait" d="M184 149 V185 M168 186 H200 M22 190.5 H218"/></svg>
       <p class="menu-maison">Vinochope</p>
-      <p class="menu-sous">La cave à vin, Perpignan</p>
+      <p class="menu-sous">Bar · cave · location de tireuses</p>
       <span class="menu-filet" aria-hidden="true"></span>
-      <nav aria-label="Menu"><ol class="menu-liens"><li><a href="index.html"><span class="m-nom">Accueil</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">La maison</span></a></li><li><a href="la-cave.html" aria-current="page"><span class="m-nom">La cave et la carte</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Vins, bières, planches</span></a></li><li><a href="evenements.html"><span class="m-nom">Événements</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Concerts, expositions</span></a></li><li><a href="tireuses.html"><span class="m-nom">Tireuses et fûts</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Dès 80 €</span></a></li><li><a href="histoire.html"><span class="m-nom">Notre histoire</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Depuis 2013</span></a></li><li><a href="contact.html"><span class="m-nom">Contact</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">04 68 89 91 43</span></a></li></ol></nav>
+      <nav aria-label="Menu"><ol class="menu-liens"><li><a href="index.html"><span class="m-nom">Accueil</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">La maison</span></a></li><li><a href="carte.html"><span class="m-nom">La carte du bar</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Au verre, à grignoter</span></a></li><li><a href="la-cave.html" aria-current="page"><span class="m-nom">La cave</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Vins, bières, spiritueux</span></a></li><li><a href="evenements.html"><span class="m-nom">Événements</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Concerts, expositions</span></a></li><li><a href="tireuses.html"><span class="m-nom">Tireuses et fûts</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Dès 80 €</span></a></li><li><a href="histoire.html"><span class="m-nom">Notre histoire</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Depuis 2013</span></a></li><li><a href="contact.html"><span class="m-nom">Contact</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">04 68 89 91 43</span></a></li></ol></nav>
       <span class="menu-filet" aria-hidden="true"></span>
       <div class="menu-infos">
         <p>26 rue Mathieu de Dombasle, 66000 Perpignan</p>
@@ -50,10 +52,10 @@
   <div class="enveloppe entete-grille">
     <div>
       <p class="repere">La cave et le bar</p>
-      <h1 id="t-page">Ce qu'on <span class="accent">sert</span>,<br>ce qu'on <span class="accent">vend</span>.</h1>
+      <h1 id="t-page">Ce qu'on sert,<br>ce qu'on vend.</h1>
       <p class="chapo">Au bar, la carte du jour. En cave, deux cents vins dont huit sur dix du Roussillon, quatre cent cinquante bières, deux cents bières craft et cent cinquante spiritueux.</p>
       <nav class="saut" aria-label="Sur cette page">
-        <a class="etiquette" href="#carte">La carte du bar</a>
+        <a class="etiquette" href="carte.html">La carte du bar</a>
         <a class="lien" href="#boutique">Les grandes bouteilles</a>
         <a class="lien" href="#services">Les services de la cave</a>
       </nav>
@@ -71,18 +73,18 @@
     <div class="bloc-tete">
       <div>
         <p class="repere">Au comptoir</p>
-        <h2 id="carte-t">La <span class="accent">carte</span> du bar.</h2>
+        <h2 id="carte-t">La carte du bar.</h2>
       </div>
-      <p class="petit-mono">Prix TTC, service compris</p>
+      <a class="etiquette" href="carte.html">Ouvrir la carte seule</a>
     </div>
     <div class="carte-grille">
       <div class="carte-papier">
         <div class="carte-papier-tete">
           <p class="menu-maison">Vinochope</p>
-          <p class="menu-sous">La carte du bar · prix TTC, service compris</p>
+          <p class="menu-sous" data-carte-sous>La carte du bar · prix TTC, service compris</p>
           <span class="menu-filet" aria-hidden="true"></span>
         </div>
-      <div class="carte-cols">
+      <div class="carte-cols" data-carte>
         <div class="rubrique">
           <h3>Vins au verre <small>12 cl</small></h3>
           <div class="plat"><b>Rouge du Roussillon</b><span>4,50 €</span><p>La sélection de la semaine, Côtes du Roussillon ou Collioure</p></div>
@@ -131,11 +133,11 @@
         <h3 id="qr-t">Scannez,<br>la carte s'ouvre.</h3>
         <img src="media/qr-carte.svg" alt="QR code qui ouvre la carte du bar Vinochope" width="330" height="330">
         <p>Visez le code avec l'appareil photo de votre téléphone.</p>
-        <p class="qr-url">vinochope.fr/la-cave.html#carte</p>
+        <p class="qr-url">vinochope.fr/carte.html</p>
         <button type="button" class="etiquette" data-imprimer>Imprimer le chevalet</button>
       </aside>
     </div>
-    <p class="carte-note">L'abus d'alcool est dangereux pour la santé, à consommer avec modération. Allergènes : demandez au comptoir.</p>
+    <p class="carte-note" data-carte-note>L'abus d'alcool est dangereux pour la santé, à consommer avec modération. Allergènes : demandez au comptoir.</p>
   </div>
 </section>
 
@@ -145,7 +147,7 @@
     <div class="bloc-tete">
       <div>
         <p class="repere">En cave, à emporter</p>
-        <h2 id="boutique-t" class="montee">Les grandes<br><span class="accent">bouteilles</span>.</h2>
+        <h2 id="boutique-t" class="montee">Les grandes<br>bouteilles.</h2>
         <p class="chapo montee">Notre sélection de vins doux naturels du Roussillon, avec quelques cousins d'Espagne et du Portugal. Vente en cave uniquement : appelez pour mettre une bouteille de côté.</p>
       </div>
       <div class="filtres" role="group" aria-label="Filtrer par appellation" data-filtres>
@@ -160,7 +162,7 @@
 <section class="bloc vert" id="services" data-ton="sombre" aria-labelledby="services-t">
   <div class="enveloppe">
     <p class="repere">Le conseil en plus</p>
-    <h2 id="services-t" class="montee">Ce que la cave<br>fait <span class="accent">pour vous</span>.</h2>
+    <h2 id="services-t" class="montee">Ce que la cave<br>fait pour vous.</h2>
     <div class="services montee" style="margin-top:56px">
       <div><h3>Coffrets cadeaux</h3><p>On compose un coffret selon le budget et les goûts de la personne à gâter.</p></div>
       <div><h3>Recherche de millésimes</h3><p>Une année de naissance, de mariage ? On cherche la bouteille pour vous.</p></div>
@@ -192,7 +194,7 @@
     <div>
       <h2 class="pied-t">Horaires</h2>
       <p data-statut>Lundi 15 h – 21 h</p>
-      <p class="pied-petit">Lundi 15 h – 21 h<br>Mardi au samedi 10 h – 12 h 30, 14 h 30 – 21 h<br>Plus tard les soirs d'événement</p>
+      <p class="pied-petit" data-info="horaires">Lundi 15 h – 21 h<br>Mardi au samedi 10 h – 12 h 30, 14 h 30 – 21 h<br>Plus tard les soirs d'événement</p>
     </div>
     <div>
       <h2 class="pied-t">Nous joindre</h2>
@@ -202,7 +204,8 @@
     <nav aria-label="Plan du site">
       <h2 class="pied-t">Le site</h2>
       <ul class="pied-liens">
-        <li><a href="la-cave.html">La cave et la carte</a></li>
+        <li><a href="carte.html">La carte du bar</a></li>
+        <li><a href="la-cave.html">La cave</a></li>
         <li><a href="evenements.html">Événements</a></li>
         <li><a href="tireuses.html">Tireuses et fûts</a></li>
         <li><a href="histoire.html">Notre histoire</a></li>
@@ -210,7 +213,7 @@
       </ul>
     </nav>
   </div>
-  <p class="pied-marque" aria-hidden="true">Vinochope</p>
+  <p class="pied-marque" aria-hidden="true"><svg class="symbole pied-symbole" viewBox="18 10 204 184" aria-hidden="true" focusable="false"><path class="s-biere" d="M41.8 125 L45.6 187 H78.4 L82.2 125 Z"/><path class="s-mousse" d="M41 116 Q41 106 51 106 Q55 98 64 100 Q71 95 77 102 Q84 103 83 116 L82.2 126 H41.8 Z"/><path class="s-trait" d="M41.8 126 L45.6 188 H78.4 L82.2 126"/><path class="s-bouteille" d="M98 183 Q98 188 103 188 H137 Q142 188 142 183 V98 C142 81 127.5 77 127.5 64 V26 H129.5 V15 H110.5 V26 H112.5 V64 C112.5 77 98 81 98 98 Z"/><path class="s-vin" d="M160.6 122 C163 139 171 149 184 149 C197 149 205 139 207.4 122 Z"/><path class="s-trait" d="M159 94 C157 126 166 149 184 149 C202 149 211 126 209 94 Z"/><path class="s-trait" d="M184 149 V185 M168 186 H200 M22 190.5 H218"/></svg><span>Vinochope</span></p>
   <div class="pied-bas">
     <p>L'abus d'alcool est dangereux pour la santé, à consommer avec modération.</p>
     <p>© <span data-annee>2026</span> Vinochope · <a href="gerant.html">Espace gérant</a></p>
@@ -220,6 +223,7 @@
 
 <div class="seuil" id="seuil" role="dialog" aria-modal="true" aria-labelledby="seuil-t" hidden>
   <div class="seuil-voute">
+    <svg class="symbole seuil-symbole" viewBox="18 10 204 184" aria-hidden="true" focusable="false"><path class="s-biere" d="M41.8 125 L45.6 187 H78.4 L82.2 125 Z"/><path class="s-mousse" d="M41 116 Q41 106 51 106 Q55 98 64 100 Q71 95 77 102 Q84 103 83 116 L82.2 126 H41.8 Z"/><path class="s-trait" d="M41.8 126 L45.6 188 H78.4 L82.2 126"/><path class="s-bouteille" d="M98 183 Q98 188 103 188 H137 Q142 188 142 183 V98 C142 81 127.5 77 127.5 64 V26 H129.5 V15 H110.5 V26 H112.5 V64 C112.5 77 98 81 98 98 Z"/><path class="s-vin" d="M160.6 122 C163 139 171 149 184 149 C197 149 205 139 207.4 122 Z"/><path class="s-trait" d="M159 94 C157 126 166 149 184 149 C202 149 211 126 209 94 Z"/><path class="s-trait" d="M184 149 V185 M168 186 H200 M22 190.5 H218"/></svg>
     <p class="repere">Avant d'entrer</p>
     <h2 id="seuil-t">Avez-vous<br>18 ans ou plus ?</h2>
     <p class="seuil-txt">Ce site parle de vin, de bière et de spiritueux.</p>
@@ -232,12 +236,12 @@
   <p class="seuil-pied">L'abus d'alcool est dangereux pour la santé.</p>
 </div>
 <div class="intro" aria-hidden="true">
-  <svg class="intro-arche" viewBox="0 0 120 160"><path d="M8 156V64a52 52 0 0 1 104 0v92"/><path class="intro-cle" d="M60 0l9 9-9 9-9-9z"/></svg>
+  <svg class="symbole intro-symbole" viewBox="18 10 204 184" aria-hidden="true" focusable="false"><path class="s-biere" d="M41.8 125 L45.6 187 H78.4 L82.2 125 Z"/><path class="s-mousse" d="M41 116 Q41 106 51 106 Q55 98 64 100 Q71 95 77 102 Q84 103 83 116 L82.2 126 H41.8 Z"/><path class="s-trait" d="M41.8 126 L45.6 188 H78.4 L82.2 126"/><path class="s-bouteille" d="M98 183 Q98 188 103 188 H137 Q142 188 142 183 V98 C142 81 127.5 77 127.5 64 V26 H129.5 V15 H110.5 V26 H112.5 V64 C112.5 77 98 81 98 98 Z"/><path class="s-vin" d="M160.6 122 C163 139 171 149 184 149 C197 149 205 139 207.4 122 Z"/><path class="s-trait" d="M159 94 C157 126 166 149 184 149 C202 149 211 126 209 94 Z"/><path class="s-trait" d="M184 149 V185 M168 186 H200 M22 190.5 H218"/></svg>
   <p class="intro-marque">Vinochope</p>
   <p class="intro-lieu">La cave à vin, Perpignan</p>
 </div>
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="assets/commun.js?v=10"></script>
-<script src="assets/la-cave.js?v=10"></script>
+<script src="assets/commun.js?v=29"></script>
+<script src="assets/la-cave.js?v=29"></script>
 </body>
 </html>
