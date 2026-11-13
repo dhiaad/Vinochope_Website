@@ -4,10 +4,10 @@
   <div class="enveloppe entete-grille">
     <div>
       <p class="repere">La cave et le bar</p>
-      <h1 id="t-page">Ce qu'on <span class="accent">sert</span>,<br>ce qu'on <span class="accent">vend</span>.</h1>
+      <h1 id="t-page">Ce qu'on sert,<br>ce qu'on vend.</h1>
       <p class="chapo">Au bar, la carte du jour. En cave, deux cents vins dont huit sur dix du Roussillon, quatre cent cinquante bières, deux cents bières craft et cent cinquante spiritueux.</p>
       <nav class="saut" aria-label="Sur cette page">
-        <a class="etiquette" href="#carte">La carte du bar</a>
+        <a class="etiquette" href="carte.html">La carte du bar</a>
         <a class="lien" href="#boutique">Les grandes bouteilles</a>
         <a class="lien" href="#services">Les services de la cave</a>
       </nav>
@@ -25,18 +25,18 @@
     <div class="bloc-tete">
       <div>
         <p class="repere">Au comptoir</p>
-        <h2 id="carte-t">La <span class="accent">carte</span> du bar.</h2>
+        <h2 id="carte-t">La carte du bar.</h2>
       </div>
-      <p class="petit-mono">Prix TTC, service compris</p>
+      <a class="etiquette" href="carte.html">Ouvrir la carte seule</a>
     </div>
     <div class="carte-grille">
       <div class="carte-papier">
         <div class="carte-papier-tete">
           <p class="menu-maison">Vinochope</p>
-          <p class="menu-sous">La carte du bar · prix TTC, service compris</p>
+          <p class="menu-sous" data-carte-sous>La carte du bar · prix TTC, service compris</p>
           <span class="menu-filet" aria-hidden="true"></span>
         </div>
-      <div class="carte-cols">
+      <div class="carte-cols" data-carte>
         <div class="rubrique">
           <h3>Vins au verre <small>12 cl</small></h3>
           <div class="plat"><b>Rouge du Roussillon</b><span>4,50 €</span><p>La sélection de la semaine, Côtes du Roussillon ou Collioure</p></div>
@@ -85,11 +85,11 @@
         <h3 id="qr-t">Scannez,<br>la carte s'ouvre.</h3>
         <img src="media/qr-carte.svg" alt="QR code qui ouvre la carte du bar Vinochope" width="330" height="330">
         <p>Visez le code avec l'appareil photo de votre téléphone.</p>
-        <p class="qr-url">vinochope.fr/la-cave.html#carte</p>
+        <p class="qr-url">vinochope.fr/carte.html</p>
         <button type="button" class="etiquette" data-imprimer>Imprimer le chevalet</button>
       </aside>
     </div>
-    <p class="carte-note">L'abus d'alcool est dangereux pour la santé, à consommer avec modération. Allergènes : demandez au comptoir.</p>
+    <p class="carte-note" data-carte-note>L'abus d'alcool est dangereux pour la santé, à consommer avec modération. Allergènes : demandez au comptoir.</p>
   </div>
 </section>
 
@@ -99,7 +99,7 @@
     <div class="bloc-tete">
       <div>
         <p class="repere">En cave, à emporter</p>
-        <h2 id="boutique-t" class="montee">Les grandes<br><span class="accent">bouteilles</span>.</h2>
+        <h2 id="boutique-t" class="montee">Les grandes<br>bouteilles.</h2>
         <p class="chapo montee">Notre sélection de vins doux naturels du Roussillon, avec quelques cousins d'Espagne et du Portugal. Vente en cave uniquement : appelez pour mettre une bouteille de côté.</p>
       </div>
       <div class="filtres" role="group" aria-label="Filtrer par appellation" data-filtres>
@@ -114,7 +114,7 @@
 <section class="bloc vert" id="services" data-ton="sombre" aria-labelledby="services-t">
   <div class="enveloppe">
     <p class="repere">Le conseil en plus</p>
-    <h2 id="services-t" class="montee">Ce que la cave<br>fait <span class="accent">pour vous</span>.</h2>
+    <h2 id="services-t" class="montee">Ce que la cave<br>fait pour vous.</h2>
     <div class="services montee" style="margin-top:56px">
       <div><h3>Coffrets cadeaux</h3><p>On compose un coffret selon le budget et les goûts de la personne à gâter.</p></div>
       <div><h3>Recherche de millésimes</h3><p>Une année de naissance, de mariage ? On cherche la bouteille pour vous.</p></div>

@@ -13,8 +13,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/cave.css?v=14">
-<link rel="stylesheet" href="assets/pages.css?v=14">
+<link rel="stylesheet" href="assets/cave.css?v=29">
+<link rel="stylesheet" href="assets/pages.css?v=29">
 <script>try{if(sessionStorage.getItem("vc-intro"))document.documentElement.classList.add("intro-vue")}catch(e){}</script>
 </head>
 <body class="">
@@ -25,18 +25,18 @@
   <a class="marque" href="index.html" aria-label="Vinochope, accueil"><svg class="symbole" viewBox="18 10 204 184" aria-hidden="true" focusable="false"><path class="s-biere" d="M41.8 125 L45.6 187 H78.4 L82.2 125 Z"/><path class="s-mousse" d="M41 116 Q41 106 51 106 Q55 98 64 100 Q71 95 77 102 Q84 103 83 116 L82.2 126 H41.8 Z"/><path class="s-trait" d="M41.8 126 L45.6 188 H78.4 L82.2 126"/><path class="s-bouteille" d="M98 183 Q98 188 103 188 H137 Q142 188 142 183 V98 C142 81 127.5 77 127.5 64 V26 H129.5 V15 H110.5 V26 H112.5 V64 C112.5 77 98 81 98 98 Z"/><path class="s-vin" d="M160.6 122 C163 139 171 149 184 149 C197 149 205 139 207.4 122 Z"/><path class="s-trait" d="M159 94 C157 126 166 149 184 149 C202 149 211 126 209 94 Z"/><path class="s-trait" d="M184 149 V185 M168 186 H200 M22 190.5 H218"/></svg><span class="marque-nom">Vinochope</span></a>
   <nav class="nav" aria-label="Navigation principale"><a href="la-cave.html">La cave</a><a href="evenements.html">Événements</a><a href="tireuses.html" aria-current="page">Tireuses</a><a href="histoire.html">Histoire</a><a href="contact.html">Contact</a></nav>
   <div class="tete-droite">
-    <a class="etiquette bouton-carte" href="la-cave.html#carte">La carte</a>
+    <a class="etiquette bouton-carte" href="carte.html">La carte</a>
     <button type="button" class="menu-btn" aria-expanded="false" aria-controls="menu">Menu</button>
   </div>
 </header>
-<div class="menu" id="menu" hidden>
+<div class="menu" id="menu" data-lenis-prevent hidden>
   <div class="menu-carte">
     <div class="menu-cadre">
       <svg class="symbole menu-symbole" viewBox="18 10 204 184" aria-hidden="true" focusable="false"><path class="s-biere" d="M41.8 125 L45.6 187 H78.4 L82.2 125 Z"/><path class="s-mousse" d="M41 116 Q41 106 51 106 Q55 98 64 100 Q71 95 77 102 Q84 103 83 116 L82.2 126 H41.8 Z"/><path class="s-trait" d="M41.8 126 L45.6 188 H78.4 L82.2 126"/><path class="s-bouteille" d="M98 183 Q98 188 103 188 H137 Q142 188 142 183 V98 C142 81 127.5 77 127.5 64 V26 H129.5 V15 H110.5 V26 H112.5 V64 C112.5 77 98 81 98 98 Z"/><path class="s-vin" d="M160.6 122 C163 139 171 149 184 149 C197 149 205 139 207.4 122 Z"/><path class="s-trait" d="M159 94 C157 126 166 149 184 149 C202 149 211 126 209 94 Z"/><path class="s-trait" d="M184 149 V185 M168 186 H200 M22 190.5 H218"/></svg>
       <p class="menu-maison">Vinochope</p>
       <p class="menu-sous">Bar · cave · location de tireuses</p>
       <span class="menu-filet" aria-hidden="true"></span>
-      <nav aria-label="Menu"><ol class="menu-liens"><li><a href="index.html"><span class="m-nom">Accueil</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">La maison</span></a></li><li><a href="la-cave.html"><span class="m-nom">La cave et la carte</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Vins, bières, planches</span></a></li><li><a href="evenements.html"><span class="m-nom">Événements</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Concerts, expositions</span></a></li><li><a href="tireuses.html" aria-current="page"><span class="m-nom">Tireuses et fûts</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Dès 80 €</span></a></li><li><a href="histoire.html"><span class="m-nom">Notre histoire</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Depuis 2013</span></a></li><li><a href="contact.html"><span class="m-nom">Contact</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">04 68 89 91 43</span></a></li></ol></nav>
+      <nav aria-label="Menu"><ol class="menu-liens"><li><a href="index.html"><span class="m-nom">Accueil</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">La maison</span></a></li><li><a href="carte.html"><span class="m-nom">La carte du bar</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Au verre, à grignoter</span></a></li><li><a href="la-cave.html"><span class="m-nom">La cave</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Vins, bières, spiritueux</span></a></li><li><a href="evenements.html"><span class="m-nom">Événements</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Concerts, expositions</span></a></li><li><a href="tireuses.html" aria-current="page"><span class="m-nom">Tireuses et fûts</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Dès 80 €</span></a></li><li><a href="histoire.html"><span class="m-nom">Notre histoire</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">Depuis 2013</span></a></li><li><a href="contact.html"><span class="m-nom">Contact</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">04 68 89 91 43</span></a></li></ol></nav>
       <span class="menu-filet" aria-hidden="true"></span>
       <div class="menu-infos">
         <p>26 rue Mathieu de Dombasle, 66000 Perpignan</p>
@@ -52,7 +52,7 @@
   <div class="enveloppe entete-grille">
     <div>
       <p class="repere">Location de tireuses</p>
-      <h1 id="t-page">La tireuse<br>est <span class="accent">offerte</span>.</h1>
+      <h1 id="t-page">La tireuse<br>est offerte.</h1>
       <p class="chapo">Vous choisissez vos fûts, on prête la tireuse. Mariage, anniversaire, fête d'association, saison de camping : à partir de 80 € le fût de 30 litres, soit 0,67 € le demi de 25 cl.</p>
       <div class="saut">
         <a class="etiquette" href="#devis">Demander un devis</a>
@@ -70,7 +70,7 @@
 <section class="bloc clair" id="comment" data-ton="clair" aria-labelledby="comment-t">
   <div class="enveloppe">
     <p class="repere">Comment ça marche</p>
-    <h2 id="comment-t" class="montee" style="margin-bottom:60px">Quatre étapes,<br>zéro <span class="accent">prise de tête</span>.</h2>
+    <h2 id="comment-t" class="montee" style="margin-bottom:60px">Quatre étapes,<br>zéro prise de tête.</h2>
     <ol class="etapes-loc montee">
       <li><h3>Choisissez vos fûts</h3><p>Blonde, blanche, ambrée, IPA : on vous conseille selon le nombre d'invités et leurs goûts.</p></li>
       <li><h3>Réservez la date</h3><p>Par téléphone ou avec le formulaire. On confirme la disponibilité du matériel.</p></li>
@@ -85,7 +85,7 @@
     <div class="bloc-tete">
       <div>
         <p class="repere">Les fûts du moment</p>
-        <h2 id="futs-t" class="montee">Choisissez<br>vos <span class="accent">bières</span>.</h2>
+        <h2 id="futs-t" class="montee">Choisissez<br>vos bières.</h2>
         <p class="chapo montee">La sélection change selon les brasseries et la saison. Une envie particulière ? Demandez, on cherche.</p>
       </div>
       <div class="filtres" role="group" aria-label="Filtrer par style de bière" data-filtres>
@@ -100,7 +100,7 @@
   <div class="enveloppe calcul">
     <div>
       <p class="repere">Le calculateur</p>
-      <h2 id="calcul-t" class="montee">Combien<br>de <span class="accent">fûts</span> ?</h2>
+      <h2 id="calcul-t" class="montee">Combien<br>de fûts ?</h2>
       <p class="chapo montee">Une estimation rapide pour préparer votre budget. On affine ensemble au téléphone.</p>
       <form class="montee" style="margin-top:44px" data-calcul onsubmit="return false">
         <div class="champ">
@@ -136,7 +136,7 @@
 <section class="bloc vert" id="options" data-ton="sombre" aria-labelledby="options-t">
   <div class="enveloppe">
     <p class="repere">À la carte</p>
-    <h2 id="options-t" class="montee" style="margin-bottom:56px">Les <span class="accent">options</span>.</h2>
+    <h2 id="options-t" class="montee" style="margin-bottom:56px">Les options.</h2>
     <ul class="options-loc montee" data-options></ul>
   </div>
 </section>
@@ -144,7 +144,7 @@
 <section class="bloc clair" id="formules" data-ton="clair" aria-labelledby="formules-t">
   <div class="enveloppe">
     <p class="repere">Pour qui</p>
-    <h2 id="formules-t" class="montee" style="margin-bottom:56px">Une soirée<br>ou toute une <span class="accent">saison</span>.</h2>
+    <h2 id="formules-t" class="montee" style="margin-bottom:56px">Une soirée<br>ou toute une saison.</h2>
     <div class="formules montee">
       <div class="formule"><span class="code">Particuliers</span><h3>Mariage, anniversaire, fête de famille</h3><p>Le fût, la tireuse et les verres pour un soir. On vous aide à prévoir la bonne quantité.</p><a class="lien" href="#devis">Demander un devis</a></div>
       <div class="formule"><span class="code">Associations</span><h3>Fêtes de village, festivals, clubs</h3><p>Plusieurs fûts, plusieurs têtes, écocups consignés : on s'adapte au nombre et au lieu.</p><a class="lien" href="#devis">Demander un devis</a></div>
@@ -158,7 +158,7 @@
     <div class="bloc-tete">
       <div>
         <p class="repere">Votre demande</p>
-        <h2 id="devis-t">Demander<br>un <span class="accent">devis</span>.</h2>
+        <h2 id="devis-t">Demander<br>un devis.</h2>
       </div>
       <p>Ou directement au <a href="tel:+33468899143" style="color:var(--cire)">04 68 89 91 43</a></p>
     </div>
@@ -195,7 +195,7 @@
     <div>
       <h2 class="pied-t">Horaires</h2>
       <p data-statut>Lundi 15 h – 21 h</p>
-      <p class="pied-petit">Lundi 15 h – 21 h<br>Mardi au samedi 10 h – 12 h 30, 14 h 30 – 21 h<br>Plus tard les soirs d'événement</p>
+      <p class="pied-petit" data-info="horaires">Lundi 15 h – 21 h<br>Mardi au samedi 10 h – 12 h 30, 14 h 30 – 21 h<br>Plus tard les soirs d'événement</p>
     </div>
     <div>
       <h2 class="pied-t">Nous joindre</h2>
@@ -205,7 +205,8 @@
     <nav aria-label="Plan du site">
       <h2 class="pied-t">Le site</h2>
       <ul class="pied-liens">
-        <li><a href="la-cave.html">La cave et la carte</a></li>
+        <li><a href="carte.html">La carte du bar</a></li>
+        <li><a href="la-cave.html">La cave</a></li>
         <li><a href="evenements.html">Événements</a></li>
         <li><a href="tireuses.html">Tireuses et fûts</a></li>
         <li><a href="histoire.html">Notre histoire</a></li>
@@ -241,7 +242,7 @@
   <p class="intro-lieu">La cave à vin, Perpignan</p>
 </div>
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="assets/commun.js?v=14"></script>
-<script src="assets/tireuses.js?v=14"></script>
+<script src="assets/commun.js?v=29"></script>
+<script src="assets/tireuses.js?v=29"></script>
 </body>
 </html>

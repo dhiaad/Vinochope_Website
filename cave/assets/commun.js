@@ -58,8 +58,7 @@
     var cs = sous && sous.getAttribute("data-fond-tete") !== "non" ? getComputedStyle(sous) : null;
     var fond = cs ? cs.backgroundColor : "", img = cs ? cs.backgroundImage : "";
     var actif = y > 80 && fond && fond !== "rgba(0, 0, 0, 0)";
-    tete.style.backgroundColor = actif ? fond : "";
-    tete.setAttribute("data-fond", actif ? (img.indexOf("svg") > -1 ? "vert" : "") : "");
+    // la barre du haut reste rouge sur tout le site (essai)
   }
   VC.majTete = majTete;
   addEventListener("scroll", function () { if (!tic) { tic = true; requestAnimationFrame(majTete); } }, { passive: true });
@@ -111,6 +110,7 @@
   /* ---------- Ouvert / fermé (heure de Perpignan) ---------- */
   var HOURS = { 0: [], 1: [[900, 1260]], 2: [[600, 750], [870, 1260]], 3: [[600, 750], [870, 1260]], 4: [[600, 750], [870, 1260]], 5: [[600, 750], [870, 1260]], 6: [[600, 750], [870, 1260]] };
   var DAYS = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
+  function minutes(t) { var p = String(t || "").split(":"); return (+p[0] || 0) * 60 + (+p[1] || 0); }
   function hm(m) { var h = Math.floor(m / 60), mi = m % 60; return h + " h" + (mi ? " " + (mi < 10 ? "0" : "") + mi : ""); }
   function parisNow() {
     try {
@@ -131,7 +131,11 @@
     return { open: false, text: "Fermé" };
   }
   var st = status(), now = parisNow();
-  document.querySelectorAll("[data-statut]").forEach(function (el) { el.textContent = st.text; el.classList.add("statut"); el.classList.toggle("ouvert", st.open); });
+  function majStatut() {
+    st = status();
+    document.querySelectorAll("[data-statut]").forEach(function (el) { el.textContent = st.text; el.classList.add("statut"); el.classList.toggle("ouvert", st.open); });
+  }
+  majStatut();
   document.querySelectorAll("tr[data-jours]").forEach(function (tr) {
     if (tr.getAttribute("data-jours").split(",").indexOf(String(now.d)) > -1) { tr.classList.add("aujourdhui"); tr.setAttribute("aria-current", "date"); }
   });
@@ -140,11 +144,102 @@
   /* ---------- Données gérables depuis l'espace gérant ----------
      Le site lit d'abord data/<nom>.json ; si le gérant a modifié la liste sur cet appareil, c'est sa version qui s'affiche. */
   VC.cleGerant = function (nom) { return "vc-gerant-" + nom; };
-  VC.donnees = function (nom) {
-    var local = store.get(VC.cleGerant(nom));
-    if (local) { try { return Promise.resolve(JSON.parse(local)); } catch (e) {} }
-    return fetch("data/" + nom + ".json", { cache: "no-cache" }).then(function (r) { return r.json(); });
+  VC.lireLocal = function (nom) {
+    var local = store.get(VC.cleGerant(nom)); if (!local) return null;
+    try {
+      var o = JSON.parse(local);
+      if (o && o.v === 2) {
+        // publiée en ligne : on garde la copie locale le temps que le site se mette à jour (quelques minutes)
+        if (o.publie && Date.now() - o.t > 15 * 60 * 1000) { store.del(VC.cleGerant(nom)); return null; }
+        return o;
+      }
+      return { v: 2, t: 0, publie: false, data: o };
+    } catch (e) { return null; }
   };
+  VC.ecrireLocal = function (nom, data, publie) {
+    return store.set(VC.cleGerant(nom), JSON.stringify({ v: 2, t: Date.now(), publie: !!publie, data: data }));
+  };
+  VC.donnees = function (nom) {
+    var l = VC.lireLocal(nom);
+    if (l) return Promise.resolve(l.data);
+    return fetch("data/" + nom + ".json", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+  };
+
+  /* ---------- La carte du bar : dessinée à partir de data/carte.json (page carte, page cave) ---------- */
+  VC.ancre = function (s) { return String(s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); };
+  VC.carteHTML = function (c) {
+    var e = VC.echapper;
+    return (c.rubriques || []).map(function (r) {
+      return '<div class="rubrique" id="r-' + VC.ancre(r.titre) + '"><h3>' + e(r.titre) + (r.precision ? " <small>" + e(r.precision) + "</small>" : "") + "</h3>" +
+        (r.plats || []).map(function (p) {
+          return '<div class="plat"><b>' + e(p.nom) + "</b><span>" + e(p.prix) + "</span>" + (p.detail ? "<p>" + e(p.detail) + "</p>" : "") + "</div>";
+        }).join("") + "</div>";
+    }).join("");
+  };
+  document.querySelectorAll("[data-carte]").forEach(function (zone) {
+    VC.donnees("carte").then(function (c) {
+      zone.innerHTML = VC.carteHTML(c);
+      var nav = document.querySelector("[data-carte-nav]");
+      if (nav) nav.innerHTML = (c.rubriques || []).map(function (r) { return '<a href="#r-' + VC.ancre(r.titre) + '">' + VC.echapper(r.titre) + "</a>"; }).join("");
+      var sous = document.querySelector("[data-carte-sous]"); if (sous && c.sous_titre) sous.textContent = c.sous_titre;
+      var note = document.querySelector("[data-carte-note]"); if (note && c.note) note.textContent = c.note;
+    }).catch(function () {});
+  });
+
+  /* ---------- Infos pratiques : téléphone, adresse, horaires, annonce (data/infos.json) ---------- */
+  var JOURS_ORDRE = [1, 2, 3, 4, 5, 6, 0], JOURS_NOMS = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+  function plage(p) { return hm(minutes(p[0])) + " – " + hm(minutes(p[1])); }
+  VC.groupesHoraires = function (h) {
+    var g = [];
+    JOURS_ORDRE.forEach(function (d) {
+      var txt = (h[d] || []).map(plage).join(", ") || "Fermé", der = g[g.length - 1];
+      if (der && der.txt === txt) der.jours.push(d); else g.push({ jours: [d], txt: txt });
+    });
+    return g.map(function (x) {
+      var a = JOURS_NOMS[x.jours[0]], b = JOURS_NOMS[x.jours[x.jours.length - 1]];
+      return { jours: x.jours, nom: x.jours.length === 1 ? a : x.jours.length === 2 ? a + " et " + b.toLowerCase() : a + " au " + b.toLowerCase(), txt: x.txt };
+    });
+  };
+  var DEFAUT = { telephone: "04 68 89 91 43", email: "contact@vinochope.com" };
+  function remplaceTexte(ancien, neuf) {
+    if (!neuf || ancien === neuf) return;
+    var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT), n, l = [];
+    while ((n = w.nextNode())) if (n.nodeValue.indexOf(ancien) > -1) l.push(n);
+    l.forEach(function (n) { n.nodeValue = n.nodeValue.split(ancien).join(neuf); });
+  }
+  VC.donnees("infos").then(function (inf) {
+    if (inf.horaires) {
+      Object.keys(HOURS).forEach(function (d) { HOURS[d] = (inf.horaires[d] || []).map(function (p) { return [minutes(p[0]), minutes(p[1])]; }); });
+      majStatut();
+      var gr = VC.groupesHoraires(inf.horaires);
+      document.querySelectorAll('[data-info="horaires"]').forEach(function (el) {
+        el.innerHTML = gr.map(function (x) { return VC.echapper(x.nom + " " + (x.txt === "Fermé" ? "fermé" : x.txt)); }).join("<br>") + (inf.horaires_note ? "<br>" + VC.echapper(inf.horaires_note) : "");
+      });
+      document.querySelectorAll('[data-info="horaires-table"]').forEach(function (tb) {
+        tb.innerHTML = gr.map(function (x) {
+          return '<tr data-jours="' + x.jours.join(",") + '"' + (x.jours.indexOf(now.d) > -1 ? ' class="aujourdhui" aria-current="date"' : "") + '><th scope="row">' + VC.echapper(x.nom) + "</th><td>" + VC.echapper(x.txt).replace(/, /g, "<br>") + "</td></tr>";
+        }).join("");
+      });
+    }
+    if (inf.telephone && inf.telephone !== DEFAUT.telephone) {
+      var tel = "tel:+33" + inf.telephone.replace(/\D/g, "").replace(/^0/, "");
+      document.querySelectorAll('a[href^="tel:"]').forEach(function (a) { a.href = tel; });
+      remplaceTexte(DEFAUT.telephone, inf.telephone);
+    }
+    if (inf.email && inf.email !== DEFAUT.email) {
+      document.querySelectorAll('a[href^="mailto:"]').forEach(function (a) { a.href = "mailto:" + inf.email; });
+      remplaceTexte(DEFAUT.email, inf.email);
+    }
+    if (inf.annonce && !document.body.classList.contains("page-gerant")) {
+      var cle = "vc-annonce-" + inf.annonce.length + inf.annonce.slice(0, 20);
+      try { if (sessionStorage.getItem(cle)) return; } catch (e) {}
+      var b = document.createElement("aside");
+      b.className = "annonce"; b.setAttribute("role", "status");
+      b.innerHTML = '<p class="annonce-t">À savoir</p><p>' + VC.echapper(inf.annonce) + '</p><button type="button" aria-label="Fermer l\'annonce">Fermer</button>';
+      b.querySelector("button").addEventListener("click", function () { b.remove(); try { sessionStorage.setItem(cle, "1"); } catch (e) {} });
+      document.body.appendChild(b);
+    }
+  }).catch(function () {});
   VC.echapper = function (s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; });
   };

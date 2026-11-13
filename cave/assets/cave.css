@@ -81,7 +81,8 @@ em, i { font-style: normal; }
   position: fixed; inset: 0 0 auto 0; z-index: 30;
   display: flex; align-items: center; justify-content: space-between; gap: 24px;
   padding: 18px var(--gouttiere) 18px calc(var(--gouttiere) + var(--jauge));
-  color: var(--lie); transition: color .4s, background-color .4s, transform .5s var(--ease);
+  color: var(--blanc); background: var(--lie); transition: transform .5s var(--ease);
+  padding-top: 12px; padding-bottom: 12px;
 }
 .tete.range { transform: translateY(-110%); }
 .tete[data-ton="sombre"] { color: var(--blanc); }
@@ -174,7 +175,7 @@ h2 .accent, h1 .accent { color: var(--cire); }
 
 /* ---------- Niveau −5 · Tireuses ---------- */
 .tireuses { background: var(--tex-vert), var(--vert); }
-.tir-grille { display: grid; grid-template-columns: 1.2fr .8fr; gap: 6vw; align-items: center; }
+.tir-grille { display: grid; grid-template-columns: 1.05fr .95fr; gap: 6vw; align-items: center; }
 .options { list-style: none; padding: 0; margin: 36px 0 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; }
 .options li { padding: 14px 0 14px 26px; border-bottom: 1px solid rgba(255, 255, 255, .2); position: relative; }
 .options li::before { content: ""; position: absolute; left: 0; top: 23px; width: 9px; height: 9px; background: var(--cire); transform: rotate(45deg); }
@@ -244,67 +245,36 @@ h2 .accent, h1 .accent { color: var(--cire); }
 .s-vin, .vin { fill: var(--vin); }
 
 /* =================================================================
-   Ouverture de l'accueil : un seul écran tenu pendant tout le défilement.
-   1. le logo en grand, posé sur le comptoir, suit la souris ;
-   2. on sert : la bière monte avec sa mousse, le vin remplit le verre ;
-   3. les verres s'écartent, la bouteille vient se poser sur celle du film ;
-   4. elle s'ouvre comme une fenêtre : le film est derrière, en plein écran, et le vin est servi.
+   Accueil : une grande photo plein écran qui défile comme une page.
+   Puis le film, à part : tenu à l'écran pendant qu'on fait défiler, de la bouteille au verre.
    ================================================================= */
-.ouverture { position: relative; height: 640vh; background: var(--tuffeau); color: var(--lie); }
-.ouv-colle {
-  position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden;
-  display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 4vw;
-  padding: 96px var(--gouttiere) 64px;
-  perspective: 1400px;
+.acc-une {
+  position: relative; min-height: 100vh; min-height: 100svh; overflow: hidden; background: var(--lie); color: var(--blanc);
+  display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 4vw; padding: 96px var(--gouttiere) 64px;
 }
-.ouv-texte { position: relative; z-index: 2; opacity: var(--t, 1); visibility: var(--tv, visible); transform: translateY(calc((1 - var(--t, 1)) * -30px)); }
-.ouverture h1 { font-size: clamp(52px, 6.6vw, 124px); line-height: .94; letter-spacing: -.02em; }
+.acc-photo { position: absolute; inset: 0; z-index: 0; }
+.acc-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 30% 50%; display: block; }
+.js .acc-photo { opacity: 0; transition: opacity 1.2s ease; }
+.js .acc-photo.prete { opacity: 1; }
+/* un voile léger sur la prairie, derrière le titre */
+.acc-voile { position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(90deg, rgba(34, 0, 0, 0) 38%, rgba(34, 0, 0, .42) 100%), linear-gradient(rgba(34, 0, 0, .35), rgba(34, 0, 0, 0) 22%); }
+.ouv-texte { grid-column: 2; position: relative; z-index: 2; max-width: 46vw; text-shadow: 0 2px 30px rgba(34, 0, 0, .35); }
+.acc-une h1 { font-size: clamp(52px, 6.6vw, 124px); line-height: .94; letter-spacing: -.02em; }
 .sans-coupure { white-space: nowrap; }
-.ouverture .chapo { max-width: 26em; margin: 28px 0 40px; }
+.acc-une .chapo { max-width: 26em; margin: 28px 0 40px; color: rgba(255, 255, 255, .92); }
+.acc-une .repere { color: var(--tuffeau); }
+.acc-une .lien { background-image: linear-gradient(var(--blanc), var(--blanc)); }
 
-/* Le comptoir : les trois objets du logo, à l'échelle --u (pixels par unité du dessin) */
-.comptoir {
-  --u: min(calc((100svh - 230px) / 180), calc(40vw / 178), 3.6px);
-  position: relative; z-index: 2; justify-self: center; align-self: center;
-  display: flex; align-items: flex-end; padding: 0 calc(10 * var(--u)) calc(4 * var(--u));
-  transform-style: preserve-3d; will-change: transform;
-  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
-}
-.objet { position: relative; transform-style: preserve-3d; will-change: transform, opacity; }
-.objet svg { display: block; width: 100%; height: 100%; overflow: visible; }
-.objet .s-trait, .objet .mousse { stroke-width: 3; }
-.o-biere { width: calc(48 * var(--u)); height: calc(97 * var(--u)); margin: 0 calc(12 * var(--u)) calc(-3 * var(--u)) 0; }
-.o-bouteille { width: calc(44 * var(--u)); height: calc(173 * var(--u)); transform-origin: 0 0; filter: drop-shadow(0 calc(10 * var(--u)) calc(9 * var(--u)) rgba(34, 0, 0, .18)); }
-.o-vin { width: calc(58 * var(--u)); height: calc(100 * var(--u)); margin: 0 0 calc(-2 * var(--u)) calc(13 * var(--u)); }
-.reflet { fill: none; stroke: var(--blanc); stroke-opacity: .22; stroke-width: 4; stroke-linecap: round; }
-.comptoir-ligne {
-  position: absolute; left: 0; right: 0; bottom: calc(2.2 * var(--u)); height: calc(3 * var(--u)); background: var(--lie);
-  transform-origin: 50% 50%; transform: scaleX(var(--cl, 1)); opacity: var(--cl, 1);
-}
-/* les liquides montent avec le défilement */
-.biere { transform-box: fill-box; transform-origin: 50% 100%; transform: scaleY(var(--b, 0)); }
-.vin { transform-box: fill-box; transform-origin: 50% 100%; transform: scaleY(var(--v, 0)); }
-.mousse { transform-box: fill-box; transform-origin: 50% 100%; transform: translateY(calc((1 - var(--b, 0)) * 60px)) scaleY(var(--m, 0)); opacity: var(--m, 0); }
-.bulle { fill: var(--blanc); opacity: calc(var(--b, 0) * .55); animation: bulle 2.4s linear infinite; transform-box: fill-box; }
-.bulle:nth-of-type(2) { animation-delay: -.8s; animation-duration: 1.9s; }
-.bulle:nth-of-type(3) { animation-delay: -1.5s; animation-duration: 2.8s; }
-@keyframes bulle { from { transform: translateY(0); } to { transform: translateY(-58px); } }
-
-/* L'écran du film : d'abord découpé à la forme de la bouteille, puis plein écran */
-.ouv-ecran {
-  position: absolute; inset: 0; z-index: 3; background: var(--film); pointer-events: none;
-  visibility: var(--fv, hidden);
-  -webkit-mask: url("../media/logo/bouteille.svg") no-repeat; mask: url("../media/logo/bouteille.svg") no-repeat;
-  -webkit-mask-size: var(--ms, 0 0); mask-size: var(--ms, 0 0);
-  -webkit-mask-position: var(--mp, 0 0); mask-position: var(--mp, 0 0);
-}
-.ouv-ecran.ouverte { -webkit-mask: none; mask: none; }
+.ouverture { position: relative; height: 420vh; background: var(--film); color: var(--blanc); }
+.ouv-colle { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.ouv-ecran { position: absolute; inset: 0; z-index: 1; background: var(--film); pointer-events: none; }
 .ouv-film { position: absolute; inset: 0; width: 100%; height: 100%; }
 /* à la fin du film, l'image se fond dans le rouge de la section suivante : pas de cassure */
 .ouv-colle::after { content: ""; position: absolute; inset: 0; z-index: 5; pointer-events: none; background: linear-gradient(rgba(34, 0, 0, 0) 20%, var(--lie)); opacity: var(--fin, 0); }
 .chapitres { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; z-index: 4; pointer-events: none; color: var(--blanc); }
 .chapitre-film {
-  position: absolute; top: 50%; left: calc(var(--gouttiere) + 1vw); width: min(30vw, 420px);
+  position: absolute; top: 50%; left: calc(var(--gouttiere) + 1vw); width: min(36vw, 520px);
   opacity: var(--o, 0); transform: translateY(calc(-50% + var(--y, 0px))); will-change: transform, opacity;
   text-shadow: 0 2px 30px rgba(0, 0, 0, .35);
 }
@@ -313,25 +283,26 @@ h2 .accent, h1 .accent { color: var(--cire); }
 .chapitre-film h2 { font-size: clamp(44px, 5.6vw, 92px); }
 .chapitre-film p { margin-top: 20px; font-size: clamp(17px, 1.4vw, 20px); color: rgba(255, 255, 255, .86); max-width: 22em; }
 .ouv-indice {
-  position: absolute; left: 50%; bottom: 22px; z-index: 2; transform: translateX(-50%);
+  position: absolute; left: 70%; bottom: 22px; z-index: 2; transform: translateX(-50%);
   display: flex; align-items: center; gap: 12px; font-size: 13px; font-weight: 500; white-space: nowrap;
-  opacity: var(--t, 1);
 }
 .ouv-indice span { width: 1px; height: 28px; background: currentColor; transform-origin: 50% 0; animation: indice 2s var(--ease) infinite; }
 @keyframes indice { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); transform-origin: 50% 0; } 51% { transform-origin: 50% 100%; } 100% { transform: scaleY(0); transform-origin: 50% 100%; } }
 @media (max-width: 799px) {
-  .ouverture { height: 560vh; }
-  .ouv-colle { grid-template-columns: 1fr; grid-template-rows: auto 1fr; align-content: start; gap: 12px; padding: 92px 20px 56px; }
-  .ouverture h1 { font-size: clamp(44px, 13vw, 76px); }
-  .ouverture .chapo { margin: 14px 0 22px; font-size: 17px; }
-  .comptoir { --u: max(1px, min(calc((100svh - 560px) / 182), calc((100vw - 40px) / 182))); align-self: end; margin-bottom: 8px; }
+  .acc-une { grid-template-columns: 1fr; align-content: end; padding: 92px 20px 40px; }
+  .acc-photo img { object-position: 16% 50%; }
+  .ouv-texte { grid-column: 1; max-width: none; }
+  .acc-voile { background: linear-gradient(rgba(34, 0, 0, .3), rgba(34, 0, 0, 0) 18%, rgba(34, 0, 0, 0) 38%, rgba(34, 0, 0, .78) 78%); }
+  .acc-une h1 { font-size: clamp(44px, 13vw, 76px); }
+  .acc-une .chapo { margin: 14px 0 22px; font-size: 17px; }
+  .ouverture { height: 360vh; }
   .chapitres::before { content: ""; position: absolute; inset: 50% 0 0; background: linear-gradient(rgba(40, 12, 18, 0), rgba(40, 12, 18, .85)); opacity: var(--cg, 0); }
   .chapitre-film, .chapitre-film:nth-child(n+2) { top: auto; bottom: 8svh; left: 20px; right: 20px; width: auto; transform: translateY(var(--y, 0px)); }
   .chapitre-film h2 { font-size: 42px; }
   .chapitre-film p { margin-top: 10px; font-size: 16px; }
   .ouv-indice { display: none; }
 }
-@media (max-height: 640px) and (max-width: 799px) { .ouverture .chapo { display: none; } }
+@media (max-height: 640px) and (max-width: 799px) { .acc-une .chapo { display: none; } }
 
 /* ---------- Lancement : le logo se dessine, on sert, le nom monte, le rideau se lève ---------- */
 .intro {
@@ -356,13 +327,13 @@ h2 .accent, h1 .accent { color: var(--cire); }
 @keyframes intro-leve { to { clip-path: inset(0 0 100% 0); visibility: hidden; } }
 .intro.vite { animation: intro-leve .5s cubic-bezier(.7, 0, .2, 1) forwards; }
 /* le titre et le comptoir arrivent juste après le rideau */
-.js .ouv-texte > *, .js .comptoir .objet svg { animation: entree .9s var(--ease) both; }
-.js .ouv-texte > :nth-child(2), .js .o-bouteille svg { animation-delay: .08s; }
-.js .ouv-texte > :nth-child(3), .js .o-vin svg { animation-delay: .16s; }
+.js .ouv-texte > * { animation: entree .9s var(--ease) both; }
+.js .ouv-texte > :nth-child(2) { animation-delay: .08s; }
+.js .ouv-texte > :nth-child(3) { animation-delay: .16s; }
 .js .ouv-texte > :nth-child(4) { animation-delay: .24s; }
-.js:not(.intro-vue) .ouv-texte > *, .js:not(.intro-vue) .comptoir .objet svg { animation-delay: 2.5s; }
-.js:not(.intro-vue) .ouv-texte > :nth-child(2), .js:not(.intro-vue) .o-bouteille svg { animation-delay: 2.58s; }
-.js:not(.intro-vue) .ouv-texte > :nth-child(3), .js:not(.intro-vue) .o-vin svg { animation-delay: 2.66s; }
+.js:not(.intro-vue) .ouv-texte > * { animation-delay: 2.5s; }
+.js:not(.intro-vue) .ouv-texte > :nth-child(2) { animation-delay: 2.58s; }
+.js:not(.intro-vue) .ouv-texte > :nth-child(3) { animation-delay: 2.66s; }
 .js:not(.intro-vue) .ouv-texte > :nth-child(4) { animation-delay: 2.74s; }
 @keyframes entree { from { opacity: 0; transform: translateY(18px); } }
 
@@ -406,3 +377,27 @@ h2 .accent, h1 .accent { color: var(--cire); }
 .terroir h2 { text-shadow: 0 2px 40px rgba(34, 0, 0, .45); }
 .terroir .chapo { max-width: 30em; color: rgba(255, 255, 255, .9); }
 @media (max-width: 799px) { .terroir-img img { object-position: 50% 62%; } }
+
+/* ---------- Les photos des sections : elles se dévoilent par le bas, puis glissent un peu moins vite que la page ---------- */
+.cliche { position: relative; margin: 0; overflow: hidden; background: rgba(34, 0, 0, .25); }
+.cliche.portrait { aspect-ratio: 4 / 5; }
+.cliche.paysage { aspect-ratio: 3 / 2; }
+.cliche img { position: absolute; left: 0; top: -8%; width: 100%; height: 116%; max-width: none; object-fit: cover; transform: translate3d(0, var(--py, 0px), 0); will-change: transform; }
+.js .cliche.montee { opacity: 1; transform: none; clip-path: inset(22% 0 0 0); transition: clip-path 1.3s var(--ease); }
+.js .cliche.montee.vu { clip-path: inset(0 0 0 0); }
+.avec-photo { display: grid; grid-template-columns: 1.1fr .9fr; gap: 6vw; align-items: end; }
+.avec-photo .cliche { width: 100%; max-width: 460px; justify-self: end; }
+.cave .avec-photo { align-items: center; grid-template-columns: 1.35fr .65fr; }
+.cave .avec-photo .cliche { max-width: 400px; }
+.bar .cliche { margin-top: 40px; }
+.tir-droite { position: relative; }
+.tir-droite .cliche { aspect-ratio: 4 / 3; width: 88%; }
+.tir-droite .tarif { width: 78%; margin: -72px 0 0 auto; z-index: 1; padding: 48px 28px 36px; }
+.tarif-prix { white-space: nowrap; }
+@media (max-width: 799px) {
+  .avec-photo, .cave .avec-photo { grid-template-columns: 1fr; gap: 40px; }
+  .avec-photo .cliche, .cave .avec-photo .cliche { max-width: none; justify-self: stretch; }
+  .cliche.portrait { aspect-ratio: 4 / 4.4; }
+  .tir-droite .tarif { width: 88%; margin-top: -72px; }
+}
+@media (prefers-reduced-motion: reduce) { .js .cliche.montee { clip-path: none; transition: none; } .cliche img { transform: none; } }

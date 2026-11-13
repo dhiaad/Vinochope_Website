@@ -11,7 +11,7 @@ Lancer : python tools/build_cave.py
 import json, pathlib, re
 
 RACINE = pathlib.Path(__file__).resolve().parent.parent / "cave"
-V = "14"  # version des fichiers css/js, à monter quand ils changent
+V = "29"  # version des fichiers css/js, à monter quand ils changent
 
 # Le logo : un verre de bière, la bouteille, un verre de vin, posés sur le comptoir.
 # Les couleurs viennent du CSS (classes s-*) ; le trait suit la couleur du texte.
@@ -21,7 +21,8 @@ def symbole(classe="symbole"):
 
 PAGES = [  # (fichier, libellé, ce qu'on y trouve : écrit comme le détail d'un plat sur une carte)
     ("index.html", "Accueil", "La maison"),
-    ("la-cave.html", "La cave et la carte", "Vins, bières, planches"),
+    ("carte.html", "La carte du bar", "Au verre, à grignoter"),
+    ("la-cave.html", "La cave", "Vins, bières, spiritueux"),
     ("evenements.html", "Événements", "Concerts, expositions"),
     ("tireuses.html", "Tireuses et fûts", "Dès 80 €"),
     ("histoire.html", "Notre histoire", "Depuis 2013"),
@@ -33,7 +34,7 @@ def tete_html(actif):
     ac = lambda f: ' aria-current="page"' if f == actif else ""
     nav = "".join(
         f'<a href="{f}"{ac(f)}>{l.replace(" et la carte", "").replace(" et fûts", "").replace("Notre ", "").capitalize()}</a>'
-        for f, l, _ in PAGES[1:]
+        for f, l, _ in PAGES[1:] if f != "carte.html"
     )
     menu = "".join(
         f'<li><a href="{f}"{ac(f)}><span class="m-nom">{l}</span><span class="m-points" aria-hidden="true"></span><span class="m-detail">{n}</span></a></li>'
@@ -44,11 +45,11 @@ def tete_html(actif):
   <a class="marque" href="index.html" aria-label="Vinochope, accueil">{symbole()}<span class="marque-nom">Vinochope</span></a>
   <nav class="nav" aria-label="Navigation principale">{nav}</nav>
   <div class="tete-droite">
-    <a class="etiquette bouton-carte" href="la-cave.html#carte">La carte</a>
+    <a class="etiquette bouton-carte" href="carte.html">La carte</a>
     <button type="button" class="menu-btn" aria-expanded="false" aria-controls="menu">Menu</button>
   </div>
 </header>
-<div class="menu" id="menu" hidden>
+<div class="menu" id="menu" data-lenis-prevent hidden>
   <div class="menu-carte">
     <div class="menu-cadre">
       {symbole("symbole menu-symbole")}
@@ -79,7 +80,7 @@ PIED = f"""<!--PIED-->
     <div>
       <h2 class="pied-t">Horaires</h2>
       <p data-statut>Lundi 15 h – 21 h</p>
-      <p class="pied-petit">Lundi 15 h – 21 h<br>Mardi au samedi 10 h – 12 h 30, 14 h 30 – 21 h<br>Plus tard les soirs d'événement</p>
+      <p class="pied-petit" data-info="horaires">Lundi 15 h – 21 h<br>Mardi au samedi 10 h – 12 h 30, 14 h 30 – 21 h<br>Plus tard les soirs d'événement</p>
     </div>
     <div>
       <h2 class="pied-t">Nous joindre</h2>
@@ -89,7 +90,8 @@ PIED = f"""<!--PIED-->
     <nav aria-label="Plan du site">
       <h2 class="pied-t">Le site</h2>
       <ul class="pied-liens">
-        <li><a href="la-cave.html">La cave et la carte</a></li>
+        <li><a href="carte.html">La carte du bar</a></li>
+        <li><a href="la-cave.html">La cave</a></li>
         <li><a href="evenements.html">Événements</a></li>
         <li><a href="tireuses.html">Tireuses et fûts</a></li>
         <li><a href="histoire.html">Notre histoire</a></li>
