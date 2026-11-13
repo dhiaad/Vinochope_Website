@@ -197,20 +197,28 @@
     majPlans();
   }
 
-  /* ---------- Flux : de longs fils de lumière, à peine visibles, qui ondulent sur les fonds clairs ---------- */
+  /* ---------- Bulles : comme dans le verre de bière du logo, quelques bulles remontent lentement sur les fonds clairs ---------- */
   var clairs = [].slice.call(document.querySelectorAll("main > section")).filter(function (x) { return x.hasAttribute("data-ton"); });
   if (clairs.length && !reduce) {
     var fx = document.createElement("canvas"); fx.className = "flux"; fx.setAttribute("aria-hidden", "true");
     document.body.appendChild(fx);
-    var c2 = fx.getContext("2d"), FW = 0, FH = 0, vide = true, dernier = 0;
-    var tailleFlux = function () { FW = fx.width = Math.round(innerWidth * .75); FH = fx.height = Math.round(innerHeight * .75); };
+    var c2 = fx.getContext("2d"), FW = 0, FH = 0, FD = Math.min(devicePixelRatio || 1, 1.5), vide = true, dernier = 0, bulles = [];
+    var nouvelle = function (partout) {
+      var r = 1.8 + Math.pow(Math.random(), 2) * 5.2;                  // surtout des petites, quelques grosses
+      return {
+        x: Math.random() * FW, y: partout ? Math.random() * FH : FH + r + Math.random() * 60,
+        r: r, v: 7 + r * 3.2 + Math.random() * 6,                         // les grosses montent plus vite, comme dans un verre
+        oa: 10 + Math.random() * 18, of: .4 + Math.random() * .9, op: Math.random() * 6.283,
+        a: .2 + Math.random() * .18
+      };
+    };
+    var tailleFlux = function () {
+      FW = innerWidth; FH = innerHeight;
+      fx.width = Math.round(FW * FD); fx.height = Math.round(FH * FD);
+      var n = Math.round(FW * FH / 30000);
+      bulles = []; for (var i = 0; i < n; i++) bulles.push(nouvelle(true));
+    };
     tailleFlux(); addEventListener("resize", tailleFlux);
-    // chaque courant : une nappe de fils fins qui suit une onde lente
-    var COURANTS = [
-      { y: .22, amp: .10, f: 1.3, v: .00006, fils: 14, ec: .006, coul: "160,84,35", a: .16 },
-      { y: .58, amp: .14, f: .9, v: .00004, fils: 18, ec: .005, coul: "34,0,0", a: .07 },
-      { y: .82, amp: .08, f: 1.7, v: .00007, fils: 10, ec: .007, coul: "160,84,35", a: .12 }
-    ];
     var visibleClair = function () {
       var h = innerHeight;
       for (var i = 0; i < clairs.length; i++) {
@@ -219,29 +227,33 @@
       }
       return false;
     };
+    var yPrec = scrollY;
     var dessinerFlux = function (t) {
       requestAnimationFrame(dessinerFlux);
-      if (t - dernier < 33 || document.hidden) return;        // 30 images par seconde suffisent
-      dernier = t;
-      if (!visibleClair()) { if (!vide) { c2.clearRect(0, 0, FW, FH); vide = true; } return; }
+      if (t - dernier < 30 || document.hidden) return;
+      var dt = Math.min(.1, (t - dernier) / 1000); dernier = t;
+      var dy = scrollY - yPrec; yPrec = scrollY;
+      if (!visibleClair()) { if (!vide) { c2.clearRect(0, 0, fx.width, fx.height); vide = true; } return; }
       vide = false;
-      c2.clearRect(0, 0, FW, FH); c2.lineWidth = 1;
-      COURANTS.forEach(function (k, ci) {
-        for (var j = 0; j < k.fils; j++) {
-          var dj = (j - k.fils / 2) * k.ec, ph = t * k.v * 6.283 + j * .06;
-          c2.beginPath();
-          for (var s = 0; s <= 48; s++) {
-            var u = s / 48, x = u * FW;
-            var y = (k.y + dj + Math.sin(u * k.f * 6.283 + ph + ci) * k.amp * (.6 + .4 * Math.sin(ph * .7 + u * 3))
-              + Math.sin(u * 13 + ph * 1.7) * .004) * FH;
-            s ? c2.lineTo(x, y) : c2.moveTo(x, y);
-          }
-          var g = c2.createLinearGradient(0, 0, FW, 0), al = k.a * (1 - Math.abs(j / k.fils - .5) * 1.6);
-          g.addColorStop(0, "rgba(" + k.coul + ",0)"); g.addColorStop(.35, "rgba(" + k.coul + "," + al.toFixed(3) + ")");
-          g.addColorStop(.7, "rgba(" + k.coul + "," + (al * .6).toFixed(3) + ")"); g.addColorStop(1, "rgba(" + k.coul + ",0)");
-          c2.strokeStyle = g; c2.stroke();
+      c2.setTransform(FD, 0, 0, FD, 0, 0);
+      c2.clearRect(0, 0, FW, FH);
+      for (var i = 0; i < bulles.length; i++) {
+        var b = bulles[i];
+        b.y -= b.v * dt + dy * .12;                                       // la page qui défile les entraîne un peu
+        if (b.y < -20) { bulles[i] = nouvelle(false); continue; }
+        if (b.y > FH + 80) b.y = -10;
+        var x = b.x + Math.sin(t / 1000 * b.of + b.op) * b.oa * (b.r / 6);
+        var fond = Math.min(1, (FH - b.y) / 120), haut = Math.min(1, b.y / (FH * .35));   // apparaît en bas, s'éteint en haut
+        var al = b.a * Math.max(0, fond) * Math.max(0, haut);
+        if (al <= .005) continue;
+        c2.beginPath(); c2.arc(x, b.y, b.r, 0, 6.283);
+        c2.fillStyle = "rgba(160,84,35," + (al * .22).toFixed(3) + ")"; c2.fill();
+        c2.lineWidth = b.r > 3 ? 1.1 : .9; c2.strokeStyle = "rgba(160,84,35," + al.toFixed(3) + ")"; c2.stroke();
+        if (b.r > 2.6) {                                                   // le petit reflet de la bulle
+          c2.beginPath(); c2.arc(x - b.r * .35, b.y - b.r * .35, b.r * .38, 3.5, 5.2);
+          c2.strokeStyle = "rgba(34,0,0," + (al * .5).toFixed(3) + ")"; c2.stroke();
         }
-      });
+      }
     };
     requestAnimationFrame(dessinerFlux);
   }

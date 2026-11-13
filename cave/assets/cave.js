@@ -1,9 +1,9 @@
 /* Vinochope · accueil
    Un seul écran tenu pendant l'ouverture : la page ne monte pas.
-   1. La fenêtre voûtée est un objet en relief (embrasure en quatre anneaux) qui suit la souris.
-   2. Au défilement, on avance dedans : vraie perspective, le cadre passe plus vite que la grappe.
-   3. Une fois dedans, la bouteille apparaît en plein écran et le vin est servi (images de la vidéo),
-      pendant que les chapitres passent de chaque côté. */
+   1. Le logo en grand sur le comptoir : verre de bière, bouteille, verre de vin. Il suit la souris.
+   2. Au défilement on sert : la bière monte avec sa mousse, le vin remplit le verre.
+   3. Les verres s'écartent ; la bouteille vient se poser exactement sur celle du film.
+   4. Elle s'ouvre comme une fenêtre : le film est derrière, dans ses vraies couleurs, et le vin est servi. */
 (function () {
   var VC = window.VC, reduce = VC.reduce;
   var root = document.documentElement;
@@ -20,18 +20,20 @@
   }
 
   var ouv = document.querySelector(".ouverture"), colle = ouv.querySelector(".ouv-colle");
-  var porte = ouv.querySelector(".porte"), grappe = ouv.querySelector(".porte-grappe");
-  var canvas = ouv.querySelector(".ouv-film"), ctx = canvas.getContext("2d");
+  var comptoir = ouv.querySelector(".comptoir"), ligne = ouv.querySelector(".comptoir-ligne");
+  var biere = ouv.querySelector(".o-biere"), bouteille = ouv.querySelector(".o-bouteille"), vin = ouv.querySelector(".o-vin");
+  var ecran = ouv.querySelector(".ouv-ecran"), canvas = ouv.querySelector(".ouv-film"), ctx = canvas.getContext("2d", { alpha: false });
+  var chapitres = ouv.querySelector(".chapitres");
   var chap = [].slice.call(ouv.querySelectorAll(".chapitre-film")).map(function (el) {
     return { el: el, de: +el.getAttribute("data-de"), a: +el.getAttribute("data-a") };
   });
   var bar = document.querySelector(".bar"), bougie = document.querySelector(".bougie");
-  var P = 1400;                       // perspective de la scène (identique au CSS)
+  var terroir = document.querySelector(".terroir"), terroirImg = terroir && terroir.querySelector("img");
 
-  /* ---------- Images de la vidéo : de la bouteille entière au verre plein ---------- */
+  /* ---------- Images du film : de la bouteille debout au verre plein ---------- */
   var DEB = 136, FIN = 290, N = FIN + 1;
-  var dpr = Math.min(devicePixelRatio || 1, 1.75);
-  var size = (innerWidth >= 800 && innerHeight * dpr > 900) ? "lg" : "sm";
+  var dpr = Math.min(devicePixelRatio || 1, 2);
+  var size = (Math.max(innerWidth, innerHeight) * dpr > 1300) ? "lg" : "sm";
   var imgs = [], loaded = new Uint8Array(N), cur = 0, active = 0, dirty = true;
   var order = [DEB, 150, 176, 210, 240, 268, FIN], seen = {};
   order.forEach(function (i) { seen[i] = 1; });
@@ -41,141 +43,162 @@
     while (active < 6 && cur < order.length) (function (i) {
       active++;
       var im = new Image(); im.decoding = "async";
-      im.onload = function () { imgs[i] = im; loaded[i] = 1; active--; dirty = true; next(); };
+      var fini = function () { imgs[i] = im; loaded[i] = 1; active--; dirty = true; next(); };
+      im.onload = function () { im.decode ? im.decode().then(fini, fini) : fini(); };   // décodée d'avance : pas d'à-coup au dessin
       im.onerror = function () { active--; next(); };
       im.src = "media/" + size + "/f" + pad(i) + ".webp";
     })(order[cur++]);
   }
   function nearest(f) {
-    f = Math.round(f);
     for (var d = 0; d < N; d++) { if (f - d >= DEB && loaded[f - d]) return f - d; if (f + d <= FIN && loaded[f + d]) return f + d; }
     return -1;
   }
-  if (document.readyState === "complete") setTimeout(next, 200); else addEventListener("load", function () { setTimeout(next, 200); });
+  setTimeout(next, 120);
 
-  // Avancée dans la vidéo selon la part du film parcourue : la bouteille se tient, puis on sert, puis le verre plein
-  var CLES = [[0, DEB], [.12, 140], [.34, 150], [.62, 240], [.86, FIN], [1, FIN]];
-  // Cadrage : [image, centre x du sujet, part de largeur montrée, hauteur (× écran), centre vertical (× écran)]
-  var CADRE = [[DEB, .53, .40, .86, .52], [150, .55, .46, .86, .53], [176, .59, .78, .92, .55], [FIN, .60, .78, .92, .55]];
+  // Avancée dans le film : la bouteille se tient, on la prend, on sert, le verre est plein
+  var CLES = [[0, DEB], [.1, 140], [.3, 150], [.62, 240], [.88, FIN], [1, FIN]];
+  // Point suivi horizontalement : la bouteille au début, puis le verre et le goulot
+  var VISEE = [[DEB, .516, .516], [150, .53, .5], [200, .5, .43], [FIN, .5, .42]];   // colonne 2 : écran étroit, on garde le verre
+  // La bouteille du film (image 136) : centre x, haut, largeur du corps, en part de l'image
+  var BX = .516, BTOP = .282, BLARG = .089;
 
   /* ---------- Mesures ---------- */
-  var W, H, narrow, zMax = 0, cible = { x: 0, y: 0 };
+  var W, H, narrow, repos = null, cible = null, M = 1, LY = 0, LS = 1;
+  function cadrage(f) {   // l'image du film couvre l'écran ; on garde le sujet dans le champ
+    var s = Math.max(W / 1280, H / 720), fw = 1280 * s, fh = 720 * s;
+    var x0 = clamp(W / 2 - table(VISEE, f, narrow ? 2 : 1) * fw, W - fw, 0);
+    return { s: s, fw: fw, fh: fh, x0: x0, y0: (H - fh) / 2 };
+  }
   function mesurer() {
     W = root.clientWidth; H = innerHeight; narrow = W < 800;
     var cw = Math.round(W * dpr), ch = Math.round(H * dpr);
-    if (canvas.width !== cw || canvas.height !== ch) { canvas.width = cw; canvas.height = ch; dirty = true; }
-    // position de la fenêtre au repos (on retire un instant ses transformations)
-    var t = porte.style.transform; porte.style.transform = "none";
-    var r = porte.getBoundingClientRect(), c = colle.getBoundingClientRect();
-    porte.style.transform = t;
-    var vw = r.width - 14, vh = r.height - 7, droite = Math.max(40, vh - vw / 2);   // partie droite sous l'arc
-    // le point que l'on vise : le milieu de la partie droite de la voûte
-    cible.x = W / 2 - (r.left - c.left + r.width / 2);
-    cible.y = H / 2 - (r.top - c.top + vw / 2 + 7 + droite / 2);
-    var S = Math.max(W / vw, H / droite) * 1.25;
-    zMax = Math.min(P - 40, P - P / S + 80);
+    if (canvas.width !== cw || canvas.height !== ch) { canvas.width = cw; canvas.height = ch; }
+    dirty = true;
+    // la bouteille au repos (sans transformation)
+    // sur téléphone, une fois le texte parti, le comptoir monte au milieu et grandit
+    LY = narrow ? -H * .2 : 0; LS = narrow ? 1.3 : 1;
+    var t1 = bouteille.style.transform, t2 = comptoir.style.transform;
+    bouteille.style.transform = "none"; comptoir.style.transform = "translateY(" + LY + "px) scale(" + LS + ")";
+    var rb = bouteille.getBoundingClientRect(), rc = colle.getBoundingClientRect();   // relatif à l'écran tenu, où que soit la page
+    repos = { left: rb.left - rc.left, top: rb.top - rc.top, width: rb.width, s: LS };
+    bouteille.style.transform = t1; comptoir.style.transform = t2;
+    // la bouteille du film, à l'écran : même largeur de corps, même haut
+    var g = cadrage(DEB), k = BLARG * g.fw / 44;                     // pixels par unité du dessin
+    cible = { k: k, x: g.x0 + BX * g.fw - 22 * k, y: g.y0 + BTOP * g.fh, w: 44 * k, h: 173 * k };
+    // point d'ancrage de l'ouverture : le milieu du corps de la bouteille ; taille finale qui couvre l'écran
+    var ax = cible.x + 22 * k, ay = cible.y + 113 * k;
+    cible.ax = ax; cible.ay = ay;
+    M = Math.max(Math.max(ax, W - ax) / (22 * k), ay / (30 * k), (H - ay) / (58 * k)) * 1.08;
   }
 
-  /* ---------- Dessin d'une image de la vidéo, ramenée au rouge du site et fondue sur les bords ---------- */
-  function place(f) {
-    var cx = table(CADRE, f, 1), vf = table(CADRE, f, 2), zh = table(CADRE, f, 3), yc = table(CADRE, f, 4);
-    var maxWin = narrow ? W * 1.05 : W * .46;
-    if (narrow) { zh *= .7; yc = .4; vf = Math.min(.86, vf * 1.1); }
-    var fh = Math.min(H * zh, (maxWin / vf) * (720 / 1280)), fw = fh * 1280 / 720;
-    return { fh: fh, fw: fw, x0: W / 2 - cx * fw, y0: H * yc - fh / 2, ww: fw * vf };
-  }
+  /* ---------- Dessin d'une image, dans ses couleurs d'origine ---------- */
+  var dessinee = -1;
   function dessiner(f) {
-    var a = nearest(Math.floor(f)), b = nearest(Math.ceil(f));
+    var a = nearest(f);
     if (a < 0) return false;
-    var g = place(f), k = dpr, cw = canvas.width, ch = canvas.height;
-    var x = g.x0 * k, y = g.y0 * k, w = g.fw * k, h = g.fh * k;
-    ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 1;
-    ctx.clearRect(0, 0, cw, ch);
+    if (a === dessinee && !dirty) return true;
+    var g = cadrage(f), k = dpr;
     ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
-    ctx.drawImage(imgs[a], x, y, w, h);
-    var t = f - Math.floor(f);
-    if (b >= 0 && b !== a && t > .02) { ctx.globalAlpha = t; ctx.drawImage(imgs[b], x, y, w, h); ctx.globalAlpha = 1; }
-    // la vidéo d'origine est prune : on garde ses lumières et on la passe dans le rouge du site
-    var rx = Math.max(0, x), ry = Math.max(0, y), rw = Math.min(cw, x + w) - rx, rh = Math.min(ch, y + h) - ry;
-    ctx.globalCompositeOperation = "color"; ctx.fillStyle = "rgb(140,8,8)"; ctx.fillRect(rx, ry, rw, rh);
-    ctx.globalCompositeOperation = "multiply"; ctx.fillStyle = "rgb(98,94,94)"; ctx.fillRect(rx, ry, rw, rh);
-    // halo ovale : le sujet se fond dans le rouge de la page, sans bord visible
-    ctx.globalCompositeOperation = "destination-in";
-    var cxs = W / 2 * k, cys = (g.y0 + g.fh * .5) * k, rX = g.ww / 2 * k * (narrow ? 1.3 : 1.15), rY = g.fh * .6 * k;
-    ctx.save(); ctx.translate(cxs, cys); ctx.scale(1, rY / rX);
-    var rg = ctx.createRadialGradient(0, 0, 0, 0, 0, rX);
-    rg.addColorStop(0, "#000"); rg.addColorStop(.62, "#000"); rg.addColorStop(.84, "rgba(0,0,0,.5)"); rg.addColorStop(1, "rgba(0,0,0,0)");
-    ctx.fillStyle = rg; ctx.fillRect(-cw * 2, -ch * 2 * rX / rY, cw * 4, ch * 4 * rX / rY);
-    ctx.restore();
-    var v = ctx.createLinearGradient(0, y, 0, y + h);
-    v.addColorStop(0, "rgba(0,0,0,0)"); v.addColorStop(.06, "#000"); v.addColorStop(.94, "#000"); v.addColorStop(1, "rgba(0,0,0,0)");
-    ctx.fillStyle = v; ctx.fillRect(0, 0, cw, ch);
-    ctx.globalCompositeOperation = "source-over";
+    ctx.fillStyle = "#52232B"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(imgs[a], g.x0 * k, g.y0 * k, g.fw * k, g.fh * k);
+    dessinee = a; dirty = false;
     return true;
   }
 
-  /* ---------- La souris incline la fenêtre ; sans souris, elle respire à peine ---------- */
-  var sx = 0, sy = 0, tx = 0, ty = 0, gx = 0, gy = 0;
+  /* ---------- La souris incline le comptoir ; sans souris, il respire à peine ---------- */
+  var sx = 0, sy = 0, tx = 0, ty = 0;
   if (hover && !reduce) addEventListener("pointermove", function (e) { sx = e.clientX / W - .5; sy = e.clientY / H - .5; }, { passive: true });
 
   /* ---------- Boucle ---------- */
   var vals = new Map();
   function pose(el, nom, v) {
     var m = vals.get(el); if (!m) { m = {}; vals.set(el, m); }
-    if (m[nom] !== v) { m[nom] = v; el.style.setProperty(nom, v); }
+    if (m[nom] !== v) { m[nom] = v; if (nom === "transform" || nom === "opacity") el.style[nom] = v; else el.style.setProperty(nom, v); }
   }
-  var lastF = -1, ton = "";
+  var fs = DEB, ton = "", pLisse = 0;
   function boucle(now) {
     var r = ouv.getBoundingClientRect();
-    var p = clamp(-r.top / Math.max(1, r.height - H), 0, 1);
+    var pv = clamp(-r.top / Math.max(1, r.height - H), 0, 1);
+    pLisse += (pv - pLisse) * (reduce ? 1 : .32);                       // défilement lissé : les gestes brusques ne cassent rien
+    if (Math.abs(pv - pLisse) < .0004) pLisse = pv;
+    var p = pLisse;
 
-    // inclinaison : souris (ou léger balancement), qui s'efface quand on avance
-    var libre = 1 - smooth(p / .12);
-    var ax = reduce ? 0 : hover ? sx : Math.sin(now / 2600) * .18, ay = reduce ? 0 : hover ? sy : Math.cos(now / 3100) * .12;
-    tx += (ax - tx) * .07; ty += (ay - ty) * .07;
-    pose(porte, "--ry", (tx * 16 * libre).toFixed(2) + "deg");
-    pose(porte, "--rx", (-ty * 12 * libre).toFixed(2) + "deg");
-    gx += (tx * -22 * libre - gx) * .1; gy += (ty * -16 * libre - gy) * .1;     // la grappe, plus loin, bouge en sens inverse
-    pose(grappe, "--gx", gx.toFixed(1) + "px"); pose(grappe, "--gy", gy.toFixed(1) + "px");
+    // inclinaison : souris (ou léger balancement), qui s'efface dès qu'on sert
+    var libre = 1 - smooth(p / .1);
+    var ax = reduce ? 0 : hover ? sx : Math.sin(now / 2600) * .2, ay = reduce ? 0 : hover ? sy : Math.cos(now / 3100) * .12;
+    tx += (ax - tx) * .06; ty += (ay - ty) * .06;
+    var l = smooth(p / .08);
+    pose(comptoir, "transform", "translateY(" + (LY * l).toFixed(1) + "px) scale(" + (1 + (LS - 1) * l).toFixed(4) + ") rotateX(" + (-ty * 10 * libre).toFixed(2) + "deg) rotateY(" + (tx * 18 * libre).toFixed(2) + "deg)");
 
-    // avancée dans la fenêtre
-    var c = douce(p / .22), e = douce(p / .3);
-    pose(porte, "--dx", (cible.x * c).toFixed(1) + "px");
-    pose(porte, "--dy", (cible.y * c).toFixed(1) + "px");
-    pose(porte, "--z", (zMax * Math.pow(e, 1.6)).toFixed(1) + "px");
-    pose(colle, "--t", (1 - smooth(p / .07)).toFixed(3));
-    pose(colle, "--tv", p > .08 ? "hidden" : "visible");
-    var go = 1 - smooth((p - .19) / .08);
-    pose(grappe, "--go", go.toFixed(3));
-    pose(grappe, "--gs", (1 + e * .25).toFixed(3));
-    pose(grappe, "--gb", ((1 - go) * 8).toFixed(1) + "px");
-    var n = smooth((p - .24) / .05);
-    pose(colle, "--n", n.toFixed(3));
-    pose(porte, "visibility", n >= 1 ? "hidden" : "visible");
-    pose(colle, "--f", smooth((p - .27) / .07).toFixed(3));
+    // 1. le texte s'efface, on sert
+    var tt = 1 - smooth(p / .07);
+    pose(colle, "--t", tt.toFixed(3));
+    pose(colle, "--tv", tt <= 0 ? "hidden" : "visible");
+    var b = smooth((p - .01) / .1), v = smooth((p - .03) / .1), m = smooth((p - .08) / .04);
+    pose(comptoir, "--b", b.toFixed(3)); pose(comptoir, "--v", v.toFixed(3)); pose(comptoir, "--m", m.toFixed(3));
 
-    // le film
-    var q = clamp((p - .27) / .73, 0, 1), f = table(CLES, q, 1);
-    if (p > .2 && (dirty || Math.abs(f - lastF) > .01)) { if (dessiner(f)) { lastF = f; dirty = false; } }
+    // 2. les verres s'écartent en tournant, le comptoir s'efface
+    var q = douce((p - .13) / .09);
+    var zv = 50 * libre;
+    pose(biere, "transform", "translate3d(" + (-q * W * .55).toFixed(1) + "px," + (q * 40).toFixed(1) + "px," + zv.toFixed(1) + "px) rotateY(" + (-q * 50).toFixed(1) + "deg) rotate(" + (-q * 8).toFixed(1) + "deg)");
+    pose(vin, "transform", "translate3d(" + (q * W * .55).toFixed(1) + "px," + (q * 40).toFixed(1) + "px," + zv.toFixed(1) + "px) rotateY(" + (q * 50).toFixed(1) + "deg) rotate(" + (q * 8).toFixed(1) + "deg)");
+    pose(biere, "opacity", (1 - smooth((p - .15) / .06)).toFixed(3));
+    pose(vin, "opacity", (1 - smooth((p - .15) / .06)).toFixed(3));
+    pose(ligne, "--cl", (1 - smooth((p - .12) / .07)).toFixed(3));
 
-    // les chapitres passent comme une page qui défile, pendant que la bouteille reste au centre
+    // 3. la bouteille vient se poser sur celle du film
+    var c = douce((p - .13) / .11);
+    var sc = lerp(1, cible.w / repos.width, c);
+    var dx = lerp(0, (cible.x - repos.left) / repos.s, c), dy = lerp(0, (cible.y - repos.top) / repos.s, c);
+    pose(bouteille, "transform", "translate3d(" + dx.toFixed(1) + "px," + dy.toFixed(1) + "px,0) scale(" + sc.toFixed(4) + ")");
+    pose(bouteille, "opacity", (1 - smooth((p - .245) / .03)).toFixed(3));
+
+    // 4. la fenêtre en forme de bouteille s'ouvre sur le film
+    var on = p > .235;
+    pose(ecran, "--fv", on ? "visible" : "hidden");
+    var o = douce((p - .255) / .11), mm = Math.pow(M, o);        // zoom exponentiel : vitesse régulière à l'œil
+    var mw = cible.w * mm, mh = cible.h * mm;
+    pose(ecran, "--ms", mw.toFixed(1) + "px " + mh.toFixed(1) + "px");
+    pose(ecran, "--mp", (cible.ax - 22 * cible.k * mm).toFixed(1) + "px " + (cible.ay - 113 * cible.k * mm).toFixed(1) + "px");
+    var plein = o >= 1;
+    if (plein !== ecran.classList.contains("ouverte")) ecran.classList.toggle("ouverte", plein);
+
+    // le film : l'image suit le défilement, sans à-coup
+    var f = table(CLES, clamp((p - .36) / .64, 0, 1), 1);
+    fs += (f - fs) * (reduce ? 1 : .35);
+    if (on) dessiner(Math.round(fs));
+
+    // les chapitres passent pendant que la bouteille reste au centre
+    var cg = 0;
     chap.forEach(function (x) {
       var u = (p - x.de) / (x.a - x.de);
-      var o = u <= 0 || u >= 1 ? 0 : smooth(u / .22) * (1 - smooth((u - .78) / .22));
-      pose(x.el, "--o", o.toFixed(3));
-      pose(x.el, "--y", ((.5 - clamp(u, 0, 1)) * H * (narrow ? .12 : .32)).toFixed(1) + "px");
+      var op = u <= 0 || u >= 1 ? 0 : smooth(u / .22) * (1 - smooth((u - .78) / .22));
+      cg = Math.max(cg, op);
+      pose(x.el, "--o", op.toFixed(3));
+      pose(x.el, "--y", ((.5 - clamp(u, 0, 1)) * H * (narrow ? .1 : .3)).toFixed(1) + "px");
     });
+    pose(chapitres, "--cg", cg.toFixed(3));
+    pose(colle, "--fin", smooth((p - .9) / .1).toFixed(3));
 
-    // en-tête : clair au début, sombre une fois dans la fenêtre
-    var t2 = p > .2 ? "sombre" : "clair";
-    if (t2 !== ton) { ton = t2; ouv.setAttribute("data-ton", ton); ouv.style.backgroundColor = ton === "sombre" ? "var(--lie)" : ""; }
+    // en-tête : clair au début, sombre une fois le film ouvert
+    var t2 = p > .3 ? "sombre" : "clair";
+    if (t2 !== ton) { ton = t2; ouv.setAttribute("data-ton", ton); }
     VC.majTete();
+
+    // les vignes glissent un peu moins vite que la page
+    if (terroirImg && !reduce) {
+      var rt = terroir.getBoundingClientRect();
+      if (rt.bottom > 0 && rt.top < H) pose(terroirImg, "--py", ((rt.top + rt.height / 2 - H / 2) * -.12).toFixed(1) + "px");
+    }
 
     if (!hover && bougie) bougie.style.setProperty("--by", (H / 2 - bar.getBoundingClientRect().top).toFixed(0) + "px");
     requestAnimationFrame(boucle);
   }
+  // l'ouverture se lit depuis le début : on ne reprend pas au milieu après un rechargement
+  if ("scrollRestoration" in history && !location.hash) history.scrollRestoration = "manual";
   mesurer();
-  addEventListener("resize", function () { mesurer(); dirty = true; });
+  addEventListener("resize", mesurer);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(mesurer);
   requestAnimationFrame(boucle);
 
   /* ---------- La bougie du bar suit la souris ---------- */

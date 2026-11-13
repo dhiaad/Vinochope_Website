@@ -11,7 +11,13 @@ Lancer : python tools/build_cave.py
 import json, pathlib, re
 
 RACINE = pathlib.Path(__file__).resolve().parent.parent / "cave"
-V = "10"  # version des fichiers css/js, à monter quand ils changent
+V = "14"  # version des fichiers css/js, à monter quand ils changent
+
+# Le logo : un verre de bière, la bouteille, un verre de vin, posés sur le comptoir.
+# Les couleurs viennent du CSS (classes s-*) ; le trait suit la couleur du texte.
+def symbole(classe="symbole"):
+    return f"""<svg class="{classe}" viewBox="18 10 204 184" aria-hidden="true" focusable="false"><path class="s-biere" d="M41.8 125 L45.6 187 H78.4 L82.2 125 Z"/><path class="s-mousse" d="M41 116 Q41 106 51 106 Q55 98 64 100 Q71 95 77 102 Q84 103 83 116 L82.2 126 H41.8 Z"/><path class="s-trait" d="M41.8 126 L45.6 188 H78.4 L82.2 126"/><path class="s-bouteille" d="M98 183 Q98 188 103 188 H137 Q142 188 142 183 V98 C142 81 127.5 77 127.5 64 V26 H129.5 V15 H110.5 V26 H112.5 V64 C112.5 77 98 81 98 98 Z"/><path class="s-vin" d="M160.6 122 C163 139 171 149 184 149 C197 149 205 139 207.4 122 Z"/><path class="s-trait" d="M159 94 C157 126 166 149 184 149 C202 149 211 126 209 94 Z"/><path class="s-trait" d="M184 149 V185 M168 186 H200 M22 190.5 H218"/></svg>"""
+
 
 PAGES = [  # (fichier, libellé, ce qu'on y trouve : écrit comme le détail d'un plat sur une carte)
     ("index.html", "Accueil", "La maison"),
@@ -35,18 +41,19 @@ def tete_html(actif):
     )
     return f"""<!--TETE-->
 <header class="tete" data-ton="clair">
-  <a class="marque" href="index.html" aria-label="Vinochope, accueil">Vinochope<span class="sceau" aria-hidden="true"></span></a>
+  <a class="marque" href="index.html" aria-label="Vinochope, accueil">{symbole()}<span class="marque-nom">Vinochope</span></a>
   <nav class="nav" aria-label="Navigation principale">{nav}</nav>
   <div class="tete-droite">
-    <a class="etiquette petite" href="la-cave.html#carte">La carte</a>
+    <a class="etiquette bouton-carte" href="la-cave.html#carte">La carte</a>
     <button type="button" class="menu-btn" aria-expanded="false" aria-controls="menu">Menu</button>
   </div>
 </header>
 <div class="menu" id="menu" hidden>
   <div class="menu-carte">
     <div class="menu-cadre">
+      {symbole("symbole menu-symbole")}
       <p class="menu-maison">Vinochope</p>
-      <p class="menu-sous">La cave à vin, Perpignan</p>
+      <p class="menu-sous">Bar · cave · location de tireuses</p>
       <span class="menu-filet" aria-hidden="true"></span>
       <nav aria-label="Menu"><ol class="menu-liens">{menu}</ol></nav>
       <span class="menu-filet" aria-hidden="true"></span>
@@ -60,7 +67,8 @@ def tete_html(actif):
 <!--/TETE-->"""
 
 
-PIED = """<!--PIED-->
+SYMBOLE_PIED = symbole("symbole pied-symbole")
+PIED = f"""<!--PIED-->
 <footer class="pied" data-ton="sombre">
   <div class="pied-haut">
     <div>
@@ -89,7 +97,7 @@ PIED = """<!--PIED-->
       </ul>
     </nav>
   </div>
-  <p class="pied-marque" aria-hidden="true">Vinochope</p>
+  <p class="pied-marque" aria-hidden="true">{SYMBOLE_PIED}<span>Vinochope</span></p>
   <div class="pied-bas">
     <p>L'abus d'alcool est dangereux pour la santé, à consommer avec modération.</p>
     <p>© <span data-annee>2026</span> Vinochope · <a href="gerant.html">Espace gérant</a></p>
@@ -99,6 +107,7 @@ PIED = """<!--PIED-->
 
 SEUIL = """<div class="seuil" id="seuil" role="dialog" aria-modal="true" aria-labelledby="seuil-t" hidden>
   <div class="seuil-voute">
+    """ + symbole("symbole seuil-symbole") + """
     <p class="repere">Avant d'entrer</p>
     <h2 id="seuil-t">Avez-vous<br>18 ans ou plus ?</h2>
     <p class="seuil-txt">Ce site parle de vin, de bière et de spiritueux.</p>
@@ -115,7 +124,7 @@ SEUIL = """<div class="seuil" id="seuil" role="dialog" aria-modal="true" aria-la
 # Lancement : l'arche se dessine, le nom apparaît, puis le rideau rouge se lève. Une fois par visite.
 INTRO_TETE = """<script>try{if(sessionStorage.getItem("vc-intro"))document.documentElement.classList.add("intro-vue")}catch(e){}</script>"""
 INTRO = """<div class="intro" aria-hidden="true">
-  <svg class="intro-arche" viewBox="0 0 120 160"><path d="M8 156V64a52 52 0 0 1 104 0v92"/><path class="intro-cle" d="M60 0l9 9-9 9-9-9z"/></svg>
+  """ + symbole("symbole intro-symbole") + """
   <p class="intro-marque">Vinochope</p>
   <p class="intro-lieu">La cave à vin, Perpignan</p>
 </div>"""
@@ -137,6 +146,7 @@ def page(nom, reglages, corps):
 <title>{titre}</title>
 <meta name="description" content="{desc}">{robots}
 <meta name="theme-color" content="#220000">
+<link rel="icon" href="media/logo/symbole.svg" type="image/svg+xml">
 <meta property="og:title" content="{titre}">
 <meta property="og:description" content="{desc}">
 <meta property="og:type" content="website">
@@ -181,6 +191,7 @@ def main():
     t = re.sub(r"<!--TETE-->.*?<!--/TETE-->", lambda _: tete_html("index.html"), t, flags=re.S)
     t = re.sub(r"<!--PIED-->.*?<!--/PIED-->", lambda _: PIED, t, flags=re.S)
     t = re.sub(r'(assets/(?:cave|pages|commun)\.(?:css|js))\?v=\d+', rf"\1?v={V}", t)
+    t = re.sub(r'<div class="seuil".*?\n</div>', lambda _: SEUIL, t, count=1, flags=re.S)
     t = re.sub(r"<!--INTRO-->.*?<!--/INTRO-->", lambda _: "<!--INTRO-->" + INTRO + "<!--/INTRO-->", t, flags=re.S)
     t = re.sub(r"<!--INTRO_TETE-->.*?<!--/INTRO_TETE-->", lambda _: "<!--INTRO_TETE-->" + INTRO_TETE + "<!--/INTRO_TETE-->", t, flags=re.S)
     acc.write_text(t, encoding="utf-8")
